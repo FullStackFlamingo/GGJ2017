@@ -1,0 +1,3695 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+	
+	<script>
+window.ts_endpoint_url = "https:\/\/slack.com\/beacon\/timing";
+
+(function(e) {
+	var n=Date.now?Date.now():+new Date,r=e.performance||{},t=[],a={},i=function(e,n){for(var r=0,a=t.length,i=[];a>r;r++)t[r][e]==n&&i.push(t[r]);return i},o=function(e,n){for(var r,a=t.length;a--;)r=t[a],r.entryType!=e||void 0!==n&&r.name!=n||t.splice(a,1)};r.now||(r.now=r.webkitNow||r.mozNow||r.msNow||function(){return(Date.now?Date.now():+new Date)-n}),r.mark||(r.mark=r.webkitMark||function(e){var n={name:e,entryType:"mark",startTime:r.now(),duration:0};t.push(n),a[e]=n}),r.measure||(r.measure=r.webkitMeasure||function(e,n,r){n=a[n].startTime,r=a[r].startTime,t.push({name:e,entryType:"measure",startTime:n,duration:r-n})}),r.getEntriesByType||(r.getEntriesByType=r.webkitGetEntriesByType||function(e){return i("entryType",e)}),r.getEntriesByName||(r.getEntriesByName=r.webkitGetEntriesByName||function(e){return i("name",e)}),r.clearMarks||(r.clearMarks=r.webkitClearMarks||function(e){o("mark",e)}),r.clearMeasures||(r.clearMeasures=r.webkitClearMeasures||function(e){o("measure",e)}),e.performance=r,"function"==typeof define&&(define.amd||define.ajs)&&define("performance",[],function(){return r}) // eslint-disable-line
+})(window);
+
+</script>
+<script>;(function() {
+
+'use strict';
+
+
+window.TSMark = function(mark_label) {
+	if (!window.performance || !window.performance.mark) return;
+	performance.mark(mark_label);
+};
+window.TSMark('start_load');
+
+
+window.TSMeasureAndBeacon = function(measure_label, start_mark_label) {
+	if (start_mark_label === 'start_nav' && window.performance && window.performance.timing) {
+		window.TSBeacon(measure_label, (new Date()).getTime() - performance.timing.navigationStart);
+		return;
+	}
+	if (!window.performance || !window.performance.mark || !window.performance.measure) return;
+	performance.mark(start_mark_label + '_end');
+	try {
+		performance.measure(measure_label, start_mark_label, start_mark_label + '_end');
+		window.TSBeacon(measure_label, performance.getEntriesByName(measure_label)[0].duration);
+	} catch(e) { return; }
+};
+
+
+if ('sendBeacon' in navigator) {
+	window.TSBeacon = function(label, value) {
+		var endpoint_url = window.ts_endpoint_url || 'https://slack.com/beacon/timing';
+		navigator.sendBeacon(endpoint_url + '?data=' + encodeURIComponent(label + ':' + value), '');
+	};
+} else {
+	window.TSBeacon = function(label, value) {
+		var endpoint_url = window.ts_endpoint_url || 'https://slack.com/beacon/timing';
+		(new Image()).src = endpoint_url + '?data=' + encodeURIComponent(label + ':' + value);
+	};
+}
+
+})();
+</script>
+ 
+
+<script>
+window.TSMark('step_load');
+</script>	<noscript><meta http-equiv="refresh" content="0; URL=/files/bdeakin/F3U016MDX/boatbase.obj?nojsmode=1" /></noscript>
+<script type="text/javascript">
+if(self!==top)window.document.write("\u003Cstyle>body * {display:none !important;}\u003C\/style>\u003Ca href=\"#\" onclick="+
+"\"top.location.href=window.location.href\" style=\"display:block !important;padding:10px\">Go to Slack.com\u003C\/a>");
+
+(function() {
+	var timer;
+	if (self !== top) {
+		timer = window.setInterval(function() {
+			if (window.$) {
+				try {
+					$('#page').remove();
+					$('#client-ui').remove();
+					window.TS = null;
+					window.clearInterval(timer);
+				} catch(e) {}
+			}
+		}, 200);
+	}
+}());
+
+</script>
+
+<script>(function() {
+        'use strict';
+
+        window.callSlackAPIUnauthed = function(method, args, callback) {
+                var timestamp = Date.now() / 1000;  
+                var version = (window.TS && TS.boot_data) ? TS.boot_data.version_uid.substring(0, 8) : 'noversion';
+                var url = '/api/' + method + '?_x_id=' + version + '-' + timestamp;
+                var req = new XMLHttpRequest();
+
+                req.onreadystatechange = function() {
+                        if (req.readyState == 4) {
+                                req.onreadystatechange = null;
+                                var obj;
+
+                                if (req.status == 200 || req.status == 429) {
+                                        try {
+                                                obj = JSON.parse(req.responseText);
+                                        } catch (err) {
+                                                console.warn('unable to do anything with api rsp');
+                                        }
+                                }
+
+                                obj = obj || {
+                                        ok: false
+                                }
+
+                                callback(obj.ok, obj, args);
+                        }
+                }
+
+                var async = true;
+                req.open('POST', url, async);
+
+                var form_data = new FormData();
+                var has_data = false;
+                Object.keys(args).map(function(k) {
+                        if (k[0] === '_') return;
+                        form_data.append(k, args[k]);
+                        has_data = true;
+                });
+
+                if (has_data) {
+                        req.send(form_data);
+                } else {
+                        req.send();
+                }
+        }
+})();</script>
+
+			
+	
+		<script>
+			if (window.location.host == 'slack.com' && window.location.search.indexOf('story') < 0) {
+				document.cookie = '__cvo_skip_doc=' + escape(document.URL) + '|' + escape(document.referrer) + ';path=/';
+			}
+		</script>
+	
+
+		<script type="text/javascript">
+		
+		try {
+			if(window.location.hash && !window.location.hash.match(/^(#?[a-zA-Z0-9_]*)$/)) {
+				window.location.hash = '';
+			}
+		} catch(e) {}
+		
+	</script>
+
+	<script type="text/javascript">
+				
+			window.optimizely = [];
+			window.ga = false;
+		
+	
+		(function(e,c,b,f,d,g,a){e.SlackBeaconObject=d;
+		e[d]=e[d]||function(){(e[d].q=e[d].q||[]).push([1*new Date(),arguments])};
+		e[d].l=1*new Date();g=c.createElement(b);a=c.getElementsByTagName(b)[0];
+		g.async=1;g.src=f;a.parentNode.insertBefore(g,a)
+		})(window,document,"script","https://a.slack-edge.com/4e6c/js/libs/slack_beacon.js","sb");
+		sb('set', 'token', '3307f436963e02d4f9eb85ce5159744c');
+
+					sb('set', 'user_id', "U0KRPMS1L");
+							sb('set', 'user_' + "batch", "signup_api");
+							sb('set', 'user_' + "created", "2016-01-30");
+						sb('set', 'name_tag', "brightonggj" + '/' + "georgie");
+				sb('track', 'pageview');
+
+		
+		function track(a) {
+			if(window.ga) ga('send','event','web', a);
+			if(window.sb) sb('track', a);
+		}
+		
+
+	</script>
+
+
+
+<script type='text/javascript'>
+	
+	/* safety stub */
+	window.mixpanel = {
+		track: function() {},
+		track_links: function() {},
+		track_forms: function() {}
+	};
+
+	function mixpanel_track(){}
+	function mixpanel_track_forms(){}
+	function mixpanel_track_links(){}
+	
+</script>
+	
+	<meta name="referrer" content="no-referrer">
+		<meta name="superfish" content="nofish">
+
+	<script type="text/javascript">
+
+
+
+var TS_last_log_date = null;
+var TSMakeLogDate = function() {
+	var date = new Date();
+
+	var y = date.getFullYear();
+	var mo = date.getMonth()+1;
+	var d = date.getDate();
+
+	var time = {
+	  h: date.getHours(),
+	  mi: date.getMinutes(),
+	  s: date.getSeconds(),
+	  ms: date.getMilliseconds()
+	};
+
+	Object.keys(time).map(function(moment, index) {
+		if (moment == 'ms') {
+			if (time[moment] < 10) {
+				time[moment] = time[moment]+'00';
+			} else if (time[moment] < 100) {
+				time[moment] = time[moment]+'0';
+			}
+		} else if (time[moment] < 10) {
+			time[moment] = '0' + time[moment];
+		}
+	});
+
+	var str = y + '/' + mo + '/' + d + ' ' + time.h + ':' + time.mi + ':' + time.s + '.' + time.ms;
+	if (TS_last_log_date) {
+		var diff = date-TS_last_log_date;
+		//str+= ' ('+diff+'ms)';
+	}
+	TS_last_log_date = date;
+	return str+' ';
+}
+
+var parseDeepLinkRequest = function(code) {
+	var m = code.match(/"id":"([CDG][A-Z0-9]{8})"/);
+	var id = m ? m[1] : null;
+
+	m = code.match(/"team":"(T[A-Z0-9]{8})"/);
+	var team = m ? m[1] : null;
+
+	m = code.match(/"message":"([0-9]+\.[0-9]+)"/);
+	var message = m ? m[1] : null;
+
+	return { id: id, team: team, message: message };
+}
+
+if ('rendererEvalAsync' in window) {
+	var origRendererEvalAsync = window.rendererEvalAsync;
+	window.rendererEvalAsync = function(blob) {
+		try {
+			var data = JSON.parse(decodeURIComponent(atob(blob)));
+			if (data.code.match(/handleDeepLink/)) {
+				var request = parseDeepLinkRequest(data.code);
+				if (!request.id || !request.team || !request.message) return;
+
+				request.cmd = 'channel';
+				TSSSB.handleDeepLinkWithArgs(JSON.stringify(request));
+				return;
+			} else {
+				origRendererEvalAsync(blob);
+			}
+		} catch (e) {
+		}
+	}
+}
+</script>
+
+
+
+<script type="text/javascript">
+
+	var TSSSB = {
+		call: function() {
+			return false;
+		}
+	};
+
+</script>
+<script>TSSSB.env = (function() {
+	'use strict';
+
+	var v = {
+		win_ssb_version: null,
+		win_ssb_version_minor: null,
+		mac_ssb_version: null,
+		mac_ssb_version_minor: null,
+		mac_ssb_build: null,
+		lin_ssb_version: null,
+		lin_ssb_version_minor: null,
+		desktop_app_version: null
+	};
+
+	var is_win = (navigator.appVersion.indexOf("Windows") !== -1);
+	var is_lin = (navigator.appVersion.indexOf("Linux") !== -1);
+	var is_mac = !!(navigator.userAgent.match(/(OS X)/g));
+
+	if (navigator.userAgent.match(/(Slack_SSB)/g) || navigator.userAgent.match(/(Slack_WINSSB)/g)) {
+		
+		var parts = navigator.userAgent.split('/');
+		var version_str = parts[parts.length-1];
+		var version_float = parseFloat(version_str);
+		var version_parts = version_str.split('.');
+		var version_minor = (version_parts.length == 3) ? parseInt(version_parts[2]) : 0;
+
+		if (navigator.userAgent.match(/(AtomShell)/g)) {
+			
+			if (is_lin) {
+				v.lin_ssb_version = version_float;
+				v.lin_ssb_version_minor = version_minor;
+			} else if (is_win) {
+				v.win_ssb_version = version_float;
+				v.win_ssb_version_minor = version_minor;
+			} else if (is_mac) {
+				v.mac_ssb_version = version_float;
+				v.mac_ssb_version_minor = version_minor;
+			}
+
+			if (version_parts.length >= 3) {
+				v.desktop_app_version = {
+					major: parseInt(version_parts[0]),
+					minor: parseInt(version_parts[1]),
+					patch: parseInt(version_parts[2])
+				}
+			}
+		} else {
+			
+			v.mac_ssb_version = version_float;
+			v.mac_ssb_version_minor = version_minor;
+
+			
+			
+			var app_ver = window.macgap && macgap.app && macgap.app.buildVersion && macgap.app.buildVersion();
+			var matches = String(app_ver).match(/(?:\()(.*)(?:\))/);
+			v.mac_ssb_build = (matches && matches.length == 2) ? parseInt(matches[1] || 0) : 0;
+		}
+	}
+
+	return v;
+})();
+</script>
+
+
+	<script type="text/javascript">
+		
+		var was_TS = window.TS;
+		delete window.TS;
+		TSSSB.call('didFinishLoading');
+		if (was_TS) window.TS = was_TS;
+	</script>
+	    <title>boatbase.obj | Brighton Game Jams Slack</title>
+    <meta name="author" content="Slack">
+
+	
+		
+	
+	
+					
+	
+				
+	
+	
+	
+	
+	
+	
+	
+			<!-- output_css "core" -->
+    <link href="https://a.slack-edge.com/63e66/style/rollup-plastic.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+
+		<!-- output_css "before_file_pages" -->
+    <link href="https://a.slack-edge.com/74a30/style/libs/codemirror.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+    <link href="https://a.slack-edge.com/7abb/style/codemirror_overrides.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+
+	<!-- output_css "file_pages" -->
+    <link href="https://a.slack-edge.com/3cfb8/style/rollup-file_pages.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+
+		<!-- output_css "regular" -->
+    <link href="https://a.slack-edge.com/2cdf/style/print.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+    <link href="https://a.slack-edge.com/1d9c/style/libs/lato-1-compressed.css" rel="stylesheet" type="text/css" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)">
+
+	
+
+	
+	
+		<meta name="robots" content="noindex, nofollow" />
+	
+
+	
+<link id="favicon" rel="shortcut icon" href="https://a.slack-edge.com/66f9/img/icons/favicon-32.png" sizes="16x16 32x32 48x48" type="image/png" />
+
+<link rel="icon" href="https://a.slack-edge.com/0180/img/icons/app-256.png" sizes="256x256" type="image/png" />
+
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://a.slack-edge.com/66f9/img/icons/ios-152.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://a.slack-edge.com/66f9/img/icons/ios-144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://a.slack-edge.com/66f9/img/icons/ios-120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://a.slack-edge.com/66f9/img/icons/ios-114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://a.slack-edge.com/0180/img/icons/ios-72.png" />
+<link rel="apple-touch-icon-precomposed" href="https://a.slack-edge.com/66f9/img/icons/ios-57.png" />
+
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="https://a.slack-edge.com/66f9/img/icons/app-144.png" />
+	
+	<!--[if lt IE 9]>
+	<script src="https://a.slack-edge.com/ef0d/js/libs/html5shiv.js"></script>
+	<![endif]-->
+
+</head>
+
+<body class="			">
+
+		  			<script>
+		
+			var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+			if (w > 1440) document.querySelector('body').classList.add('widescreen');
+		
+		</script>
+	
+  	
+	
+
+			
+
+<nav id="site_nav" class="no_transition">
+
+	<div id="site_nav_contents">
+
+		<div id="user_menu">
+			<div id="user_menu_contents">
+				<div id="user_menu_avatar">
+										<span class="member_image thumb_48" style="background-image: url('https://secure.gravatar.com/avatar/32c3e9af04a701c6d45d7c1a553b8080.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0011-192.png')" data-thumb-size="48" data-member-id="U0KRPMS1L"></span>
+					<span class="member_image thumb_36" style="background-image: url('https://secure.gravatar.com/avatar/32c3e9af04a701c6d45d7c1a553b8080.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F3654%2Fimg%2Favatars%2Fava_0011-72.png')" data-thumb-size="36" data-member-id="U0KRPMS1L"></span>
+				</div>
+				<h3>Signed in as</h3>
+				<span id="user_menu_name">georgie</span>
+			</div>
+		</div>
+
+		<div class="nav_contents">
+
+			<ul class="primary_nav">
+				<li><a href="/messages" data-qa="app"><i class="ts_icon ts_icon_angle_arrow_up_left"></i>Back to Slack</a></li>
+				<li><a href="/home" data-qa="home"><i class="ts_icon ts_icon_home"></i>Home</a></li>
+				<li><a href="/account" data-qa="account_profile"><i class="ts_icon ts_icon_user"></i>Account &amp; Profile</a></li>
+				<li><a href="/apps/manage" data-qa="configure_apps" target="_blank"><i class="ts_icon ts_icon_plug"></i>Configure Apps</a></li>
+				<li><a href="/archives"data-qa="archives"><i class="ts_icon ts_icon_archive" ></i>Message Archives</a></li>
+				<li><a href="/files" data-qa="files"><i class="ts_icon ts_icon_all_files clear_blue"></i>Files</a></li>
+				<li><a href="/team" data-qa="team_directory"><i class="ts_icon ts_icon_team_directory"></i>Directory</a></li>
+									<li><a href="/stats" data-qa="statistics"><i class="ts_icon ts_icon_dashboard"></i>Statistics</a></li>
+													<li><a href="/customize" data-qa="customize"><i class="ts_icon ts_icon_magic"></i>Customize</a></li>
+													<li><a href="/account/team" data-qa="team_settings"><i class="ts_icon ts_icon_cog_o"></i>Team Settings</a></li>
+							</ul>
+
+			
+		</div>
+
+		<div id="footer">
+
+			<ul id="footer_nav">
+				<li><a href="/is" data-qa="tour">Tour</a></li>
+				<li><a href="/downloads" data-qa="download_apps">Download Apps</a></li>
+				<li><a href="/brand-guidelines" data-qa="brand_guidelines">Brand Guidelines</a></li>
+				<li><a href="/help" data-qa="help">Help</a></li>
+				<li><a href="https://api.slack.com" target="_blank" data-qa="api">API<i class="ts_icon ts_icon_external_link small_left_margin ts_icon_inherit"></i></a></li>
+								<li><a href="/pricing" data-qa="pricing">Pricing</a></li>
+				<li><a href="/help/requests/new" data-qa="contact">Contact</a></li>
+				<li><a href="/terms-of-service" data-qa="policies">Policies</a></li>
+				<li><a href="http://slackhq.com/" target="_blank" data-qa="our_blog">Our Blog</a></li>
+				<li><a href="https://slack.com/signout/19822053220?crumb=s-1485007348-6faa1c5726-%E2%98%83" data-qa="sign_out">Sign Out<i class="ts_icon ts_icon_sign_out small_left_margin ts_icon_inherit"></i></a></li>
+			</ul>
+
+			<p id="footer_signature">Made with <i class="ts_icon ts_icon_heart"></i> by Slack</p>
+
+		</div>
+
+	</div>
+</nav>	
+			
+<header>
+			<a id="menu_toggle" class="no_transition" data-qa="menu_toggle_hamburger">
+			<span class="menu_icon"></span>
+			<span class="menu_label">Menu</span>
+			<span class="vert_divider"></span>
+		</a>
+		<h1 id="header_team_name" class="inline_block no_transition" data-qa="header_team_name">
+			<a href="/home">
+				<i class="ts_icon ts_icon_home" /></i>
+				Brighton Game Jams
+			</a>
+		</h1>
+		<div class="header_nav">
+			<div class="header_btns float_right">
+				<a id="team_switcher" data-qa="team_switcher">
+					<i class="ts_icon ts_icon_th_large ts_icon_inherit"></i>
+					<span class="block label">Teams</span>
+				</a>
+				<a href="/help" id="help_link" data-qa="help_link">
+					<i class="ts_icon ts_icon_life_ring ts_icon_inherit"></i>
+					<span class="block label">Help</span>
+				</a>
+									<a href="/messages" data-qa="launch">
+						<img src="https://a.slack-edge.com/66f9/img/icons/ios-64.png" srcset="https://a.slack-edge.com/66f9/img/icons/ios-32.png 1x, https://a.slack-edge.com/66f9/img/icons/ios-64.png 2x" title="Slack" alt="Launch Slack"/>
+						<span class="block label">Launch</span>
+					</a>
+							</div>
+				                    <ul id="header_team_nav" data-qa="team_switcher_menu">
+	                        	                            <li class="active">
+	                            	<a href="https://brightonggj.slack.com/home" target="https://brightonggj.slack.com/">
+	                            			                            			<i class="ts_icon small ts_icon_check_circle_o active_icon s"></i>
+	                            			                            				                            		<i class="team_icon small" style="background-image: url('https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-01-20/130267519378_bd8b59f4b23314977dac_88.jpg');"></i>
+		                            		                            		<span class="switcher_label team_name">Brighton Game Jams</span>
+	                            	</a>
+	                            </li>
+	                        	                        <li id="add_team_option"><a href="https://slack.com/signin" target="_blank"><i class="ts_icon ts_icon_plus team_icon small"></i> <span class="switcher_label">Sign in to another team...</span></a></li>
+	                    </ul>
+	                		</div>
+	
+	
+</header>	
+	<div id="page" >
+
+		<div id="page_contents" data-qa="page_contents" class="">
+
+<p class="print_only">
+	<strong>
+	
+	Created by bdeakin on Saturday, January 21, 2017 at  1:21 PM
+	</strong><br />
+	<span class="subtle_silver break_word">https://brightonggj.slack.com/files/bdeakin/F3U016MDX/boatbase.obj</span>
+</p>
+
+<div class="file_header_container no_print"></div>
+
+<div class="alert_container">
+		
+
+<div class="file_public_link_shared alert" style="display: none;">
+		
+	<i class="ts_icon ts_icon_link"></i> Public Link: <a class="file_public_link" href="https://slack-files.com/T0KQ61K6G-F3U016MDX-d074fa871d" target="new">https://slack-files.com/T0KQ61K6G-F3U016MDX-d074fa871d</a>
+</div></div>
+
+<div id="file_page" class="card top_padding">
+
+	<p class="small subtle_silver no_print meta">
+		
+		83KB Plain Text snippet created on <span class="date">January 21, 2017</span>.
+				This file is private.		<span class="file_share_list"></span>
+	</p>
+
+	<a id="file_action_cog" class="action_cog action_cog_snippet float_right no_print">
+		<span>Actions </span><i class="ts_icon ts_icon_cog"></i>
+	</a>
+	<a id="snippet_expand_toggle" class="float_right no_print">
+		<i class="ts_icon ts_icon_expand "></i>
+		<i class="ts_icon ts_icon_compress hidden"></i>
+	</a>
+
+	<div class="large_bottom_margin clearfix">
+		<pre id="file_contents"># This file uses centimeters as units for non-parametric coordinates.
+
+v -6.266029 10.567745 -14.704584
+v -6.266030 9.462886 -14.883319
+v -0.080790 10.798768 19.971077
+v -5.515270 8.668033 11.526527
+v -8.318358 9.264499 -0.966139
+v -8.318581 7.971094 -0.980525
+v -8.408059 9.505920 -9.195391
+v -8.408059 8.239215 -9.344759
+v -7.875509 10.354482 -13.525416
+v -7.946745 9.094279 -13.729280
+v -8.497951 9.147378 -5.083067
+v -8.497951 7.925097 -5.158433
+v -7.762449 9.259293 3.233326
+v -7.697949 7.994150 3.249652
+v -6.860394 9.281461 7.343370
+v -6.860176 8.088332 7.379878
+v -4.023135 9.033074 14.528940
+v -1.767008 9.907249 17.775501
+v 0.826653 9.780883 -9.170566
+v 0.826670 9.365108 -5.056722
+v 0.823179 9.302721 -0.966802
+v 0.813904 9.223366 3.222225
+v 0.800785 9.244848 7.331815
+v 0.775795 11.436579 23.235861
+v 0.775795 11.436579 23.235861
+v 0.772449 10.334886 20.156096
+v 0.826653 8.482494 -13.810129
+v 0.826653 9.320245 -15.082727
+v 0.826653 10.564279 -14.898086
+v -6.463997 9.250511 3.230668
+v -5.683357 9.259185 7.340975
+v 0.411955 11.893581 23.031500
+v 0.674809 8.879142 17.601492
+v 0.789688 8.427016 14.587978
+v 0.799429 8.217749 11.533516
+v 0.814140 7.654381 7.367994
+v 0.828001 7.561495 3.235857
+v 0.838688 7.484822 -0.983010
+v 0.843889 7.532808 -5.149599
+v 0.842073 7.771415 -9.375290
+v -1.068884 8.668515 -13.798157
+v -5.275648 9.338996 -15.095263
+v -5.275648 10.594855 -14.892101
+v -6.983555 9.733328 -9.186842
+v -7.048532 9.301676 -5.070297
+v -6.879588 9.291758 -0.964269
+v 0.845133 8.174202 -12.005621
+v -8.195582 9.992486 -11.742714
+v -8.195582 8.728087 -11.938098
+v -1.966313 9.339823 -15.095129
+v -1.966313 10.594855 -14.892101
+v -2.751700 9.741781 -9.188306
+v -2.781524 9.297833 -5.070539
+v -2.705963 9.283567 -0.967400
+v -2.520029 9.229671 3.224147
+v -2.168174 9.247873 7.333958
+v 7.919336 10.522060 -14.734262
+v 7.919338 9.255406 -14.813172
+v 1.760712 10.805513 19.969721
+v 7.065247 8.659134 11.516127
+v 9.966970 9.326402 -0.960654
+v 9.966740 8.065179 -0.957941
+v 10.061367 9.933596 -9.145895
+v 10.061367 8.643009 -9.163492
+v 9.528816 10.411026 -13.542398
+v 9.600054 9.134045 -13.596415
+v 10.151258 9.518641 -5.041782
+v 10.151258 8.291358 -5.048665
+v 9.388800 9.256759 3.231097
+v 9.331478 7.992886 3.249864
+v 8.463839 9.280010 7.341476
+v 8.422905 8.088695 7.364273
+v 5.575569 9.036232 14.528566
+v 3.219620 9.763812 17.879513
+v 8.094845 9.248534 3.230035
+v 7.288355 9.257356 7.340194
+v 1.104307 11.893581 23.031500
+v 2.745205 8.672615 -13.757062
+v 6.928953 9.277664 -15.015080
+v 6.928953 10.542315 -14.920133
+v 8.636862 9.773184 -9.146553
+v 8.701836 9.456682 -5.045503
+v 8.527647 9.320634 -0.962155
+v 9.848888 10.229940 -11.728662
+v 9.848888 8.940374 -11.771822
+v 3.619621 9.314600 -15.059264
+v 3.619621 10.568712 -14.906781
+v 4.405006 9.850684 -9.154941
+v 4.434847 9.445129 -5.047648
+v 4.352724 9.307058 -0.965679
+v 4.148590 9.230167 3.224305
+v 3.770586 9.247745 7.333958
+v 0.826653 11.202768 -14.806379
+v 0.826653 11.088594 -13.438605
+v -1.966313 11.231798 -14.789063
+v -2.535254 11.089014 -13.420240
+v 0.826653 10.639803 -11.651439
+v 0.826653 10.261104 -9.290529
+v -2.668058 10.710268 -11.641877
+v -2.751700 10.272243 -9.290569
+v -6.266029 11.204688 -14.601545
+v -5.275648 11.231798 -14.789063
+v -7.875509 10.992579 -13.422191
+v -5.794551 11.077946 -13.419630
+v -7.051929 10.355152 -9.203514
+v -8.408059 10.321131 -9.202060
+v -6.801668 10.782805 -11.640051
+v -8.195582 10.644338 -11.642038
+v 6.928953 11.182999 -14.877566
+v 7.447855 11.084558 -13.502116
+v 9.528816 11.055342 -13.518154
+v 7.919336 11.164398 -14.698295
+v 10.061367 10.418042 -9.221226
+v 9.848888 10.889768 -11.710300
+v 8.454975 10.799640 -11.701834
+v 8.763536 10.378373 -9.219267
+v 4.321365 10.720249 -11.674305
+v 4.405006 10.325332 -9.299027
+v 4.188560 11.092636 -13.467418
+v 3.619621 11.207529 -14.835303
+v 6.381674 9.329923 9.916609
+v 7.638311 9.333372 10.001157
+v 7.542410 8.366352 10.055522
+v 0.804491 7.754405 10.070186
+v -5.962706 8.417140 10.073050
+v -5.986389 9.332212 10.025809
+v -4.792248 9.330428 9.916896
+v -1.764498 9.367269 9.900513
+v 0.791203 9.366820 9.899028
+v 3.347498 9.367178 9.900513
+v 0.781763 10.007642 11.377699
+v 0.772259 10.185229 14.374734
+v -1.551309 10.006458 11.379122
+v -0.994596 10.172418 14.374610
+v 0.764345 10.656484 17.562166
+v -0.018238 10.648760 17.562431
+v 0.778162 11.621344 19.844427
+v -4.023465 10.630617 14.385028
+v -2.670027 10.161355 14.383968
+v -4.317513 10.035513 11.398277
+v -5.515750 10.537155 11.411733
+v -1.781046 10.991295 17.474361
+v -0.156601 11.609182 19.843346
+v 0.775795 12.307513 23.440577
+v 0.411955 12.296211 23.122322
+v 1.546675 10.649883 17.562567
+v 5.575363 10.629941 14.384467
+v 7.169590 10.525411 11.442326
+v 5.887985 10.035011 11.397836
+v 4.218409 10.160911 14.383611
+v 3.205587 11.086343 17.545296
+v 1.677208 11.610003 19.843346
+v 1.104307 12.296596 23.122322
+v 2.539112 10.172418 14.374610
+v 3.115362 10.006458 11.379122
+v 7.660118 10.493857 10.145015
+v 6.377636 10.006072 10.096802
+v -4.796274 10.006668 10.097232
+v -5.986549 10.509155 10.110975
+v -1.768833 9.920465 9.938265
+v 0.786827 9.919180 9.936101
+v 3.343163 9.920465 9.938265
+v 0.826653 12.135289 -14.719125
+v 0.869368 11.682097 -13.626540
+v -1.966313 12.133640 -14.691025
+v -2.492540 11.677454 -13.598619
+v -6.266029 12.132918 -14.503508
+v -5.275648 12.133640 -14.691025
+v -7.875509 11.598988 -13.324092
+v -5.953480 11.679804 -13.601975
+v -7.074110 11.030296 -9.679228
+v -8.408059 11.013983 -9.684601
+v -6.960597 11.370389 -11.545309
+v -8.195582 11.363600 -11.547955
+v 6.928953 12.136280 -14.839009
+v 7.447855 11.676841 -13.749002
+v 9.528816 11.669180 -13.495609
+v 7.919336 12.132953 -14.667192
+v 10.061367 11.144920 -9.779462
+v 9.848888 11.420507 -11.690621
+v 8.618187 11.426912 -11.681258
+v 8.752445 11.161058 -9.775467
+v 3.619621 12.134882 -14.766346
+v 4.231276 11.675794 -13.681643
+v -5.683357 9.888377 7.340975
+v -6.860394 9.890545 7.343370
+v -6.463997 9.863585 3.230668
+v -7.762449 9.872366 3.233326
+v -5.934634 9.899048 9.986309
+v -4.793255 9.928355 10.016327
+v -7.048634 9.970686 -5.044788
+v -8.497951 9.955132 -5.047706
+v -6.879588 9.899471 -0.962527
+v -8.318358 9.885337 -0.961387
+v -4.023465 10.677755 14.384352
+v -2.939262 10.683002 14.374352
+v -4.317513 10.561277 11.397933
+v -5.515750 10.587709 11.411733
+v 5.575363 10.677698 14.383793
+v 7.090532 10.585793 11.411152
+v 5.887985 10.560778 11.397492
+v 4.487644 10.682095 14.374001
+v 3.205587 11.134335 17.542831
+v 1.815023 11.196024 17.894707
+v 7.572098 10.561625 10.349195
+v 6.377636 10.541729 10.335691
+v -4.796274 10.542347 10.336121
+v -5.986549 10.565070 10.349865
+v -1.781046 11.039253 17.471943
+v -0.304407 11.195364 17.878315
+v 0.778162 11.718368 19.837814
+v -0.156601 11.658729 19.839703
+v 0.775795 12.428738 23.635099
+v 0.411955 12.335557 23.303200
+v 1.677208 11.658747 19.839703
+v 1.104307 12.335940 23.303200
+v 8.481451 9.888239 7.347446
+v 9.399672 9.869438 3.233801
+v 8.094845 9.861608 3.230035
+v 7.288355 9.877615 7.340194
+v 7.649359 9.936998 9.982363
+v 6.380665 9.927827 10.016005
+v 10.151258 10.072741 -5.039083
+v 8.701941 10.080153 -5.038901
+v 9.966970 9.939476 -0.960654
+v 8.527647 9.933707 -0.962155
+v 0.764345 11.230037 18.076605
+vt 0.375000 0.500000
+vt 0.375000 0.750000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vt 0.375000 0.273319
+vt 0.386051 0.976681
+vt 0.296353 0.125000
+vt 0.375000 0.328647
+vt 0.375000 0.921353
+vt 0.214485 0.250000
+vt 0.375000 0.410515
+vt 0.214485 0.000000
+vt 0.375000 0.839485
+vt 0.162481 0.250000
+vt 0.375000 0.462519
+vt 0.162481 0.000000
+vt 0.375000 0.787481
+vt 0.142109 0.250000
+vt 0.375000 0.482891
+vt 0.142109 0.000000
+vt 0.375000 0.767109
+vt 0.187954 0.250000
+vt 0.375000 0.437046
+vt 0.187954 0.000000
+vt 0.375000 0.812954
+vt 0.241973 0.250000
+vt 0.375000 0.383027
+vt 0.241973 0.000000
+vt 0.375000 0.866973
+vt 0.272245 0.250000
+vt 0.375000 0.352755
+vt 0.272245 0.000000
+vt 0.375000 0.897245
+vt 0.375000 0.308886
+vt 0.375000 0.941114
+vt 0.375000 0.288424
+vt 0.375000 0.961576
+vt 0.501127 0.462519
+vt 0.501127 0.437046
+vt 0.501127 0.410515
+vt 0.501127 0.383027
+vt 0.501127 0.352755
+vt 0.501127 0.328647
+vt 0.501127 0.308886
+vt 0.490558 0.288424
+vt 0.449114 0.273319
+vt 0.501127 0.250000
+vt 0.501127 0.000000
+vt 0.501127 1.000000
+vt 0.492941 0.981939
+vt 0.501127 0.767109
+vt 0.501127 0.750000
+vt 0.501127 0.500000
+vt 0.501127 0.482891
+vt 0.397102 0.383027
+vt 0.397102 0.352755
+vt 0.397102 0.328647
+vt 0.397102 0.308886
+vt 0.418079 0.288424
+vt 0.397102 0.125000
+vt 0.397102 1.000000
+vt 0.432126 0.961576
+vt 0.397102 0.941114
+vt 0.397102 0.921353
+vt 0.397102 0.897245
+vt 0.397102 0.866973
+vt 0.397102 0.839485
+vt 0.397102 0.812954
+vt 0.397102 0.787481
+vt 0.425196 0.767109
+vt 0.397102 0.750000
+vt 0.397102 0.500000
+vt 0.397102 0.482891
+vt 0.397102 0.462519
+vt 0.397102 0.437046
+vt 0.397102 0.410515
+vt 0.397102 0.775200
+vt 0.501127 0.474800
+vt 0.397102 0.474800
+vt 0.150200 0.250000
+vt 0.375000 0.474800
+vt 0.150200 0.000000
+vt 0.375000 0.775200
+vt 0.453291 0.750000
+vt 0.453291 0.500000
+vt 0.453291 0.482891
+vt 0.453291 0.474800
+vt 0.453291 0.462519
+vt 0.453291 0.437046
+vt 0.453291 0.410515
+vt 0.453291 0.383027
+vt 0.453291 0.352755
+vt 0.453291 0.328647
+vt 0.453291 0.308886
+vt 0.272245 0.000000
+vt 0.296353 0.125000
+vt 0.272245 0.250000
+vt 0.187954 0.000000
+vt 0.214485 0.000000
+vt 0.214485 0.250000
+vt 0.187954 0.250000
+vt 0.150200 0.000000
+vt 0.162481 0.000000
+vt 0.162481 0.250000
+vt 0.150200 0.250000
+vt 0.142109 0.250000
+vt 0.125000 0.250000
+vt 0.125000 0.000000
+vt 0.142109 0.000000
+vt 0.241973 0.000000
+vt 0.241973 0.250000
+vt 0.501127 0.437046
+vt 0.501127 0.462519
+vt 0.501127 0.410515
+vt 0.501127 0.383027
+vt 0.501127 0.352755
+vt 0.501127 0.328647
+vt 0.501127 0.750000
+vt 0.501127 0.767109
+vt 0.501127 0.500000
+vt 0.501127 0.482891
+vt 0.501127 0.474800
+vt 0.375000 0.352755
+vt 0.397102 0.352755
+vt 0.397102 0.383027
+vt 0.375000 0.383027
+vt 0.375000 0.328647
+vt 0.397102 0.328647
+vt 0.397102 0.921353
+vt 0.375000 0.921353
+vt 0.375000 0.897245
+vt 0.397102 0.897245
+vt 0.375000 0.866973
+vt 0.397102 0.866973
+vt 0.375000 0.839485
+vt 0.397102 0.839485
+vt 0.375000 0.812954
+vt 0.397102 0.812954
+vt 0.375000 0.787481
+vt 0.397102 0.787481
+vt 0.375000 0.775200
+vt 0.397102 0.775200
+vt 0.375000 0.750000
+vt 0.397102 0.750000
+vt 0.425196 0.767109
+vt 0.375000 0.767109
+vt 0.375000 0.500000
+vt 0.397102 0.500000
+vt 0.375000 0.482891
+vt 0.397102 0.482891
+vt 0.375000 0.462519
+vt 0.397102 0.462519
+vt 0.397102 0.474800
+vt 0.375000 0.474800
+vt 0.375000 0.437046
+vt 0.397102 0.437046
+vt 0.375000 0.410515
+vt 0.397102 0.410515
+vt 0.501127 0.308886
+vt 0.490558 0.288424
+vt 0.418079 0.288424
+vt 0.449114 0.273319
+vt 0.375000 0.308886
+vt 0.397102 0.308886
+vt 0.375000 0.288424
+vt 0.375000 0.273319
+vt 0.501127 0.250000
+vt 0.397102 0.125000
+vt 0.453291 0.308886
+vt 0.453291 0.328647
+vt 0.453291 0.352755
+vt 0.453291 0.383027
+vt 0.453291 0.410515
+vt 0.453291 0.437046
+vt 0.453291 0.462519
+vt 0.453291 0.474800
+vt 0.453291 0.482891
+vt 0.453291 0.500000
+vt 0.453291 0.750000
+vt 0.397102 0.941114
+vt 0.432126 0.961576
+vt 0.375000 0.961576
+vt 0.375000 0.941114
+vt 0.501127 0.000000
+vt 0.386051 0.976681
+vt 0.501127 1.000000
+vt 0.397102 1.000000
+vt 0.467190 0.981939
+vt 0.501127 0.500000
+vt 0.453291 0.500000
+vt 0.453291 0.462519
+vt 0.501127 0.462519
+vt 0.397102 0.500000
+vt 0.375000 0.500000
+vt 0.375000 0.482891
+vt 0.375000 0.462519
+vt 0.397102 0.462519
+vt 0.375000 0.474800
+vt 0.375000 0.482891
+vt 0.375000 0.500000
+vt 0.397102 0.500000
+vt 0.375000 0.462519
+vt 0.375000 0.474800
+vt 0.397102 0.462519
+vt 0.453291 0.462519
+vt 0.453291 0.500000
+vt 0.501127 0.500000
+vt 0.501127 0.462519
+vt 0.397102 0.337087
+vt 0.375000 0.337087
+vt 0.287913 0.250000
+vt 0.375000 0.912913
+vt 0.287913 0.000000
+vt 0.397102 0.912913
+vt 0.397102 0.912913
+vt 0.287913 0.000000
+vt 0.375000 0.912913
+vt 0.287913 0.250000
+vt 0.375000 0.337087
+vt 0.397102 0.337087
+vt 0.453291 0.337087
+vt 0.501127 0.337087
+vt 0.501127 0.337087
+vt 0.453291 0.337087
+vt 0.375000 0.328647
+vt 0.375000 0.308886
+vt 0.375000 0.288424
+vt 0.375000 0.273319
+vt 0.397102 0.250000
+vt 0.501127 0.250000
+vt 0.375000 0.308886
+vt 0.375000 0.328647
+vt 0.375000 0.288424
+vt 0.375000 0.273319
+vt 0.501127 0.250000
+vt 0.397102 0.250000
+vt 0.375000 0.337087
+vt 0.397102 0.337087
+vt 0.397102 0.337087
+vt 0.375000 0.337087
+vt 0.453291 0.337087
+vt 0.501127 0.337087
+vt 0.453291 0.337087
+vt 0.501127 0.337087
+vt 0.501127 0.500000
+vt 0.453291 0.500000
+vt 0.453291 0.482891
+vt 0.501127 0.482891
+vt 0.397102 0.352755
+vt 0.397102 0.383027
+vt 0.375000 0.383027
+vt 0.375000 0.352755
+vt 0.375000 0.337087
+vt 0.397102 0.337087
+vt 0.397102 0.500000
+vt 0.375000 0.500000
+vt 0.375000 0.482891
+vt 0.375000 0.462519
+vt 0.397102 0.462519
+vt 0.397102 0.474800
+vt 0.375000 0.474800
+vt 0.397102 0.437046
+vt 0.397102 0.462519
+vt 0.375000 0.462519
+vt 0.375000 0.437046
+vt 0.397102 0.410515
+vt 0.375000 0.410515
+vt 0.397102 0.482891
+vt 0.397102 0.308886
+vt 0.397102 0.328647
+vt 0.375000 0.332867
+vt 0.375000 0.308886
+vt 0.375000 0.352755
+vt 0.375000 0.383027
+vt 0.397102 0.383027
+vt 0.397102 0.352755
+vt 0.375000 0.337087
+vt 0.397102 0.337087
+vt 0.375000 0.482891
+vt 0.375000 0.500000
+vt 0.397102 0.500000
+vt 0.375000 0.462519
+vt 0.375000 0.474800
+vt 0.397102 0.474800
+vt 0.397102 0.462519
+vt 0.375000 0.437046
+vt 0.375000 0.462519
+vt 0.397102 0.462519
+vt 0.397102 0.437046
+vt 0.375000 0.410515
+vt 0.397102 0.410515
+vt 0.397102 0.482891
+vt 0.375000 0.308886
+vt 0.375000 0.328647
+vt 0.397102 0.328647
+vt 0.397102 0.308886
+vt 0.375000 0.288424
+vt 0.397102 0.288424
+vt 0.453291 0.500000
+vt 0.453291 0.482891
+vt 0.501127 0.482891
+vt 0.501127 0.500000
+vt 0.375000 0.337087
+vt 0.397102 0.337087
+vt 0.397102 0.337087
+vt 0.375000 0.337087
+vt 0.396821 0.300590
+vt 0.375000 0.288424
+vt 0.449114 0.273319
+vt 0.375000 0.273319
+vt 0.397102 0.250000
+vt 0.501127 0.250000
+vt 0.375000 0.273319
+vt 0.449114 0.273319
+vt 0.501127 0.250000
+vt 0.397102 0.250000
+vt 0.490558 0.288424
+vt 0.418079 0.288424
+vt 0.449114 0.273319
+vt 0.418079 0.288424
+vt 0.490558 0.288424
+vt 0.449114 0.273319
+vt 0.397102 0.337087
+vt 0.397102 0.337087
+vt 0.375000 0.337087
+vn -0.999063 -0.001455 0.043263
+vn -0.999063 -0.001455 0.043263
+vn -0.999063 -0.001455 0.043263
+vn -0.999063 -0.001455 0.043263
+vn -0.996709 0.010940 -0.080317
+vn -0.996709 0.010940 -0.080317
+vn -0.996709 0.010940 -0.080317
+vn -0.996709 0.010940 -0.080317
+vn -0.589317 0.146285 -0.794548
+vn -0.589317 0.146285 -0.794548
+vn -0.589317 0.146285 -0.794548
+vn -0.589317 0.146285 -0.794548
+vn -0.999767 0.001942 -0.021502
+vn -0.999767 0.001942 -0.021502
+vn -0.999767 0.001942 -0.021502
+vn -0.999767 0.001942 -0.021502
+vn -0.990089 -0.024769 0.138241
+vn -0.990089 -0.024769 0.138241
+vn -0.990089 -0.024769 0.138241
+vn -0.990089 -0.024769 0.138241
+vn -0.015176 0.994481 0.103810
+vn -0.015176 0.994481 0.103810
+vn -0.015176 0.994481 0.103810
+vn -0.015176 0.994481 0.103810
+vn -0.012127 0.999882 0.009461
+vn -0.012127 0.999882 0.009461
+vn -0.012127 0.999882 0.009461
+vn -0.012127 0.999882 0.009461
+vn -0.001869 0.999871 0.015937
+vn -0.001869 0.999871 0.015937
+vn -0.001869 0.999871 0.015937
+vn -0.001869 0.999871 0.015937
+vn 0.001477 0.999987 -0.004889
+vn 0.001477 0.999987 -0.004889
+vn 0.001477 0.999987 -0.004889
+vn 0.001477 0.999987 -0.004889
+vn 0.002511 0.153292 -0.988178
+vn 0.002511 0.153292 -0.988178
+vn 0.002511 0.153292 -0.988178
+vn 0.002511 0.153292 -0.988178
+vn 0.011597 0.985209 0.170963
+vn 0.011597 0.985209 0.170963
+vn 0.011597 0.985209 0.170963
+vn 0.011597 0.985209 0.170963
+vn -0.075313 -0.992970 0.091316
+vn -0.075313 -0.992970 0.091316
+vn -0.075313 -0.992970 0.091316
+vn -0.075313 -0.992970 0.091316
+vn -0.053352 -0.998185 0.027920
+vn -0.053352 -0.998185 0.027920
+vn -0.053352 -0.998185 0.027920
+vn -0.053352 -0.998185 0.027920
+vn -0.051876 -0.998533 0.015531
+vn -0.051876 -0.998533 0.015531
+vn -0.051876 -0.998533 0.015531
+vn -0.051876 -0.998533 0.015531
+vn -0.047439 -0.998874 0.000752
+vn -0.047439 -0.998874 0.000752
+vn -0.047439 -0.998874 0.000752
+vn -0.047439 -0.998874 0.000752
+vn -0.187876 0.156852 -0.969588
+vn -0.187876 0.156852 -0.969588
+vn -0.187876 0.156852 -0.969588
+vn -0.187876 0.156852 -0.969588
+vn -0.009409 0.983429 0.181050
+vn -0.009409 0.983429 0.181050
+vn -0.009409 0.983429 0.181050
+vn -0.009409 0.983429 0.181050
+vn -0.017644 0.995811 0.089713
+vn -0.017644 0.995811 0.089713
+vn -0.017644 0.995811 0.089713
+vn -0.017644 0.995811 0.089713
+vn -0.010289 0.999790 0.017698
+vn -0.010289 0.999790 0.017698
+vn -0.010289 0.999790 0.017698
+vn -0.010289 0.999790 0.017698
+vn -0.001947 0.999980 0.006050
+vn -0.001947 0.999980 0.006050
+vn -0.001947 0.999980 0.006050
+vn -0.001947 0.999980 0.006050
+vn 0.010991 0.973959 0.226459
+vn 0.010991 0.973959 0.226459
+vn 0.010991 0.973959 0.226459
+vn 0.010991 0.973959 0.226459
+vn -0.987840 0.051095 -0.146839
+vn -0.987840 0.051095 -0.146839
+vn -0.987840 0.051095 -0.146839
+vn -0.987840 0.051095 -0.146839
+vn 0.000001 0.159695 -0.987166
+vn 0.000001 0.159695 -0.987166
+vn 0.000001 0.159695 -0.987166
+vn 0.000001 0.159695 -0.987166
+vn 0.008227 0.982013 0.188633
+vn 0.008227 0.982013 0.188633
+vn 0.008227 0.982013 0.188633
+vn 0.008227 0.982013 0.188633
+vn 0.020018 0.983602 0.179238
+vn 0.020018 0.983602 0.179238
+vn 0.020018 0.983602 0.179238
+vn 0.020018 0.983602 0.179238
+vn -0.000518 0.994394 0.105733
+vn -0.000518 0.994394 0.105733
+vn -0.000518 0.994394 0.105733
+vn -0.000518 0.994394 0.105733
+vn 0.001427 0.999995 0.002904
+vn 0.001427 0.999995 0.002904
+vn 0.001427 0.999995 0.002904
+vn 0.001427 0.999995 0.002904
+vn 0.003589 0.999932 0.011087
+vn 0.003589 0.999932 0.011087
+vn 0.003589 0.999932 0.011087
+vn 0.003589 0.999932 0.011087
+vn 0.004303 0.999983 -0.003862
+vn 0.004303 0.999983 -0.003862
+vn 0.004303 0.999983 -0.003862
+vn 0.004303 0.999983 -0.003862
+vn -0.003426 0.998373 -0.056924
+vn -0.003426 0.998373 -0.056924
+vn -0.003426 0.998373 -0.056924
+vn -0.003426 0.998373 -0.056924
+vn -0.007977 0.989277 -0.145831
+vn -0.007977 0.989277 -0.145831
+vn -0.007977 0.989277 -0.145831
+vn -0.007977 0.989277 -0.145831
+vn 0.018334 0.963445 -0.267278
+vn 0.018334 0.963445 -0.267278
+vn 0.018334 0.963445 -0.267278
+vn 0.008859 0.999167 -0.039842
+vn 0.008859 0.999167 -0.039842
+vn 0.008859 0.999167 -0.039842
+vn 0.008859 0.999167 -0.039842
+vn 0.003724 0.998737 -0.050097
+vn 0.003724 0.998737 -0.050097
+vn 0.003724 0.998737 -0.050097
+vn 0.003724 0.998737 -0.050097
+vn -0.007345 0.989319 -0.145580
+vn -0.007345 0.989319 -0.145580
+vn -0.007345 0.989319 -0.145580
+vn -0.207503 -0.940187 0.270170
+vn -0.207503 -0.940187 0.270170
+vn -0.207503 -0.940187 0.270170
+vn -0.207503 -0.940187 0.270170
+vn -0.094545 -0.988635 0.116881
+vn -0.094545 -0.988635 0.116881
+vn -0.094545 -0.988635 0.116881
+vn -0.094545 -0.988635 0.116881
+vn 0.998984 -0.000169 0.045077
+vn 0.998984 -0.000169 0.045077
+vn 0.998984 -0.000169 0.045077
+vn 0.998984 -0.000169 0.045077
+vn 0.592372 0.058582 -0.803532
+vn 0.592372 0.058582 -0.803532
+vn 0.592372 0.058582 -0.803532
+vn 0.592372 0.058582 -0.803532
+vn 0.989551 -0.021341 0.142594
+vn 0.989551 -0.021341 0.142594
+vn 0.989551 -0.021341 0.142594
+vn 0.989551 -0.021341 0.142594
+vn 0.975322 -0.035344 0.217938
+vn 0.975322 -0.035344 0.217938
+vn 0.975322 -0.035344 0.217938
+vn 0.975322 -0.035344 0.217938
+vn -0.007362 0.999956 -0.005777
+vn -0.007362 0.999956 -0.005777
+vn -0.007362 0.999956 -0.005777
+vn -0.007362 0.999956 -0.005777
+vn -0.008268 0.999738 -0.021340
+vn -0.008268 0.999738 -0.021340
+vn -0.008268 0.999738 -0.021340
+vn -0.008268 0.999738 -0.021340
+vn 0.072595 -0.994019 0.081589
+vn 0.072595 -0.994019 0.081589
+vn 0.072595 -0.994019 0.081589
+vn 0.072595 -0.994019 0.081589
+vn 0.053612 -0.998145 0.028836
+vn 0.053612 -0.998145 0.028836
+vn 0.053612 -0.998145 0.028836
+vn 0.053612 -0.998145 0.028836
+vn 0.057277 -0.998346 0.004909
+vn 0.057277 -0.998346 0.004909
+vn 0.057277 -0.998346 0.004909
+vn 0.057277 -0.998346 0.004909
+vn 0.072614 -0.996865 -0.031430
+vn 0.072614 -0.996865 -0.031430
+vn 0.072614 -0.996865 -0.031430
+vn 0.072614 -0.996865 -0.031430
+vn 0.193079 0.067232 -0.978877
+vn 0.193079 0.067232 -0.978877
+vn 0.193079 0.067232 -0.978877
+vn 0.193079 0.067232 -0.978877
+vn 0.009523 0.990163 0.139591
+vn 0.009523 0.990163 0.139591
+vn 0.009523 0.990163 0.139591
+vn 0.009523 0.990163 0.139591
+vn -0.011647 0.996982 0.076760
+vn -0.011647 0.996982 0.076760
+vn -0.011647 0.996982 0.076760
+vn -0.011647 0.996982 0.076760
+vn 0.000553 0.999411 0.034302
+vn 0.000553 0.999411 0.034302
+vn 0.000553 0.999411 0.034302
+vn 0.000553 0.999411 0.034302
+vn -0.004986 0.999854 0.016351
+vn -0.004986 0.999854 0.016351
+vn -0.004986 0.999854 0.016351
+vn -0.004986 0.999854 0.016351
+vn -0.015040 0.963565 -0.267051
+vn -0.015040 0.963565 -0.267051
+vn -0.015040 0.963565 -0.267051
+vn 0.007308 0.990352 -0.138382
+vn 0.007308 0.990352 -0.138382
+vn 0.007308 0.990352 -0.138382
+vn 0.007308 0.990352 -0.138382
+vn 0.007561 0.989283 -0.145814
+vn 0.007561 0.989283 -0.145814
+vn 0.007561 0.989283 -0.145814
+vn -0.003512 0.998740 -0.050053
+vn -0.003512 0.998740 -0.050053
+vn -0.003512 0.998740 -0.050053
+vn -0.003512 0.998740 -0.050053
+vn -0.003742 0.999986 -0.003751
+vn -0.003742 0.999986 -0.003751
+vn -0.003742 0.999986 -0.003751
+vn -0.003742 0.999986 -0.003751
+vn -0.003952 0.999840 0.017472
+vn -0.003952 0.999840 0.017472
+vn -0.003952 0.999840 0.017472
+vn -0.003952 0.999840 0.017472
+vn -0.002997 0.999436 0.033458
+vn -0.002997 0.999436 0.033458
+vn -0.002997 0.999436 0.033458
+vn -0.002997 0.999436 0.033458
+vn 0.007621 0.996132 0.087538
+vn 0.007621 0.996132 0.087538
+vn 0.007621 0.996132 0.087538
+vn 0.007621 0.996132 0.087538
+vn -0.016401 0.985828 0.166957
+vn -0.016401 0.985828 0.166957
+vn -0.016401 0.985828 0.166957
+vn -0.016401 0.985828 0.166957
+vn 0.005572 0.097763 -0.995194
+vn 0.005572 0.097763 -0.995194
+vn 0.005572 0.097763 -0.995194
+vn 0.005572 0.097763 -0.995194
+vn 0.002649 0.133737 -0.991013
+vn 0.002649 0.133737 -0.991013
+vn 0.002649 0.133737 -0.991013
+vn 0.002649 0.133737 -0.991013
+vn -0.019466 0.986679 0.161510
+vn -0.019466 0.986679 0.161510
+vn -0.019466 0.986679 0.161510
+vn -0.019466 0.986679 0.161510
+vn -0.021081 0.994818 0.099463
+vn -0.021081 0.994818 0.099463
+vn -0.021081 0.994818 0.099463
+vn -0.021081 0.994818 0.099463
+vn -0.011849 0.999632 0.024397
+vn -0.011849 0.999632 0.024397
+vn -0.011849 0.999632 0.024397
+vn -0.011849 0.999632 0.024397
+vn -0.001631 0.999826 0.018603
+vn -0.001631 0.999826 0.018603
+vn -0.001631 0.999826 0.018603
+vn -0.001631 0.999826 0.018603
+vn -0.001535 0.999987 -0.004825
+vn -0.001535 0.999987 -0.004825
+vn -0.001535 0.999987 -0.004825
+vn -0.001535 0.999987 -0.004825
+vn 0.003426 0.998374 -0.056901
+vn 0.003426 0.998374 -0.056901
+vn 0.003426 0.998374 -0.056901
+vn 0.003426 0.998374 -0.056901
+vn 0.007549 0.989252 -0.146026
+vn 0.007549 0.989252 -0.146026
+vn 0.007549 0.989252 -0.146026
+vn 0.007549 0.989252 -0.146026
+vn 0.186296 -0.950544 0.248515
+vn 0.186296 -0.950544 0.248515
+vn 0.186296 -0.950544 0.248515
+vn 0.186296 -0.950544 0.248515
+vn -0.002514 0.150940 -0.988540
+vn -0.002514 0.150940 -0.988540
+vn -0.002514 0.150940 -0.988540
+vn -0.002514 0.150940 -0.988540
+vn -0.003265 0.214747 0.976664
+vn -0.003265 0.214747 0.976664
+vn -0.003265 0.214747 0.976664
+vn -0.003265 0.214747 0.976664
+vn -0.187875 0.156851 -0.969588
+vn -0.187875 0.156851 -0.969588
+vn -0.187875 0.156851 -0.969588
+vn -0.187875 0.156851 -0.969588
+vn -0.597119 0.128100 -0.791858
+vn -0.597119 0.128100 -0.791858
+vn -0.597119 0.128100 -0.791858
+vn -0.597119 0.128100 -0.791858
+vn -0.004060 0.016047 0.999863
+vn -0.004060 0.016047 0.999863
+vn -0.004060 0.016047 0.999863
+vn -0.004060 0.016047 0.999863
+vn -0.996449 0.005384 -0.084030
+vn -0.996449 0.005384 -0.084030
+vn -0.996449 0.005384 -0.084030
+vn -0.996449 0.005384 -0.084030
+vn -0.984805 0.027115 -0.171537
+vn -0.984805 0.027115 -0.171537
+vn -0.984805 0.027115 -0.171537
+vn -0.984804 0.027115 -0.171537
+vn 0.000000 0.159695 -0.987167
+vn 0.000000 0.159695 -0.987167
+vn 0.000000 0.159695 -0.987167
+vn 0.000000 0.159695 -0.987167
+vn 0.011220 0.103324 0.994585
+vn 0.011220 0.103324 0.994585
+vn 0.011220 0.103324 0.994585
+vn 0.011220 0.103324 0.994585
+vn 0.594467 0.037590 -0.803241
+vn 0.594467 0.037590 -0.803241
+vn 0.594467 0.037590 -0.803241
+vn 0.594467 0.037590 -0.803241
+vn 0.182101 0.060074 -0.981443
+vn 0.182101 0.060074 -0.981443
+vn 0.182101 0.060074 -0.981443
+vn 0.182101 0.060074 -0.981443
+vn 0.996447 -0.004188 -0.084124
+vn 0.996447 -0.004188 -0.084124
+vn 0.996446 -0.004188 -0.084124
+vn 0.996446 -0.004188 -0.084124
+vn -0.009501 0.135708 0.990703
+vn -0.009501 0.135708 0.990703
+vn -0.009501 0.135708 0.990703
+vn -0.009501 0.135708 0.990703
+vn 0.984812 0.005668 -0.173531
+vn 0.984812 0.005668 -0.173531
+vn 0.984812 0.005668 -0.173531
+vn 0.984812 0.005668 -0.173531
+vn -0.009494 0.197905 0.980175
+vn -0.009494 0.197905 0.980175
+vn -0.009494 0.197905 0.980175
+vn -0.009494 0.197905 0.980175
+vn -0.007686 0.088777 -0.996022
+vn -0.007686 0.088777 -0.996022
+vn -0.007686 0.088777 -0.996022
+vn -0.007686 0.088777 -0.996022
+vn -0.006888 0.126724 -0.991914
+vn -0.006888 0.126724 -0.991914
+vn -0.006888 0.126724 -0.991914
+vn -0.006888 0.126724 -0.991914
+vn -0.005951 0.266523 0.963810
+vn -0.005951 0.266523 0.963810
+vn -0.005951 0.266523 0.963810
+vn -0.005951 0.266523 0.963810
+vn -0.082187 -0.965067 0.248779
+vn -0.082187 -0.965067 0.248779
+vn -0.082187 -0.965067 0.248779
+vn -0.082187 -0.965067 0.248779
+vn 0.020237 0.999386 -0.028611
+vn 0.020237 0.999386 -0.028611
+vn 0.020237 0.999386 -0.028611
+vn 0.020237 0.999386 -0.028611
+vn -0.895155 0.032965 0.444534
+vn -0.895155 0.032965 0.444534
+vn -0.895155 0.032965 0.444534
+vn -0.895155 0.032965 0.444534
+vn -0.642319 -0.173253 0.746599
+vn -0.642319 -0.173253 0.746599
+vn -0.642319 -0.173253 0.746599
+vn -0.642319 -0.173253 0.746599
+vn 0.813823 0.097923 0.572803
+vn 0.813823 0.097923 0.572803
+vn 0.813823 0.097923 0.572803
+vn 0.813823 0.097923 0.572803
+vn -0.047706 0.994189 -0.096503
+vn -0.047706 0.994189 -0.096503
+vn -0.047706 0.994189 -0.096503
+vn -0.047706 0.994189 -0.096503
+vn -0.049112 0.972858 -0.226132
+vn -0.049112 0.972858 -0.226132
+vn -0.049112 0.972858 -0.226132
+vn -0.049112 0.972858 -0.226132
+vn -0.069175 0.980862 -0.182003
+vn -0.069175 0.980862 -0.182003
+vn -0.069175 0.980862 -0.182003
+vn -0.069175 0.980862 -0.182003
+vn 0.000000 0.000000 0.000000
+vn 0.000000 0.000000 0.000000
+vn 0.000000 0.000000 0.000000
+vn -0.634763 -0.709870 0.305224
+vn -0.634763 -0.709870 0.305224
+vn -0.634763 -0.709870 0.305224
+vn -0.634763 -0.709870 0.305224
+vn 0.016345 0.972978 -0.230317
+vn 0.016345 0.972978 -0.230317
+vn 0.016345 0.972978 -0.230317
+vn 0.016345 0.972978 -0.230317
+vn 0.072934 0.980659 -0.181629
+vn 0.072934 0.980659 -0.181629
+vn 0.072934 0.980659 -0.181629
+vn 0.072934 0.980659 -0.181629
+vn 0.000000 0.000000 0.000000
+vn 0.000000 0.000000 0.000000
+vn 0.000000 0.000000 0.000000
+vn 0.607225 -0.725762 0.323338
+vn 0.607225 -0.725762 0.323338
+vn 0.607225 -0.725762 0.323338
+vn 0.607225 -0.725762 0.323338
+vn -0.820256 0.089371 0.564972
+vn -0.820256 0.089371 0.564972
+vn -0.820256 0.089371 0.564972
+vn -0.820256 0.089371 0.564972
+vn -0.820047 0.089085 0.565319
+vn -0.820047 0.089085 0.565319
+vn -0.820048 0.089085 0.565319
+vn -0.820047 0.089085 0.565319
+vn -0.982055 -0.055895 0.180120
+vn -0.982055 -0.055895 0.180120
+vn -0.982055 -0.055895 0.180120
+vn -0.982055 -0.055895 0.180120
+vn 0.841387 0.150952 0.518924
+vn 0.841386 0.150952 0.518924
+vn 0.841386 0.150952 0.518924
+vn 0.841387 0.150952 0.518924
+vn 0.680337 -0.165624 0.713940
+vn 0.680337 -0.165624 0.713940
+vn 0.680337 -0.165624 0.713940
+vn 0.680337 -0.165624 0.713940
+vn 0.982721 0.072967 0.170101
+vn 0.982721 0.072967 0.170101
+vn 0.982721 0.072967 0.170101
+vn 0.982721 0.072967 0.170101
+vn -0.354308 -0.778667 0.517826
+vn -0.354308 -0.778667 0.517826
+vn -0.354308 -0.778667 0.517826
+vn -0.354308 -0.778667 0.517826
+vn 0.294591 -0.802992 0.518093
+vn 0.294591 -0.802992 0.518093
+vn 0.294591 -0.802992 0.518093
+vn 0.294591 -0.802992 0.518093
+vn -0.037992 -0.867409 -0.496144
+vn -0.037992 -0.867409 -0.496144
+vn -0.037992 -0.867409 -0.496144
+vn -0.037992 -0.867409 -0.496144
+vn -0.046188 -0.996752 -0.065977
+vn -0.046188 -0.996752 -0.065977
+vn -0.046188 -0.996752 -0.065977
+vn -0.046188 -0.996752 -0.065977
+vn -0.055866 -0.983818 -0.170239
+vn -0.055866 -0.983818 -0.170239
+vn -0.055866 -0.983818 -0.170239
+vn -0.055866 -0.983818 -0.170239
+vn -0.077389 -0.944094 -0.320466
+vn -0.077389 -0.944094 -0.320466
+vn -0.077389 -0.944094 -0.320466
+vn -0.077389 -0.944094 -0.320466
+vn -0.061867 -0.976645 -0.205760
+vn -0.061867 -0.976645 -0.205760
+vn -0.061867 -0.976645 -0.205760
+vn -0.061867 -0.976645 -0.205760
+vn 0.000241 -0.888022 -0.459802
+vn 0.000241 -0.888022 -0.459802
+vn 0.000241 -0.888022 -0.459802
+vn 0.996682 0.001915 -0.081372
+vn 0.996682 0.001915 -0.081372
+vn 0.996682 0.001915 -0.081372
+vn 0.996682 0.001915 -0.081372
+vn 0.999761 0.000213 -0.021849
+vn 0.999761 0.000213 -0.021849
+vn 0.999761 0.000213 -0.021849
+vn 0.999761 0.000213 -0.021849
+vn 0.088621 -0.993511 -0.071285
+vn 0.088621 -0.993511 -0.071285
+vn 0.088621 -0.993511 -0.071285
+vn 0.088621 -0.993511 -0.071285
+vn 0.091974 -0.986496 -0.135523
+vn 0.091974 -0.986496 -0.135523
+vn 0.091974 -0.986496 -0.135523
+vn 0.091974 -0.986496 -0.135523
+vn 0.064664 -0.973290 -0.220283
+vn 0.064664 -0.973290 -0.220283
+vn 0.064664 -0.973290 -0.220283
+vn 0.064664 -0.973290 -0.220283
+vn 0.987967 0.033143 -0.151070
+vn 0.987967 0.033143 -0.151070
+vn 0.987967 0.033143 -0.151070
+vn 0.987967 0.033143 -0.151070
+vn 0.080060 -0.984878 -0.153639
+vn 0.080060 -0.984878 -0.153639
+vn 0.080060 -0.984878 -0.153639
+vn 0.080060 -0.984878 -0.153639
+vn -0.004066 -0.895832 -0.444374
+vn -0.004066 -0.895832 -0.444374
+vn -0.004066 -0.895832 -0.444374
+vn 0.042068 -0.872357 -0.487057
+vn 0.042068 -0.872357 -0.487057
+vn 0.042068 -0.872357 -0.487057
+vn 0.042068 -0.872357 -0.487057
+vn -0.097344 -0.981201 -0.166637
+vn -0.097344 -0.981201 -0.166637
+vn -0.097344 -0.981201 -0.166637
+vn 0.101818 -0.980421 -0.168544
+vn 0.101818 -0.980421 -0.168544
+vn 0.101818 -0.980421 -0.168544
+vn -0.011926 0.573556 0.819080
+vn -0.011926 0.573556 0.819080
+vn -0.011926 0.573556 0.819080
+vn -0.011926 0.573556 0.819080
+vn 0.978031 0.174626 0.113849
+vn 0.978031 0.174626 0.113849
+vn 0.978031 0.174626 0.113849
+vn 0.978031 0.174626 0.113849
+vn -0.994322 -0.028224 -0.102602
+vn -0.994322 -0.028224 -0.102602
+vn -0.994322 -0.028224 -0.102602
+vn -0.994322 -0.028224 -0.102602
+vn 0.993643 -0.044318 -0.103489
+vn 0.993643 -0.044318 -0.103489
+vn 0.993643 -0.044318 -0.103489
+vn 0.993643 -0.044318 -0.103489
+vn -0.980647 0.152464 0.122827
+vn -0.980647 0.152464 0.122827
+vn -0.980647 0.152464 0.122827
+vn -0.980647 0.152464 0.122827
+vn -0.003524 0.593912 0.804522
+vn -0.003524 0.593912 0.804522
+vn -0.003524 0.593912 0.804522
+vn -0.003524 0.593912 0.804522
+vn -0.013648 0.083688 -0.996399
+vn -0.013648 0.083688 -0.996399
+vn -0.013648 0.083688 -0.996399
+vn -0.013648 0.083688 -0.996399
+vn 0.982439 0.000000 -0.186587
+vn 0.982439 0.000000 -0.186587
+vn 0.982439 0.000000 -0.186587
+vn 0.982439 0.000000 -0.186587
+vn 0.998521 0.052883 0.012658
+vn 0.998521 0.052883 0.012658
+vn 0.998520 0.052883 0.012658
+vn 0.998520 0.052883 0.012658
+vn 0.004060 -0.016047 -0.999863
+vn 0.004060 -0.016047 -0.999863
+vn 0.004060 -0.016047 -0.999863
+vn 0.004060 -0.016047 -0.999863
+vn -0.999764 0.000384 -0.021709
+vn -0.999764 0.000384 -0.021709
+vn -0.999764 0.000384 -0.021709
+vn -0.999764 0.000384 -0.021709
+vn 0.999149 0.000961 -0.041232
+vn 0.999149 0.000961 -0.041232
+vn 0.999149 0.000961 -0.041232
+vn 0.999149 0.000961 -0.041232
+vn -0.999042 -0.001229 0.043751
+vn -0.999042 -0.001229 0.043751
+vn -0.999042 -0.001229 0.043751
+vn -0.999042 -0.001229 0.043751
+vn 0.995127 0.000142 -0.098606
+vn 0.995127 0.000142 -0.098606
+vn 0.995127 0.000142 -0.098606
+vn 0.995127 0.000142 -0.098606
+vn -0.991342 -0.000505 0.131303
+vn -0.991342 -0.000505 0.131303
+vn -0.991342 -0.000505 0.131303
+vn -0.991342 -0.000505 0.131303
+vn 0.866507 0.218466 -0.448819
+vn 0.866507 0.218466 -0.448819
+vn 0.866507 0.218466 -0.448819
+vn 0.866507 0.218466 -0.448819
+vn -0.893763 0.003098 0.448529
+vn -0.893763 0.003098 0.448529
+vn -0.893763 0.003098 0.448529
+vn -0.893763 0.003098 0.448529
+vn -0.864005 0.217874 -0.453901
+vn -0.864005 0.217874 -0.453901
+vn -0.864005 0.217874 -0.453901
+vn -0.864005 0.217874 -0.453901
+vn 0.801228 0.019605 0.598038
+vn 0.801228 0.019605 0.598038
+vn 0.801228 0.019605 0.598038
+vn 0.801228 0.019605 0.598038
+vn -0.639573 0.498875 -0.584868
+vn -0.639573 0.498875 -0.584868
+vn -0.639573 0.498875 -0.584868
+vn -0.639573 0.498875 -0.584868
+vn 0.641116 0.500200 -0.582039
+vn 0.641116 0.500200 -0.582039
+vn 0.641116 0.500200 -0.582039
+vn 0.641116 0.500200 -0.582039
+vn -0.810110 0.019065 0.585967
+vn -0.810111 0.019065 0.585967
+vn -0.810111 0.019065 0.585967
+vn -0.810110 0.019065 0.585967
+vn -0.828371 0.034757 0.559101
+vn -0.828371 0.034757 0.559101
+vn -0.828371 0.034757 0.559101
+vn -0.828371 0.034757 0.559101
+vn -0.845924 -0.476706 0.239091
+vn -0.845924 -0.476706 0.239091
+vn -0.845924 -0.476706 0.239091
+vn -0.845924 -0.476706 0.239091
+vn -0.214261 -0.898074 0.384129
+vn -0.214261 -0.898074 0.384129
+vn -0.214261 -0.898074 0.384129
+vn -0.214261 -0.898074 0.384129
+vn 0.835723 0.034600 0.548061
+vn 0.835723 0.034600 0.548061
+vn 0.835723 0.034600 0.548061
+vn 0.835723 0.034600 0.548061
+vn 0.237056 -0.893217 0.382059
+vn 0.237056 -0.893216 0.382058
+vn 0.237056 -0.893216 0.382058
+vn 0.237056 -0.893216 0.382058
+vn 0.840806 -0.484763 0.240937
+vn 0.840806 -0.484763 0.240937
+vn 0.840806 -0.484763 0.240937
+vn 0.840806 -0.484763 0.240937
+vn 0.975478 -0.024313 0.218750
+vn 0.975478 -0.024313 0.218750
+vn 0.975478 -0.024313 0.218750
+vn 0.975478 -0.024313 0.218750
+vn -0.981288 0.000000 -0.192547
+vn -0.981288 0.000000 -0.192547
+vn -0.981288 0.000000 -0.192547
+vn -0.981288 0.000000 -0.192547
+vn 0.999761 -0.001526 -0.021831
+vn 0.999761 -0.001526 -0.021831
+vn 0.999761 -0.001526 -0.021831
+vn 0.999761 -0.001526 -0.021831
+vn 0.009501 -0.135708 -0.990703
+vn 0.009501 -0.135707 -0.990703
+vn 0.009501 -0.135708 -0.990703
+vn 0.009501 -0.135708 -0.990703
+vn -0.994642 0.103065 0.008056
+vn -0.994642 0.103065 0.008056
+vn -0.994642 0.103065 0.008056
+vn -0.994642 0.103065 0.008056
+vn 0.998982 -0.000104 0.045121
+vn 0.998982 -0.000104 0.045121
+vn 0.998982 -0.000104 0.045121
+vn 0.998982 -0.000104 0.045121
+vn -0.999090 0.000314 -0.042656
+vn -0.999090 0.000314 -0.042656
+vn -0.999090 0.000314 -0.042656
+vn -0.999090 0.000314 -0.042656
+vn 0.990780 -0.009085 0.135179
+vn 0.990780 -0.009085 0.135179
+vn 0.990780 -0.009085 0.135179
+vn 0.990780 -0.009085 0.135179
+vn -0.994713 0.000000 -0.102694
+vn -0.994713 0.000000 -0.102694
+vn -0.994713 0.000000 -0.102694
+vn -0.994713 0.000000 -0.102694
+vn 0.070908 0.605624 -0.792586
+vn 0.070908 0.605624 -0.792586
+vn 0.070908 0.605624 -0.792586
+vn 0.070908 0.605624 -0.792586
+vn -0.682296 -0.540110 0.492700
+vn -0.682296 -0.540110 0.492700
+vn -0.682296 -0.540110 0.492700
+vn -0.682296 -0.540110 0.492700
+vn -0.064523 0.611637 -0.788503
+vn -0.064523 0.611637 -0.788503
+vn -0.064523 0.611637 -0.788503
+vn -0.064523 0.611637 -0.788503
+vn 0.692460 -0.534291 0.484802
+vn 0.692460 -0.534291 0.484802
+vn 0.692460 -0.534291 0.484802
+vn 0.692460 -0.534291 0.484802
+vn 0.004340 0.999336 -0.036186
+vn 0.004340 0.999336 -0.036186
+vn 0.004340 0.999336 -0.036186
+vn 0.004340 0.999336 -0.036186
+vn -0.018211 0.998746 -0.046630
+vn -0.018211 0.998746 -0.046630
+vn -0.018211 0.998746 -0.046630
+vn -0.018211 0.998746 -0.046630
+vn 0.015927 0.118357 -0.992843
+vn 0.015927 0.118357 -0.992844
+vn 0.015927 0.118357 -0.992844
+vn 0.015927 0.118357 -0.992844
+vn -0.919752 0.086064 -0.382949
+vn -0.919752 0.086064 -0.382948
+vn -0.919752 0.086064 -0.382948
+vn -0.919752 0.086064 -0.382948
+vn -0.944688 0.025895 -0.326946
+vn -0.944688 0.025895 -0.326946
+vn -0.944688 0.025895 -0.326946
+vn -0.944688 0.025895 -0.326946
+vn 0.016053 0.718580 -0.695259
+vn 0.016053 0.718580 -0.695259
+vn 0.016053 0.718580 -0.695259
+vn 0.000597 0.998894 -0.047010
+vn 0.000597 0.998894 -0.047010
+vn 0.000597 0.998894 -0.047010
+vn 0.000597 0.998894 -0.047010
+vn -0.004028 0.999343 -0.036033
+vn -0.004028 0.999343 -0.036033
+vn -0.004028 0.999343 -0.036033
+vn -0.004028 0.999343 -0.036033
+vn -0.000023 0.998174 -0.060411
+vn -0.000023 0.998174 -0.060411
+vn -0.000023 0.998174 -0.060411
+vn -0.000023 0.998174 -0.060411
+vn -0.000689 0.067521 -0.997718
+vn -0.000689 0.067521 -0.997718
+vn -0.000689 0.067521 -0.997718
+vn -0.000689 0.067521 -0.997718
+vn -0.000557 0.998894 -0.047018
+vn -0.000557 0.998894 -0.047018
+vn -0.000557 0.998894 -0.047018
+vn -0.000557 0.998894 -0.047018
+vn 0.000023 0.998174 -0.060410
+vn 0.000023 0.998174 -0.060410
+vn 0.000023 0.998174 -0.060410
+vn 0.000023 0.998174 -0.060410
+vn 0.000691 0.067526 -0.997717
+vn 0.000691 0.067526 -0.997717
+vn 0.000691 0.067526 -0.997717
+vn 0.000691 0.067526 -0.997717
+vn -0.949792 0.001660 0.312877
+vn -0.949792 0.001660 0.312877
+vn -0.949792 0.001660 0.312877
+vn -0.949792 0.001660 0.312877
+vn -0.978146 -0.021306 0.206824
+vn -0.978146 -0.021306 0.206824
+vn -0.978146 -0.021306 0.206824
+vn -0.978146 -0.021306 0.206824
+vn 0.004410 0.999972 -0.006130
+vn 0.004410 0.999972 -0.006130
+vn 0.004410 0.999972 -0.006130
+vn 0.004410 0.999972 -0.006130
+vn -0.011644 0.999919 -0.005140
+vn -0.011644 0.999919 -0.005140
+vn -0.011644 0.999919 -0.005140
+vn -0.011644 0.999919 -0.005140
+vn -0.955237 -0.009458 0.295690
+vn -0.955237 -0.009458 0.295690
+vn -0.955237 -0.009458 0.295690
+vn -0.928867 -0.148389 0.339392
+vn -0.928867 -0.148389 0.339392
+vn -0.928867 -0.148389 0.339392
+vn -0.976752 0.000000 0.214374
+vn -0.976752 0.000000 0.214374
+vn -0.976752 0.000000 0.214374
+vn -0.976752 0.000000 0.214374
+vn -0.946237 0.052369 0.319207
+vn -0.946237 0.052369 0.319207
+vn -0.946237 0.052369 0.319207
+vn -0.946237 0.052369 0.319207
+vn -0.697115 -0.654865 0.291861
+vn -0.697115 -0.654865 0.291861
+vn -0.697115 -0.654865 0.291861
+vn -0.697115 -0.654865 0.291861
+vn 0.018439 0.998748 -0.046513
+vn 0.018439 0.998748 -0.046513
+vn 0.018439 0.998748 -0.046513
+vn 0.018439 0.998748 -0.046513
+vn -0.016060 0.118247 -0.992854
+vn -0.016060 0.118247 -0.992854
+vn -0.016060 0.118247 -0.992854
+vn -0.016060 0.118247 -0.992854
+vn 0.946490 0.026836 -0.321615
+vn 0.946490 0.026836 -0.321615
+vn 0.946490 0.026836 -0.321615
+vn 0.946490 0.026836 -0.321615
+vn 0.922888 0.084433 -0.375697
+vn 0.922888 0.084433 -0.375697
+vn 0.922888 0.084433 -0.375697
+vn 0.922888 0.084433 -0.375697
+vn 0.128561 0.623085 -0.771516
+vn 0.128561 0.623085 -0.771516
+vn 0.128561 0.623085 -0.771516
+vn 0.128561 0.623085 -0.771516
+vn -0.016084 0.718130 -0.695724
+vn -0.016084 0.718130 -0.695724
+vn -0.016084 0.718130 -0.695724
+vn -0.955918 0.038559 0.291092
+vn -0.955918 0.038559 0.291092
+vn -0.955918 0.038559 0.291092
+vn -0.955918 0.038559 0.291092
+vn 0.065579 0.290314 -0.954682
+vn 0.065579 0.290314 -0.954682
+vn 0.065579 0.290314 -0.954682
+vn 0.065579 0.290314 -0.954682
+vn -0.008586 0.999162 -0.040019
+vn -0.008586 0.999162 -0.040019
+vn -0.008586 0.999162 -0.040019
+vn -0.008586 0.999162 -0.040019
+vn 0.094783 -0.988366 0.118951
+vn 0.094783 -0.988366 0.118951
+vn 0.094783 -0.988366 0.118951
+vn 0.094783 -0.988366 0.118951
+vn -0.018400 0.999417 -0.028752
+vn -0.018400 0.999417 -0.028752
+vn -0.018400 0.999417 -0.028752
+vn -0.018400 0.999417 -0.028752
+vn 0.078565 -0.961943 0.261714
+vn 0.078565 -0.961943 0.261714
+vn 0.078565 -0.961943 0.261714
+vn 0.078565 -0.961943 0.261714
+vn 0.888049 0.002225 0.459744
+vn 0.888049 0.002225 0.459744
+vn 0.888049 0.002225 0.459744
+vn 0.888049 0.002225 0.459744
+vn 0.704252 0.617845 0.349710
+vn 0.704252 0.617845 0.349710
+vn 0.704252 0.617845 0.349710
+vn 0.704252 0.617845 0.349710
+vn 0.950701 -0.049328 0.306161
+vn 0.950701 -0.049328 0.306161
+vn 0.950701 -0.049328 0.306161
+vn 0.950701 -0.049328 0.306161
+vn 0.943299 -0.075374 0.323274
+vn 0.943299 -0.075374 0.323274
+vn 0.943299 -0.075374 0.323274
+vn 0.942522 -0.031563 0.332649
+vn 0.942522 -0.031563 0.332649
+vn 0.942522 -0.031563 0.332649
+vn 0.942522 -0.031563 0.332649
+vn 0.755658 0.583466 0.297572
+vn 0.755658 0.583466 0.297572
+vn 0.755658 0.583466 0.297572
+vn 0.755658 0.583466 0.297572
+vn -0.098635 0.579575 -0.808927
+vn -0.098635 0.579575 -0.808927
+vn -0.098635 0.579575 -0.808927
+vn -0.098635 0.579575 -0.808927
+vn 0.954037 -0.019398 0.299062
+vn 0.954037 -0.019398 0.299062
+vn 0.954037 -0.019398 0.299062
+vn 0.954037 -0.019398 0.299062
+vn -0.064392 0.357867 -0.931550
+vn -0.064392 0.357867 -0.931550
+vn -0.064392 0.357867 -0.931550
+vn -0.064392 0.357867 -0.931550
+vn 0.927493 -0.121216 0.353644
+vn 0.927493 -0.121216 0.353644
+vn 0.927493 -0.121216 0.353644
+vn 0.002558 0.923028 0.384724
+vn 0.002558 0.923028 0.384724
+vn 0.002558 0.923028 0.384724
+vn 0.002558 0.923028 0.384724
+vn 0.079885 0.901477 0.425392
+vn 0.079885 0.901477 0.425392
+vn 0.079885 0.901477 0.425392
+vn -0.015687 0.990669 0.135383
+vn -0.015687 0.990669 0.135383
+vn -0.015687 0.990669 0.135383
+vn -0.015687 0.990669 0.135383
+vn 0.000129 0.922889 0.385066
+vn 0.000129 0.922889 0.385066
+vn 0.000129 0.922889 0.385066
+vn 0.000129 0.922889 0.385066
+vn -0.007597 0.100498 -0.994908
+vn -0.007597 0.100498 -0.994908
+vn -0.007597 0.100498 -0.994908
+vn -0.007597 0.100498 -0.994908
+vn 0.006391 0.295605 0.955289
+vn 0.006391 0.295605 0.955289
+vn 0.006391 0.295605 0.955289
+vn 0.006391 0.295605 0.955289
+vn -0.186430 0.104663 -0.976877
+vn -0.186430 0.104663 -0.976877
+vn -0.186430 0.104663 -0.976877
+vn -0.186430 0.104663 -0.976877
+vn -0.603182 0.101116 -0.791168
+vn -0.603182 0.101116 -0.791168
+vn -0.603182 0.101116 -0.791168
+vn -0.603182 0.101116 -0.791168
+vn 0.837689 0.259261 0.480689
+vn 0.837689 0.259261 0.480689
+vn 0.837689 0.259261 0.480689
+vn 0.837689 0.259261 0.480689
+vn -0.984583 0.025096 -0.173110
+vn -0.984583 0.025096 -0.173110
+vn -0.984583 0.025096 -0.173110
+vn -0.984583 0.025096 -0.173110
+vn -0.000768 0.289959 0.957039
+vn -0.000768 0.289959 0.957039
+vn -0.000768 0.289959 0.957039
+vn -0.000768 0.289959 0.957039
+vn 0.000000 0.108072 -0.994143
+vn 0.000000 0.108072 -0.994143
+vn 0.000000 0.108072 -0.994143
+vn 0.000000 0.108072 -0.994143
+vn 0.026148 0.896797 0.441670
+vn 0.026148 0.896797 0.441670
+vn 0.026148 0.896797 0.441670
+vn -0.068981 0.907116 0.415190
+vn -0.068981 0.907116 0.415190
+vn -0.068981 0.907116 0.415190
+vn -0.005347 0.991537 0.129715
+vn -0.005347 0.991537 0.129715
+vn -0.005347 0.991537 0.129715
+vn -0.005347 0.991537 0.129715
+vn -0.007949 0.983198 0.182368
+vn -0.007949 0.983198 0.182368
+vn -0.007949 0.983198 0.182368
+vn -0.007949 0.983198 0.182368
+vn 0.007927 0.922643 0.385573
+vn 0.007927 0.922643 0.385573
+vn 0.007927 0.922643 0.385573
+vn 0.007927 0.922643 0.385573
+vn 0.007399 0.923077 0.384545
+vn 0.007399 0.923077 0.384545
+vn 0.007399 0.923077 0.384545
+vn 0.007399 0.923077 0.384545
+vn -0.010321 0.974555 0.223909
+vn -0.010321 0.974555 0.223909
+vn -0.010321 0.974555 0.223909
+vn -0.010321 0.974555 0.223909
+vn 0.592862 0.027286 -0.804842
+vn 0.592862 0.027286 -0.804842
+vn 0.592862 0.027286 -0.804842
+vn 0.592862 0.027286 -0.804842
+vn 0.174800 0.035665 -0.983958
+vn 0.174800 0.035665 -0.983958
+vn 0.174800 0.035665 -0.983958
+vn 0.174800 0.035665 -0.983958
+vn 0.984769 0.006408 -0.173752
+vn 0.984769 0.006408 -0.173752
+vn 0.984769 0.006408 -0.173752
+vn 0.984769 0.006408 -0.173752
+vn -0.840388 0.205531 0.501504
+vn -0.840388 0.205531 0.501504
+vn -0.840388 0.205531 0.501504
+vn -0.840388 0.205531 0.501504
+vn -0.017134 0.057068 -0.998223
+vn -0.017134 0.057068 -0.998223
+vn -0.017134 0.057068 -0.998223
+vn -0.017134 0.057068 -0.998223
+vn 0.015068 0.364676 0.931012
+vn 0.015068 0.364676 0.931012
+vn 0.015068 0.364676 0.931012
+vn 0.015068 0.364676 0.931012
+vn 0.011920 0.322615 0.946455
+vn 0.011920 0.322615 0.946455
+vn 0.011920 0.322615 0.946455
+vn 0.011920 0.322615 0.946455
+vn -0.048342 0.904210 0.424343
+vn -0.048342 0.904210 0.424343
+vn -0.048342 0.904210 0.424343
+f 12/24/1 6/12/2 5/10/3 11/22/4
+f 49/82/5 8/16/6 7/14/7 48/80/8
+f 9/18/9 1/4/10 2/3/11 10/20/12
+f 8/16/13 12/24/14 11/22/15 7/14/16
+f 6/12/17 14/28/18 13/26/19 5/10/20
+f 20/39/21 19/38/22 52/88/23 53/89/24
+f 21/40/25 20/39/26 53/89/27 54/90/28
+f 22/41/29 21/40/30 54/90/31 55/91/32
+f 23/42/33 22/41/34 55/91/35 56/92/36
+f 51/85/37 29/53/38 28/52/39 50/84/40
+f 98/192/41 97/78/42 99/87/43 100/191/44
+f 124/215/45 125/217/46 16/33/47 36/65/48
+f 36/65/49 16/33/50 14/29/51 37/66/52
+f 37/66/53 14/29/54 6/13/55 38/67/56
+f 38/67/57 6/13/58 12/25/59 39/68/60
+f 1/1/61 43/72/62 42/71/63 2/2/64
+f 172/258/65 171/259/66 173/260/67 174/261/68
+f 192/265/69 191/262/70 105/263/71 106/264/72
+f 194/267/73 193/266/74 191/262/75 192/265/76
+f 188/251/77 187/250/78 193/266/79 194/267/80
+f 97/78/81 94/54/82 96/86/83 99/87/84
+f 10/20/85 49/82/86 48/80/87 9/18/88
+f 42/71/89 43/72/90 51/85/91 50/84/92
+f 96/86/93 104/73/94 107/79/95 99/87/96
+f 99/87/97 107/79/98 105/197/99 100/191/100
+f 52/88/101 44/74/102 45/75/103 53/89/104
+f 53/89/105 45/75/106 46/76/107 54/90/108
+f 54/90/109 46/76/110 30/55/111 55/91/112
+f 55/91/113 30/55/114 31/56/115 56/92/116
+f 132/44/117 131/43/118 133/93/119 134/94/120
+f 135/45/121 132/44/122 134/94/123 136/59/124
+f 210/318/125 211/46/126 227/317/127
+f 195/272/128 196/269/129 197/270/130 198/271/131
+f 133/93/132 140/57/133 139/58/134 134/94/135
+f 139/58/136 136/59/137 134/94/138
+f 34/63/139 33/62/140 18/37/141 17/35/142
+f 35/64/143 34/63/144 17/35/145 4/9/146
+f 68/98/147 67/101/148 61/100/149 62/99/150
+f 65/106/151 66/109/152 58/108/153 57/107/154
+f 62/99/155 61/100/156 69/111/157 70/110/158
+f 70/110/159 69/111/160 71/97/161 72/95/162
+f 217/273/163 218/274/164 219/275/165 220/276/166
+f 221/277/167 217/273/168 220/276/169 222/278/170
+f 124/214/171 36/132/172 72/131/173 123/212/174
+f 36/132/175 37/134/176 70/133/177 72/131/178
+f 37/134/179 38/136/180 62/135/181 70/133/182
+f 38/136/183 39/138/184 68/137/185 62/135/186
+f 57/147/187 58/143/188 79/144/189 80/148/190
+f 179/282/191 180/283/192 181/284/193 182/285/194
+f 223/286/195 113/287/196 116/288/197 224/289/198
+f 225/290/199 223/286/200 224/289/201 226/291/202
+f 218/274/203 225/290/204 226/291/205 219/275/206
+f 204/320/207 227/321/208 211/162/209
+f 203/297/210 199/293/211 202/296/212 204/298/213
+f 150/164/214 154/169/215 146/161/216
+f 155/170/217 154/169/218 150/164/219 149/128/220
+f 91/172/221 92/171/222 76/124/223 75/125/224
+f 90/173/225 91/172/226 75/125/227 83/158/228
+f 89/174/229 90/173/230 83/158/231 82/156/232
+f 88/175/233 89/174/234 82/156/235 81/152/236
+f 117/176/237 118/205/238 116/204/239 115/153/240
+f 79/144/241 86/179/242 87/178/243 80/148/244
+f 87/178/245 86/179/246 28/118/247 29/120/248
+f 98/208/249 118/205/250 117/176/251 97/122/252
+f 20/112/253 89/174/254 88/175/255 19/113/256
+f 21/114/257 90/173/258 89/174/259 20/112/260
+f 22/115/261 91/172/262 90/173/263 21/114/264
+f 23/116/265 92/171/266 91/172/267 22/115/268
+f 132/159/269 154/169/270 155/170/271 131/117/272
+f 135/160/273 146/161/274 154/169/275 132/159/276
+f 34/180/277 73/183/278 74/182/279 33/181/280
+f 29/53/281 51/85/282 95/190/283 93/189/284
+f 52/88/285 19/38/286 98/192/287 100/191/288
+f 43/72/289 1/1/290 101/194/291 102/193/292
+f 1/1/293 9/19/294 103/195/295 101/194/296
+f 7/15/297 44/74/298 105/197/299 106/196/300
+f 48/81/301 7/15/302 106/196/303 108/198/304
+f 9/19/305 48/81/306 108/198/307 103/195/308
+f 51/85/309 43/72/310 102/193/311 95/190/312
+f 44/74/313 52/88/314 100/191/315 105/197/316
+f 65/149/317 57/147/318 112/200/319 111/199/320
+f 57/147/321 80/148/322 109/201/323 112/200/324
+f 63/151/325 84/154/326 114/203/327 113/202/328
+f 81/152/329 63/151/330 113/202/331 116/204/332
+f 84/154/333 65/149/334 111/199/335 114/203/336
+f 88/175/337 81/152/338 116/204/339 118/205/340
+f 80/148/341 87/178/342 120/206/343 109/201/344
+f 87/178/345 29/120/346 93/207/347 120/206/348
+f 19/113/349 88/175/350 118/205/351 98/208/352
+f 35/64/353 4/9/354 125/217/355 124/215/356
+f 198/271/357 197/270/358 207/305/359 208/306/360
+f 4/8/361 17/34/362 138/226/363 141/225/364
+f 32/60/365 24/47/366 144/230/367 145/229/368
+f 74/165/369 73/163/370 147/231/371 151/233/372
+f 209/308/373 210/307/374 196/269/375 195/272/376
+f 212/310/377 211/309/378 210/307/379 209/308/380
+f 213/312/381 211/309/382 212/310/383 214/311/384
+f 32/60/385 25/48/386 24/47/387
+f 3/6/388 26/50/389 25/49/390 32/61/391
+f 215/313/392 203/297/393 204/298/394 211/314/395
+f 213/315/396 216/316/397 215/313/398 211/314/399
+f 77/168/400 24/167/401 25/184/402
+f 59/185/403 77/187/404 25/186/405 26/188/406
+f 138/226/407 17/34/408 18/36/409 142/227/410
+f 18/36/411 3/5/412 143/228/413 142/227/414
+f 143/228/415 3/5/416 32/60/417 145/229/418
+f 59/166/419 74/165/420 151/233/421 152/234/422
+f 144/235/423 24/167/424 77/168/425 153/236/426
+f 77/168/427 59/166/428 152/234/429 153/236/430
+f 26/50/431 3/6/432 18/37/433 33/62/434
+f 59/185/435 26/188/436 33/181/437 74/182/438
+f 41/70/439 50/84/440 28/52/441 27/51/442
+f 40/69/443 39/68/444 12/25/445 8/17/446
+f 49/83/447 47/77/448 40/69/449 8/17/450
+f 42/71/451 41/70/452 10/21/453 2/2/454
+f 49/83/455 10/21/456 41/70/457 47/77/458
+f 41/70/459 42/71/460 50/84/461
+f 85/102/462 84/105/463 63/104/464 64/103/465
+f 64/103/466 63/104/467 67/101/468 68/98/469
+f 39/138/470 40/140/471 64/139/472 68/137/473
+f 85/141/474 64/139/475 40/140/476 47/142/477
+f 66/146/478 78/145/479 79/144/480 58/143/481
+f 66/109/482 65/106/483 84/105/484 85/102/485
+f 78/145/486 66/146/487 85/141/488 47/142/489
+f 78/145/490 86/179/491 79/144/492
+f 28/118/493 86/179/494 78/145/495 27/119/496
+f 27/119/497 47/77/498 41/70/499
+f 47/77/500 27/119/501 78/145/502
+f 106/219/503 105/220/504 171/254/505 172/253/506
+f 105/220/507 107/56/508 173/249/509 171/254/510
+f 108/31/511 106/219/512 172/253/513 174/252/514
+f 113/74/515 114/15/516 180/264/517 179/263/518
+f 115/15/519 116/23/520 182/265/521 181/264/522
+f 116/76/523 113/75/524 179/262/525 182/266/526
+f 120/73/527 93/86/528 163/247/529 183/268/530
+f 31/190/531 30/193/532 187/255/533 185/246/534
+f 45/210/535 44/123/536 105/273/537 191/277/538
+f 44/124/539 7/209/540 106/278/541 105/276/542
+f 7/209/543 11/210/544 192/277/545 106/278/546
+f 46/199/547 45/200/548 191/280/549 193/279/550
+f 11/200/551 5/201/552 194/281/553 192/280/554
+f 30/202/555 46/203/556 193/283/557 187/282/558
+f 5/153/559 13/204/560 188/285/561 194/284/562
+f 139/204/563 140/202/564 197/282/565 196/285/566
+f 141/155/567 138/151/568 195/287/569 198/286/570
+f 149/152/571 150/156/572 202/289/573 201/288/574
+f 151/157/575 147/155/576 199/286/577 203/290/578
+f 150/156/579 146/158/580 204/291/581 202/289/582
+f 136/233/583 139/231/584 196/293/585 210/297/586
+f 138/164/587 142/161/588 209/298/589 195/296/590
+f 142/177/591 143/150/592 212/292/593 209/300/594
+f 143/121/595 145/177/596 214/300/597 212/301/598
+f 145/206/599 144/207/600 213/302/601 214/299/602
+f 152/232/603 151/237/604 203/303/605 215/294/606
+f 144/238/607 153/128/608 216/295/609 213/304/610
+f 153/57/611 152/239/612 215/305/613 216/270/614
+f 71/239/615 69/240/616 218/306/617 217/305/618
+f 75/240/619 76/225/620 220/271/621 219/306/622
+f 67/227/623 63/228/624 113/310/625 223/308/626
+f 63/228/627 81/229/628 116/311/629 113/310/630
+f 81/229/631 82/230/632 224/312/633 116/311/634
+f 61/234/635 67/233/636 223/297/637 225/313/638
+f 82/161/639 83/162/640 226/314/641 224/298/642
+f 69/235/643 61/236/644 225/316/645 218/315/646
+f 83/236/647 75/234/648 219/313/649 226/316/650
+f 135/45/651 136/59/652 210/318/653 227/317/654
+f 136/59/655 137/46/656 211/319/657 210/318/658
+f 146/161/659 135/160/660 227/321/661 204/320/662
+f 137/162/663 146/161/664 204/320/665 211/322/666
+f 92/171/667 130/224/668 121/209/669 76/124/670
+f 149/128/671 157/238/672 162/243/673 155/170/674
+f 121/209/675 130/224/676 162/243/677 222/323/678
+f 206/283/679 157/203/680 149/199/681 201/279/682
+f 220/272/683 76/226/684 121/227/685 222/308/686
+f 222/323/687 162/243/688 157/238/689
+f 128/221/690 129/223/691 23/42/692 56/92/693
+f 56/92/694 31/56/695 127/220/696 128/221/697
+f 133/93/698 131/43/699 161/242/700 160/241/701
+f 161/242/702 129/223/703 128/221/704 160/241/705
+f 23/116/706 129/222/707 130/224/708 92/171/709
+f 161/244/710 131/117/711 155/170/712 162/243/713
+f 162/243/714 130/224/715 129/222/716 161/244/717
+f 15/30/718 16/32/719 125/216/720 126/218/721
+f 14/28/722 16/32/723 15/30/724 13/26/725
+f 186/252/726 185/249/727 187/250/728 188/251/729
+f 189/253/730 190/254/731 185/249/732 186/252/733
+f 126/218/734 125/216/735 4/7/736
+f 141/225/737 159/240/738 189/271/739
+f 13/58/740 15/57/741 186/270/742 188/269/743
+f 15/125/744 126/124/745 189/276/746 186/275/747
+f 208/295/748 159/128/749 141/164/750 198/296/751
+f 160/241/752 158/239/753 140/57/754 133/93/755
+f 190/324/756 160/241/757 128/221/758 127/220/759
+f 190/273/760 127/123/761 31/126/762 185/274/763
+f 140/150/764 158/153/765 207/284/766 197/292/767
+f 207/293/768 158/231/769 159/232/770 208/294/771
+f 160/241/772 190/324/773 158/239/774
+f 141/225/775 189/271/776 126/219/777 4/8/778
+f 189/271/779 159/240/780 158/239/781 190/272/782
+f 199/293/783 200/294/784 201/295/785 202/296/786
+f 35/129/787 60/130/788 73/183/789 34/180/790
+f 200/294/791 205/303/792 206/304/793 201/295/794
+f 60/130/795 35/129/796 124/214/797 123/212/798
+f 73/163/799 60/127/800 148/232/801 147/231/802
+f 147/151/803 148/152/804 200/288/805 199/287/806
+f 123/213/807 72/95/808 71/97/809 122/211/810
+f 123/213/811 122/211/812 60/96/813
+f 148/232/814 60/127/815 122/210/816 221/325/817
+f 148/126/818 156/157/819 205/290/820 200/274/821
+f 156/158/822 157/125/823 206/275/824 205/291/825
+f 221/307/826 122/59/827 71/58/828 217/269/829
+f 156/237/830 221/307/831 222/323/832 157/238/833
+f 148/232/834 221/325/835 156/237/836
+f 164/248/837 163/245/838 165/246/839 166/247/840
+f 167/256/841 170/73/842 168/255/843
+f 169/257/844 174/261/845 173/260/846 170/268/847
+f 168/255/848 170/268/849 166/247/850 165/246/851
+f 163/245/852 93/189/853 95/190/854 165/246/855
+f 166/247/856 96/86/857 94/54/858 164/248/859
+f 168/249/860 102/56/861 101/55/862 167/250/863
+f 101/27/864 103/31/865 169/252/866 167/251/867
+f 173/255/868 107/193/869 104/194/870 170/256/871
+f 103/194/872 108/195/873 174/257/874 169/256/875
+f 104/196/876 96/197/877 166/259/878 170/258/879
+f 165/259/880 95/197/881 102/79/882 168/260/883
+f 170/73/884 167/256/885 169/257/886
+f 176/150/887 178/280/888 175/281/889
+f 181/284/890 180/283/891 177/279/892 176/292/893
+f 110/150/894 119/177/895 117/176/896 115/153/897
+f 175/281/898 183/299/899 184/300/900 176/292/901
+f 164/301/902 184/300/903 183/299/904 163/302/905
+f 97/122/906 117/176/907 119/177/908 94/121/909
+f 177/261/910 111/198/911 112/196/912 178/258/913
+f 178/262/914 112/75/915 109/74/916 175/263/917
+f 180/265/918 114/23/919 111/11/920 177/267/921
+f 110/55/922 115/76/923 181/266/924 176/250/925
+f 175/267/926 109/11/927 120/27/928 183/251/929
+f 184/260/930 119/79/931 110/73/932 176/268/933
+f 164/257/934 94/195/935 119/198/936 184/261/937
+f 178/280/938 176/150/939 177/279/940
+v -5.807064 9.803907 -14.412747
+v -5.037060 8.956793 10.924202
+v -7.729881 8.949080 -1.092692
+v -7.816145 9.508998 -8.776284
+v -7.901196 9.338968 -5.148629
+v -7.138736 8.882511 3.109370
+v -6.341608 9.030425 7.287545
+v -3.614611 9.421915 14.277413
+v -1.603391 10.419531 16.985159
+v 0.924334 10.960783 20.240549
+v 0.969986 8.173520 18.556841
+v 0.071913 5.816474 16.909184
+v -2.651018 6.760406 14.201573
+v -4.160670 5.485701 10.845683
+v -5.238342 5.091935 7.205392
+v -5.934504 4.770652 3.025583
+v -6.427673 4.784857 -1.260534
+v -6.549021 5.052882 -5.231585
+v -6.486229 5.464678 -8.857004
+v -4.881041 7.234930 -14.058558
+v -6.312512 6.287497 -11.870428
+v -7.615508 9.696858 -11.991275
+v -0.781424 3.291566 14.132267
+v -1.435872 1.816241 10.764529
+v -1.944690 1.124000 7.121654
+v -2.269425 0.615983 2.920327
+v -2.480127 0.265051 -1.287397
+v -2.557226 0.088431 -5.347057
+v -2.511947 0.516609 -8.979773
+v -2.445779 2.380204 -11.738644
+v -1.781493 7.168592 -14.058333
+v 7.485054 9.803907 -14.412747
+v 6.775185 8.954307 10.924482
+v 9.404152 9.235519 -1.092704
+v 9.490269 9.508998 -8.776284
+v 9.573681 9.338968 -5.148629
+v 8.816681 9.170842 3.109350
+v 8.020128 9.030425 7.287545
+v 5.363779 9.451921 14.274095
+v 3.549395 10.034255 16.857824
+v 3.139179 8.097824 16.948872
+v 4.434467 6.392594 14.213449
+v 5.895596 5.483234 10.845962
+v 6.916687 5.051276 7.205392
+v 7.607929 5.053284 3.025583
+v 8.050852 5.060122 -1.175824
+v 8.209745 5.052882 -5.231585
+v 8.150576 6.169122 -8.857004
+v 6.555048 7.234294 -14.058557
+v 7.983423 6.287497 -11.870428
+v 9.292629 9.693420 -11.991263
+v 2.564634 3.287816 14.132690
+v 3.163765 1.814766 10.764695
+v 3.620108 1.124000 7.121654
+v 3.933374 0.615983 2.920327
+v 4.134075 0.265051 -1.287397
+v 4.204905 0.088431 -5.347057
+v 4.194101 0.516609 -8.979773
+v 4.103514 2.378602 -11.738638
+v 3.452684 7.167926 -14.058331
+v 1.980915 5.811296 16.909767
+v -1.312400 8.102354 16.948738
+v -2.051022 4.783142 -13.708452
+v 3.716255 4.782081 -13.708448
+v -1.778884 9.767112 -14.412621
+v 3.455301 9.766793 -14.412621
+vt 0.375000 0.750000
+vt 0.375000 0.921353
+vt 0.375000 0.839485
+vt 0.375000 0.787481
+vt 0.375000 0.812954
+vt 0.375000 0.866973
+vt 0.375000 0.897245
+vt 0.375000 0.941114
+vt 0.375000 0.961576
+vt 0.449114 1.000000
+vt 0.490558 0.976681
+vt 0.432126 0.961576
+vt 0.397102 0.941114
+vt 0.397102 0.921353
+vt 0.397102 0.897245
+vt 0.397102 0.866973
+vt 0.397102 0.839485
+vt 0.397102 0.812954
+vt 0.397102 0.787481
+vt 0.397102 0.750000
+vt 0.397102 0.775200
+vt 0.375000 0.775200
+vt 0.439055 0.976681
+vt 0.453291 0.941114
+vt 0.453291 0.921353
+vt 0.453291 0.897245
+vt 0.453291 0.866973
+vt 0.453291 0.839485
+vt 0.453291 0.812954
+vt 0.453291 0.787481
+vt 0.453291 0.775200
+vt 0.453291 0.750000
+vt 0.397102 0.921353
+vt 0.375000 0.921353
+vt 0.375000 0.897245
+vt 0.397102 0.897245
+vt 0.375000 0.866973
+vt 0.397102 0.866973
+vt 0.375000 0.839485
+vt 0.397102 0.839485
+vt 0.375000 0.812954
+vt 0.397102 0.812954
+vt 0.375000 0.787481
+vt 0.397102 0.787481
+vt 0.375000 0.775200
+vt 0.397102 0.775200
+vt 0.375000 0.750000
+vt 0.397102 0.750000
+vt 0.453291 0.750000
+vt 0.453291 0.775200
+vt 0.453291 0.787481
+vt 0.453291 0.812954
+vt 0.453291 0.839485
+vt 0.453291 0.866973
+vt 0.453291 0.897245
+vt 0.453291 0.921353
+vt 0.397102 0.941114
+vt 0.432126 0.961576
+vt 0.375000 0.961576
+vt 0.375000 0.941114
+vt 0.453291 0.941114
+vt 0.449114 1.000000
+vt 0.439055 0.976681
+vt 0.461342 0.961576
+vt 0.390647 0.961576
+vt 0.453291 0.758555
+vt 0.453291 0.758555
+vt 0.453291 0.633493
+vt 0.453291 0.633493
+vn -0.851467 -0.475387 0.221382
+vn -0.933868 -0.264948 0.240193
+vn -0.947219 -0.283140 0.150359
+vn -0.852079 -0.505565 0.135519
+vn -0.953040 -0.295995 0.064037
+vn -0.857601 -0.511175 0.056753
+vn -0.952942 -0.302717 -0.016236
+vn -0.862028 -0.506111 -0.027564
+vn -0.945523 -0.317200 -0.073285
+vn -0.844005 -0.515136 -0.149300
+vn -0.885039 -0.339142 -0.318888
+vn -0.762936 -0.502741 -0.406423
+vn -0.392370 -0.911976 0.119770
+vn -0.403146 -0.895465 0.188720
+vn -0.399088 -0.914826 0.061829
+vn -0.406563 -0.912869 -0.037110
+vn -0.375663 -0.881768 -0.285243
+vn -0.309499 -0.741335 -0.595510
+vn 0.833087 -0.435884 0.340546
+vn 0.854129 -0.478905 0.202763
+vn 0.938281 -0.264977 0.222298
+vn 0.899575 -0.251410 0.357153
+vn 0.861176 -0.493409 0.122158
+vn 0.948491 -0.285264 0.137803
+vn 0.862864 -0.500919 0.067424
+vn 0.950728 -0.301056 0.074041
+vn 0.858066 -0.512155 -0.037695
+vn 0.947837 -0.318337 -0.016298
+vn 0.853658 -0.501423 -0.140862
+vn 0.935132 -0.346262 -0.075044
+vn 0.879929 -0.360994 -0.308883
+vn 0.763473 -0.521855 -0.380496
+vn 0.399963 -0.870472 -0.286895
+vn 0.330479 -0.747853 -0.575760
+vn 0.423242 -0.904950 -0.043958
+vn 0.414207 -0.907654 0.067797
+vn 0.407381 -0.906211 0.113238
+vn 0.407730 -0.895351 0.179171
+vn 0.165735 -0.502557 -0.848510
+vn -0.165771 -0.502319 -0.848643
+vn -0.000708 -0.139680 -0.990197
+vn 0.000686 -0.139671 -0.990198
+vn -0.465803 -0.267624 -0.843448
+vn -0.421691 -0.374566 -0.825758
+vn 0.421324 -0.375425 -0.825556
+vn 0.465650 -0.268432 -0.843276
+vn 0.000773 -0.135515 -0.990775
+vn -0.000784 -0.135522 -0.990774
+vn -0.825690 -0.436872 0.356902
+vn -0.891764 -0.259482 0.370709
+vn -0.782879 -0.369611 0.500488
+vn -0.829551 -0.244437 0.502091
+vn -0.416396 -0.845236 0.334948
+vn -0.061045 -0.387360 0.919905
+vn -0.785541 -0.169447 0.595158
+vn -0.699783 -0.321206 0.638068
+vn -0.422271 -0.728472 0.539458
+vn -0.420980 -0.575440 0.701174
+vn 0.409909 -0.852778 0.323643
+vn 0.844651 -0.235043 0.480957
+vn 0.792548 -0.376769 0.479492
+vn 0.405743 -0.746445 0.527439
+vn 0.709532 -0.310974 0.632344
+vn 0.789752 -0.183859 0.585224
+vn 0.426833 -0.574670 0.698261
+vn -0.001044 -0.464309 0.885673
+f 242/340/941 234/332/942 233/331/943 243/341/944
+f 243/341/944 233/331/943 230/328/945 244/342/946
+f 244/342/946 230/328/945 232/330/947 245/343/948
+f 245/343/948 232/330/947 231/329/949 246/344/950
+f 249/347/951 248/346/952 246/344/950 231/329/949
+f 242/340/941 243/341/944 253/352/953 252/351/954
+f 243/341/944 244/342/946 254/353/955 253/352/953
+f 244/342/946 245/343/948 255/354/956 254/353/955
+f 245/343/948 246/344/950 256/355/957 255/354/956
+f 246/344/950 248/346/952 257/356/958 256/355/957
+f 270/358/959 271/361/960 265/360/961 260/359/962
+f 271/361/960 272/363/963 264/362/964 265/360/961
+f 272/363/963 273/365/965 261/364/966 264/362/964
+f 273/365/965 274/367/967 263/366/968 261/364/966
+f 274/367/967 275/369/969 262/368/970 263/366/968
+f 278/370/971 262/368/970 275/369/969 277/371/972
+f 275/369/969 285/376/973 286/375/974 277/371/972
+f 274/367/967 284/377/975 285/376/973 275/369/969
+f 273/365/965 283/378/976 284/377/975 274/367/967
+f 272/363/963 282/379/977 283/378/976 273/365/965
+f 271/361/960 281/380/978 282/379/977 272/363/963
+f 253/352/953 282/379/977 281/380/978 252/351/954
+f 254/353/955 283/378/976 282/379/977 253/352/953
+f 255/354/956 284/377/975 283/378/976 254/353/955
+f 256/355/957 285/376/973 284/377/975 255/354/956
+f 257/356/958 286/375/974 285/376/973 256/355/957
+f 291/392/979 286/375/974 257/356/958 290/391/980
+f 291/392/979 290/391/980 258/357/981 287/374/982
+f 248/346/952 249/347/951 228/326/983 247/345/984
+f 290/391/980 257/356/958 248/346/952 247/345/984
+f 290/391/980 247/345/984 258/357/981
+f 277/371/972 276/373/985 259/372/986 278/370/971
+f 276/373/985 291/392/979 287/374/982
+f 291/392/979 276/373/985 277/371/972 286/375/974
+f 259/372/986 276/373/985 287/374/982 293/394/987
+f 293/394/987 287/374/982 258/357/981 292/393/988
+f 292/393/988 258/357/981 247/345/984 228/326/983
+f 242/340/941 241/339/989 229/327/990 234/332/942
+f 241/339/989 240/338/991 235/333/992 229/327/990
+f 241/339/989 242/340/941 252/351/954 251/350/993
+f 237/335/994 236/334/995 289/390/996
+f 240/338/991 289/390/996 236/334/995 235/333/992
+f 240/338/991 241/339/989 251/350/993 250/349/997
+f 239/337/998 289/390/996 240/338/991 250/349/997
+f 270/358/959 280/381/999 281/380/978 271/361/960
+f 270/358/959 260/359/962 266/385/1000 269/382/1001
+f 269/382/1001 279/386/1002 280/381/999 270/358/959
+f 252/351/954 281/380/978 280/381/999 251/350/993
+f 251/350/993 280/381/999 279/386/1002 250/349/997
+f 268/383/1003 269/382/1001 266/385/1000 267/384/1004
+f 288/389/1005 279/386/1002 269/382/1001 268/383/1003
+f 237/387/994 268/383/1003 267/384/1004
+f 239/337/998 238/336/1006 237/335/994 289/390/996
+f 239/337/998 288/389/1005 238/348/1006
+f 288/389/1005 268/383/1003 237/387/994 238/388/1006
+f 239/337/998 250/349/997 279/386/1002 288/389/1005
+v 1.044047 9.283237 -5.626998
+v 0.860601 9.283237 -5.707378
+v 0.677152 9.283237 -5.626998
+v 0.601163 9.283237 -5.432945
+v 0.677152 9.283237 -5.238892
+v 0.860601 9.283237 -5.158512
+v 1.044047 9.283237 -5.238892
+v 1.120036 9.283237 -5.432945
+v 1.044047 29.145523 -5.626998
+v 0.860601 29.145523 -5.707378
+v 0.677152 29.145523 -5.626998
+v 0.601163 29.145523 -5.432945
+v 0.677152 29.145523 -5.238892
+v 0.860601 29.145523 -5.158512
+v 1.044047 29.145523 -5.238892
+v 1.120036 29.145523 -5.432945
+v 0.860601 9.283237 -5.432945
+v 0.860601 29.145523 -5.432945
+vt 0.610485 0.045765
+vt 0.500000 0.000000
+vt 0.389515 0.045765
+vt 0.343750 0.156250
+vt 0.389515 0.266735
+vt 0.500000 0.312500
+vt 0.610485 0.266735
+vt 0.656250 0.156250
+vt 0.375000 0.312500
+vt 0.406250 0.312500
+vt 0.437500 0.312500
+vt 0.468750 0.312500
+vt 0.500000 0.312500
+vt 0.531250 0.312500
+vt 0.562500 0.312500
+vt 0.593750 0.312500
+vt 0.625000 0.312500
+vt 0.375000 0.688440
+vt 0.406250 0.688440
+vt 0.437500 0.688440
+vt 0.468750 0.688440
+vt 0.500000 0.688440
+vt 0.531250 0.688440
+vt 0.562500 0.688440
+vt 0.593750 0.688440
+vt 0.625000 0.688440
+vt 0.610485 0.733265
+vt 0.500000 0.687500
+vt 0.389515 0.733265
+vt 0.343750 0.843750
+vt 0.389515 0.954235
+vt 0.500000 1.000000
+vt 0.610485 0.954235
+vt 0.656250 0.843750
+vt 0.500000 0.150000
+vt 0.500000 0.837500
+vn 0.726676 -0.005035 -0.686962
+vn -0.000000 -0.005092 -0.999987
+vn -0.000000 0.005092 -0.999987
+vn 0.726676 0.005035 -0.686962
+vn -0.726671 -0.005035 -0.686967
+vn -0.726671 0.005035 -0.686967
+vn -0.999988 -0.004979 -0.000000
+vn -0.999988 0.004979 -0.000000
+vn -0.726672 -0.005035 0.686966
+vn -0.726672 0.005035 0.686966
+vn -0.000000 -0.005092 0.999987
+vn -0.000000 0.005092 0.999987
+vn 0.726677 -0.005035 0.686961
+vn 0.726677 0.005035 0.686961
+vn 0.999988 -0.004979 -0.000000
+vn 0.999988 0.004979 0.000000
+vn 0.000000 -1.000000 -0.000001
+vn 0.000000 1.000000 0.000000
+f 294/403/1007 295/404/1008 303/413/1009 302/412/1010
+f 295/404/1008 296/405/1011 304/414/1012 303/413/1009
+f 296/405/1011 297/406/1013 305/415/1014 304/414/1012
+f 297/406/1013 298/407/1015 306/416/1016 305/415/1014
+f 298/407/1015 299/408/1017 307/417/1018 306/416/1016
+f 299/408/1017 300/409/1019 308/418/1020 307/417/1018
+f 300/409/1019 301/410/1021 309/419/1022 308/418/1020
+f 301/410/1021 294/411/1007 302/420/1010 309/419/1022
+f 295/396/1008 294/395/1007 310/429/1023
+f 296/397/1011 295/396/1008 310/429/1023
+f 297/398/1013 296/397/1011 310/429/1023
+f 298/399/1015 297/398/1013 310/429/1023
+f 299/400/1017 298/399/1015 310/429/1023
+f 300/401/1019 299/400/1017 310/429/1023
+f 301/402/1021 300/401/1019 310/429/1023
+f 294/395/1007 301/402/1021 310/429/1023
+f 302/427/1010 303/426/1009 311/430/1024
+f 303/426/1009 304/425/1012 311/430/1024
+f 304/425/1012 305/424/1014 311/430/1024
+f 305/424/1014 306/423/1016 311/430/1024
+f 306/423/1016 307/422/1018 311/430/1024
+f 307/422/1018 308/421/1020 311/430/1024
+f 308/421/1020 309/428/1022 311/430/1024
+f 309/428/1022 302/427/1010 311/430/1024
+v -0.250949 9.096601 7.153985
+v -0.016357 9.096601 7.153985
+v -0.250949 9.494597 7.153985
+v -0.016357 9.494597 7.153985
+v -0.250949 9.494597 5.078355
+v -0.016357 9.494597 5.078355
+v -0.250949 9.096601 5.078355
+v -0.016357 9.096601 5.078355
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 312/431/1025 313/432/1026 315/434/1027 314/433/1028
+f 314/433/1029 315/434/1030 317/436/1031 316/435/1032
+f 316/435/1033 317/436/1034 319/438/1035 318/437/1036
+f 318/437/1037 319/438/1038 313/440/1039 312/439/1040
+f 313/432/1041 319/441/1042 317/442/1043 315/434/1044
+f 318/443/1045 312/431/1046 314/433/1047 316/444/1048
+v 1.710983 9.096601 5.332162
+v 1.710984 9.096601 5.076205
+v 1.710983 9.494597 5.332162
+v 1.710984 9.494597 5.076205
+v -0.251217 9.494597 5.332163
+v -0.251216 9.494597 5.076206
+v -0.251217 9.096601 5.332163
+v -0.251216 9.096601 5.076206
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 1.000000 0.000000 0.000005
+vn 1.000000 0.000000 0.000005
+vn 1.000000 0.000000 0.000005
+vn 1.000000 0.000000 0.000005
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn -1.000000 0.000000 -0.000005
+vn -1.000000 0.000000 -0.000005
+vn -1.000000 0.000000 -0.000005
+vn -1.000000 0.000000 -0.000005
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000000 0.000000 -1.000000
+vn -0.000000 0.000000 -1.000000
+vn -0.000000 0.000000 -1.000000
+vn -0.000000 0.000000 -1.000000
+vn 0.000001 0.000000 1.000000
+vn 0.000001 0.000000 1.000000
+vn 0.000001 0.000000 1.000000
+vn 0.000001 0.000000 1.000000
+f 320/445/1049 321/446/1050 323/448/1051 322/447/1052
+f 322/447/1053 323/448/1054 325/450/1055 324/449/1056
+f 324/449/1057 325/450/1058 327/452/1059 326/451/1060
+f 326/451/1061 327/452/1062 321/454/1063 320/453/1064
+f 321/446/1065 327/455/1066 325/456/1067 323/448/1068
+f 326/457/1069 320/445/1070 322/447/1071 324/458/1072
+v 1.473201 9.096601 7.159976
+v 1.707797 9.096601 7.159976
+v 1.473201 9.494597 7.159976
+v 1.707797 9.494597 7.159976
+v 1.473201 9.494597 5.084347
+v 1.707797 9.494597 5.084347
+v 1.473201 9.096601 5.084347
+v 1.707797 9.096601 5.084347
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 328/459/1073 329/460/1074 331/462/1075 330/461/1076
+f 330/461/1077 331/462/1078 333/464/1079 332/463/1080
+f 332/463/1081 333/464/1082 335/466/1083 334/465/1084
+f 334/465/1085 335/466/1086 329/468/1087 328/467/1088
+f 329/460/1089 335/469/1090 333/470/1091 331/462/1092
+f 334/471/1093 328/459/1094 330/461/1095 332/472/1096
+v -0.252537 9.096601 6.903056
+v -0.252538 9.096601 7.159014
+v -0.252537 9.494597 6.903056
+v -0.252538 9.494597 7.159014
+v 1.709661 9.494597 6.903057
+v 1.709660 9.494597 7.159015
+v 1.709661 9.096601 6.903057
+v 1.709660 9.096601 7.159015
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn -1.000000 0.000000 -0.000003
+vn -1.000000 0.000000 -0.000003
+vn -1.000000 0.000000 -0.000003
+vn -1.000000 0.000000 -0.000003
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 0.000003
+vn 1.000000 0.000000 0.000003
+vn 1.000000 0.000000 0.000003
+vn 1.000000 0.000000 0.000003
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+f 336/473/1097 337/474/1098 339/476/1099 338/475/1100
+f 338/475/1101 339/476/1102 341/478/1103 340/477/1104
+f 340/477/1105 341/478/1106 343/480/1107 342/479/1108
+f 342/479/1109 343/480/1110 337/482/1111 336/481/1112
+f 337/474/1113 343/483/1114 341/484/1115 339/476/1116
+f 342/485/1117 336/473/1118 338/475/1119 340/486/1120
+v 0.102325 9.245696 7.067164
+v 0.280394 9.245696 7.067164
+v 0.102325 9.334006 7.067164
+v 0.280394 9.334006 7.067164
+v 0.102325 9.334006 5.225182
+v 0.280394 9.334006 5.225182
+v 0.102325 9.245696 5.225182
+v 0.280394 9.245696 5.225182
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 344/487/1121 345/488/1122 347/490/1123 346/489/1124
+f 346/489/1125 347/490/1126 349/492/1127 348/491/1128
+f 348/491/1129 349/492/1130 351/494/1131 350/493/1132
+f 350/493/1133 351/494/1134 345/496/1135 344/495/1136
+f 345/488/1137 351/497/1138 349/498/1139 347/490/1140
+f 350/499/1141 344/487/1142 346/489/1143 348/500/1144
+v 0.452432 9.245696 7.067164
+v 0.618159 9.245696 7.067164
+v 0.452432 9.334006 7.067164
+v 0.618159 9.334006 7.067164
+v 0.452432 9.334006 5.225182
+v 0.618159 9.334006 5.225182
+v 0.452432 9.245696 5.225182
+v 0.618159 9.245696 5.225182
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 352/501/1145 353/502/1146 355/504/1147 354/503/1148
+f 354/503/1149 355/504/1150 357/506/1151 356/505/1152
+f 356/505/1153 357/506/1154 359/508/1155 358/507/1156
+f 358/507/1157 359/508/1158 353/510/1159 352/509/1160
+f 353/502/1161 359/511/1162 357/512/1163 355/504/1164
+f 358/513/1165 352/501/1166 354/503/1167 356/514/1168
+v 0.813718 9.245696 7.067164
+v 0.972066 9.245696 7.067164
+v 0.813718 9.334006 7.067164
+v 0.972066 9.334006 7.067164
+v 0.813718 9.334006 5.225182
+v 0.972066 9.334006 5.225182
+v 0.813718 9.245696 5.225182
+v 0.972066 9.245696 5.225182
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 360/515/1169 361/516/1170 363/518/1171 362/517/1172
+f 362/517/1173 363/518/1174 365/520/1175 364/519/1176
+f 364/519/1177 365/520/1178 367/522/1179 366/521/1180
+f 366/521/1181 367/522/1182 361/524/1183 360/523/1184
+f 361/516/1185 367/525/1186 365/526/1187 363/518/1188
+f 366/527/1189 360/515/1190 362/517/1191 364/528/1192
+v 1.159150 9.245696 7.067164
+v 1.343407 9.245696 7.067164
+v 1.159150 9.334006 7.067164
+v 1.343407 9.334006 7.067164
+v 1.159150 9.334006 5.225182
+v 1.343407 9.334006 5.225182
+v 1.159150 9.245696 5.225182
+v 1.343407 9.245696 5.225182
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+f 368/529/1193 369/530/1194 371/532/1195 370/531/1196
+f 370/531/1197 371/532/1198 373/534/1199 372/533/1200
+f 372/533/1201 373/534/1202 375/536/1203 374/535/1204
+f 374/535/1205 375/536/1206 369/538/1207 368/537/1208
+f 369/530/1209 375/539/1210 373/540/1211 371/532/1212
+f 374/541/1213 368/529/1214 370/531/1215 372/542/1216
+v -0.149344 9.245696 5.495495
+v -0.149343 9.245696 5.663534
+v -0.149344 9.334006 5.495495
+v -0.149343 9.334006 5.663534
+v 1.591979 9.334006 5.495496
+v 1.591981 9.334006 5.663536
+v 1.591979 9.245696 5.495496
+v 1.591981 9.245696 5.663536
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+f 376/543/1217 377/544/1218 379/546/1219 378/545/1220
+f 378/545/1221 379/546/1222 381/548/1223 380/547/1224
+f 380/547/1225 381/548/1226 383/550/1227 382/549/1228
+f 382/549/1229 383/550/1230 377/552/1231 376/551/1232
+f 377/544/1233 383/553/1234 381/554/1235 379/546/1236
+f 382/555/1237 376/543/1238 378/545/1239 380/556/1240
+v -0.149344 9.245696 5.832921
+v -0.149343 9.245696 6.000960
+v -0.149344 9.334006 5.832921
+v -0.149343 9.334006 6.000960
+v 1.591979 9.334006 5.832922
+v 1.591981 9.334006 6.000961
+v 1.591979 9.245696 5.832922
+v 1.591981 9.245696 6.000961
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn -0.000000 0.000000 1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+f 384/557/1241 385/558/1242 387/560/1243 386/559/1244
+f 386/559/1245 387/560/1246 389/562/1247 388/561/1248
+f 388/561/1249 389/562/1250 391/564/1251 390/563/1252
+f 390/563/1253 391/564/1254 385/566/1255 384/565/1256
+f 385/558/1257 391/567/1258 389/568/1259 387/560/1260
+f 390/569/1261 384/557/1262 386/559/1263 388/570/1264
+v -0.149344 9.245696 6.214916
+v -0.149343 9.245696 6.382955
+v -0.149344 9.334006 6.214916
+v -0.149343 9.334006 6.382955
+v 1.591979 9.334006 6.214917
+v 1.591981 9.334006 6.382957
+v 1.591979 9.245696 6.214917
+v 1.591981 9.245696 6.382957
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn -1.000000 0.000000 0.000007
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+f 392/571/1265 393/572/1266 395/574/1267 394/573/1268
+f 394/573/1269 395/574/1270 397/576/1271 396/575/1272
+f 396/575/1273 397/576/1274 399/578/1275 398/577/1276
+f 398/577/1277 399/578/1278 393/580/1279 392/579/1280
+f 393/572/1281 399/581/1282 397/582/1283 395/574/1284
+f 398/583/1285 392/571/1286 394/573/1287 396/584/1288
+v -0.149342 9.245696 6.583333
+v -0.149343 9.245696 6.751371
+v -0.149342 9.334006 6.583333
+v -0.149343 9.334006 6.751371
+v 1.591979 9.334006 6.583333
+v 1.591981 9.334006 6.751372
+v 1.591979 9.245696 6.583333
+v 1.591981 9.245696 6.751372
+vt 0.375000 0.000000
+vt 0.625000 0.000000
+vt 0.375000 0.250000
+vt 0.625000 0.250000
+vt 0.375000 0.500000
+vt 0.625000 0.500000
+vt 0.375000 0.750000
+vt 0.625000 0.750000
+vt 0.375000 1.000000
+vt 0.625000 1.000000
+vt 0.875000 0.000000
+vt 0.875000 0.250000
+vt 0.125000 0.000000
+vt 0.125000 0.250000
+vn -1.000000 0.000000 -0.000004
+vn -1.000000 0.000000 -0.000004
+vn -1.000000 0.000000 -0.000004
+vn -1.000000 0.000000 -0.000004
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 1.000000 0.000000 -0.000007
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn -0.000001 0.000000 1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+vn 0.000001 0.000000 -1.000000
+f 400/585/1289 401/586/1290 403/588/1291 402/587/1292
+f 402/587/1293 403/588/1294 405/590/1295 404/589/1296
+f 404/589/1297 405/590/1298 407/592/1299 406/591/1300
+f 406/591/1301 407/592/1302 401/594/1303 400/593/1304
+f 401/586/1305 407/595/1306 405/596/1307 403/588/1308
+f 406/597/1309 400/585/1310 402/587/1311 404/598/1312
+</pre>
+
+		<p class="file_page_meta no_print" style="line-height: 1.5rem;">
+			<label class="checkbox normal mini float_right no_top_padding no_min_width">
+				<input type="checkbox" id="file_preview_wrap_cb"> wrap long lines			</label>
+		</p>
+
+	</div>
+
+	<div id="comments_holder" class="clearfix clear_both">
+	<div class="col span_1_of_6"></div>
+	<div class="col span_4_of_6 no_right_padding">
+		<div id="file_page_comments">
+			
+
+<div class="loading_hash_animation">
+	<span class=loading_hash_container><img src="https://a.slack-edge.com/9c217/img/loading_hash_animation_@2x.gif" srcset="https://a.slack-edge.com/9c217/img/loading_hash_animation.gif 1x, https://a.slack-edge.com/9c217/img/loading_hash_animation_@2x.gif 2x" alt="Loading" class="loading_hash" /><br />loading...</span>
+	<noscript>
+		
+			You must enable javascript in order to use Slack :(
+						<style type="text/css">span.loading_hash_container { display: none; }</style>
+	</noscript>
+</div>		</div>	
+		
+
+<form action="https://brightonggj.slack.com/files/bdeakin/F3U016MDX/boatbase.obj"
+		id="file_comment_form"
+					class="comment_form clearfix"
+				method="post">
+			<a href="/team/georgie" class="member_preview_link" data-member-id="U0KRPMS1L" >
+			<span class="member_image thumb_36" style="background-image: url('https://secure.gravatar.com/avatar/32c3e9af04a701c6d45d7c1a553b8080.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F3654%2Fimg%2Favatars%2Fava_0011-72.png')" data-thumb-size="36" data-member-id="U0KRPMS1L"></span>
+		</a>
+		<input type="hidden" name="addcomment" value="1" />
+	<input type="hidden" name="crumb" value="s-1485007348-19207bfe21-☃" />
+
+	<textarea id="file_comment" data-el-id-to-keep-in-view="file_comment_submit_btn" class="small comment_input small_bottom_margin autogrow-short" name="comment" wrap="virtual" ></textarea>
+	<span class="input_note float_left indifferent_grey file_comment_tip">shift+enter to add a new line</span>	<button id="file_comment_submit_btn" type="submit" class="btn float_right  ladda-button" data-style="expand-right"><span class="ladda-label">Add Comment</span></button>
+</form>
+
+<form
+		id="file_edit_comment_form"
+					class="edit_comment_form clearfix hidden"
+				method="post">
+		<textarea id="file_edit_comment" class="small comment_input small_bottom_margin" name="comment" wrap="virtual"></textarea><br>
+	<input type="submit" class="save btn float_right " value="Save" />
+	<button class="cancel btn btn_outline float_right small_right_margin ">Cancel</button>
+</form>	
+	</div>
+	<div class="col span_1_of_6"></div>
+</div>
+</div>
+
+
+
+
+		
+	</div>
+	<div id="overlay"></div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+	function vvv(v) {
+
+		var vvv_warning = 'You cannot use vvv on dynamic values. Please make sure you only pass in static file paths.';
+		if (TS && TS.warn) {
+			TS.warn(vvv_warning);
+		} else {
+			console.warn(vvv_warning);
+		}
+
+		return v;
+	}
+
+	var cdn_url = "https:\/\/slack.global.ssl.fastly.net";
+	var inc_js_setup_data = {
+		emoji_sheets: {
+			apple: 'https://a.slack-edge.com/bfaba/img/emoji_2016_06_08/sheet_apple_64_indexed_256colors.png',
+			google: 'https://a.slack-edge.com/f360/img/emoji_2016_06_08/sheet_google_64_indexed_128colors.png',
+			twitter: 'https://a.slack-edge.com/bfaba/img/emoji_2016_06_08/sheet_twitter_64_indexed_128colors.png',
+			emojione: 'https://a.slack-edge.com/bfaba/img/emoji_2016_06_08/sheet_emojione_64_indexed_128colors.png',
+		},
+	};
+</script>
+			<script type="text/javascript">
+<!--
+	// common boot_data
+	var boot_data = {
+		start_ms: Date.now(),
+		app: 'web',
+		user_id: 'U0KRPMS1L',
+		no_login: false,
+		version_ts: '1484966700',
+		version_uid: '6e342b56386c35d72b84d2d20089908d0d781fd5',
+		cache_version: "v15-koala",
+		cache_ts_version: "v1-cat",
+		redir_domain: 'slack-redir.net',
+		signin_url: 'https://slack.com/signin',
+		abs_root_url: 'https://slack.com/',
+		api_url: '/api/',
+		team_url: 'https://brightonggj.slack.com/',
+		image_proxy_url: 'https://slack-imgs.com/',
+		beacon_timing_url: "https:\/\/slack.com\/beacon\/timing",
+		beacon_error_url: "https:\/\/slack.com\/beacon\/error",
+		clog_url: "clog\/track\/",
+		api_token: 'xoxs-19822053220-19873740054-130733408116-d74e5984ca',
+		ls_disabled: false,
+
+		notification_sounds: [{"value":"b2.mp3","label":"Ding","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/b2.mp3"},{"value":"animal_stick.mp3","label":"Boing","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/animal_stick.mp3"},{"value":"been_tree.mp3","label":"Drop","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/been_tree.mp3"},{"value":"complete_quest_requirement.mp3","label":"Ta-da","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/complete_quest_requirement.mp3"},{"value":"confirm_delivery.mp3","label":"Plink","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/confirm_delivery.mp3"},{"value":"flitterbug.mp3","label":"Wow","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/flitterbug.mp3"},{"value":"here_you_go_lighter.mp3","label":"Here you go","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/here_you_go_lighter.mp3"},{"value":"hi_flowers_hit.mp3","label":"Hi","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/hi_flowers_hit.mp3"},{"value":"item_pickup.mp3","label":"Yoink","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/item_pickup.mp3"},{"value":"knock_brush.mp3","label":"Knock Brush","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/knock_brush.mp3"},{"value":"save_and_checkout.mp3","label":"Woah!","url":"https:\/\/slack.global.ssl.fastly.net\/dfc0\/sounds\/push\/save_and_checkout.mp3"},{"value":"hummus.mp3","label":"Hummus","url":"https:\/\/slack.global.ssl.fastly.net\/7fa9\/sounds\/push\/hummus.mp3"},{"value":"none","label":"None"}],
+		alert_sounds: [{"value":"frog.mp3","label":"Frog","url":"https:\/\/slack.global.ssl.fastly.net\/a34a\/sounds\/frog.mp3"}],
+		call_sounds: [{"value":"call\/alert_v2.mp3","label":"Alert","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/alert_v2.mp3"},{"value":"call\/incoming_ring_v2.mp3","label":"Incoming ring","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/incoming_ring_v2.mp3"},{"value":"call\/outgoing_ring_v2.mp3","label":"Outgoing ring","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/outgoing_ring_v2.mp3"},{"value":"call\/pop_v2.mp3","label":"Incoming reaction","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/pop_v2.mp3"},{"value":"call\/they_left_call_v2.mp3","label":"They left call","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/they_left_call_v2.mp3"},{"value":"call\/you_left_call_v2.mp3","label":"You left call","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/you_left_call_v2.mp3"},{"value":"call\/they_joined_call_v2.mp3","label":"They joined call","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/they_joined_call_v2.mp3"},{"value":"call\/you_joined_call_v2.mp3","label":"You joined call","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/you_joined_call_v2.mp3"},{"value":"call\/confirmation_v2.mp3","label":"Confirmation","url":"https:\/\/slack.global.ssl.fastly.net\/08f7\/sounds\/call\/confirmation_v2.mp3"}],
+		call_sounds_version: "v2",
+		max_team_handy_rxns: 5,
+		max_channel_handy_rxns: 5,
+		max_poll_handy_rxns: 7,
+		max_handy_rxns_title_chars: 30,
+				default_tz: "America\/Los_Angeles",
+				
+		feature_tinyspeck: false,
+		feature_i18n: false,
+		feature_create_team_google_auth: false,
+		feature_api_extended_2fa_backup: false,
+		feature_flannel_fe: false,
+		feature_thin_channel_membership: false,
+		feature_frecency_normalization: true,
+		feature_frecency_im_browser: false,
+		feature_batch_file_deleted_event: false,
+		feature_sales_tax: true,
+		feature_message_replies: true,
+		feature_message_replies_rewrite_864: false,
+		feature_message_replies_inline: false,
+		feature_message_replies_temp_msgs: false,
+		feature_a11y_keyboard_shortcuts: false,
+		feature_email_ingestion: false,
+		feature_msg_consistency: false,
+		feature_sli_channel_priority: false,
+		feature_sli_clog_selections: true,
+		feature_thanks: false,
+		feature_attachments_inline: false,
+		feature_fix_files: true,
+		feature_files_list: true,
+		feature_channel_eventlog_client: true,
+		feature_elide_closed_dms: true,
+		feature_no_redirects_in_ssb: true,
+		feature_referer_policy: true,
+		feature_calls: true,
+		feature_integrations_message_preview: true,
+		feature_paging_api: false,
+		feature_promote_org_po: false,
+		feature_enterprise_api: true,
+		feature_enterprise_create: true,
+		feature_enterprise_api_auth: true,
+		feature_enterprise_profile: true,
+		feature_enterprise_search: true,
+		feature_enterprise_locked_settings: false,
+		feature_frecency_migration: false,
+		feature_enterprise_frecency: false,
+		feature_enterprise_team_overview_page: false,
+		feature_enterprise_conditional_team_removal: true,
+		feature_enterprise_move_channels: false,
+		feature_dunning: false,
+		feature_enterprise_mandatory_2fa: true,
+		feature_basic_analytics: false,
+		feature_enterprise_user_account_settings: true,
+		feature_enterprise_security_auth_refactor: false,
+		feature_enterprise_profile_menu_deactivate_2fa: false,
+		feature_enterprise_billing_section: true,
+		feature_sso_sandbox: false,
+		feature_mpim_restrictions: false,
+		feature_js_raf_queue: false,
+		feature_channel_highlights: false,
+		feature_shared_channels: false,
+		feature_external_shared_channels_ui: false,
+		feature_you_autocomplete_me: false,
+		feature_allow_shared_general: false,
+		feature_fast_files_flexpane: true,
+		feature_custom_saml_signin_button_label: true,
+		feature_admin_approved_apps: true,
+		feature_winssb_beta_channel: false,
+		feature_inline_media_playback: true,
+		feature_clog_whats_new: true,
+		feature_presence_sub: false,
+		feature_live_support_free_plan: false,
+		feature_dm_yahself: true,
+		feature_slackbot_goes_to_college: false,
+		feature_newxp_enqueue_message: true,
+		feature_lato_2_ssb: true,
+		feature_focus_mode: false,
+		feature_star_shortcut: false,
+		feature_omit_localstorage_users_bots: false,
+		feature_disable_ls_compression: false,
+		feature_force_ls_compression: false,
+		feature_sign_in_with_slack: true,
+		feature_sign_in_with_slack_ui_elements: true,
+		feature_fix_unstarrables: true,
+		feature_app_review_scope_error: true,
+		feature_zendesk_app_submission_improvement: false,
+		feature_react_emoji_picker: false,
+		feature_ignore_code_mentions: false,
+		feature_better_msg_copying: true,
+		feature_name_tagging_client: false,
+		feature_name_tagging_client_extras: false,
+		feature_name_tagging_client_search: false,
+		feature_browse_date: true,
+		feature_use_imgproxy_resizing: false,
+		feature_always_active_bots: true,
+		feature_slash_command_link_names: true,
+		feature_single_team_apps: false,
+		feature_update_message_file: true,
+		feature_custom_clogs: true,
+		feature_a11y_pref_text_size: false,
+		feature_share_mention_comment_cleanup: false,
+		feature_unread_view: true,
+		feature_external_files: false,
+		feature_min_web: false,
+		feature_electron_memory_logging: false,
+		feature_no_tokenless_ms_connections: false,
+		feature_devrel_try_it_now: false,
+		feature_wait_for_all_mentions_in_client: false,
+		feature_prev_next_button: false,
+		feature_free_inactive_domains: true,
+		feature_platform_calls: true,
+		feature_a11y_tab: false,
+		feature_admin_billing_refactor: true,
+		feature_wrapped_mention_parsing: false,
+		feature_measure_css_usage: false,
+		feature_take_profile_photo: false,
+		feature_ajax_billing_history: true,
+		feature_update_coachmarks_cta: true,
+		feature_update_coachmarks_copy: true,
+		feature_multnomah: false,
+		feature_texty: false,
+		feature_texty_takes_over: false,
+		feature_texty_copy_paste: false,
+		feature_sales_tax_address: true,
+		feature_toggle_id_translation: false,
+		feature_can_edit_app: true,
+		feature_gdrive_1_dot_5: true,
+		feature_mention_non_members: false,
+		feature_hide_email_pref: true,
+		feature_tos_oct2016: true,
+		feature_flexbox_client: true,
+		feature_emoji_menu_tuning: false,
+		feature_discoverable_teams: false,
+		feature_discoverable_teams_v1: false,
+		feature_discoverable_teams_v2: false,
+		feature_discoverable_teams_client_v1: false,
+		feature_discoverable_teams_client_v2: false,
+		feature_discoverable_teams_client_metrics: false,
+		feature_thin_shares: false,
+		feature_reveal_channel_renames: true,
+		feature_claim_email_domain: true,
+		feature_app_info_youtube_url: false,
+		feature_api_metadata_token_allow: true,
+		feature_app_cards_and_profs_frontend: true,
+		feature_user_removed_from_team: true,
+		feature_user_added_to_team: true,
+		feature_a11y_ui_zoom: false,
+		feature_message_menus: false,
+		feature_contact_us_form: true,
+		feature_app_cards_and_profs_set_card_color: false,
+		feature_sli_recaps: false,
+		feature_cdn_load_tracking: true,
+		feature_searchable_member_list: false,
+		feature_team_to_org_directory: true,
+		feature_user_custom_status: false,
+		feature_app_cards_app_label: false,
+		feature_platform_metrics: true,
+		feature_sales_contact_inquiry: true,
+		feature_hide_join_leave: false,
+		feature_show_drafts: true,
+		feature_slim_scrollbar: false,
+		feature_flexpane_redesign: true,
+		feature_console_log_redactor: true,
+		feature_ent_dash_new_modal: false,
+		feature_trials_checkout_flow: false,
+		feature_intl_channel_names: false,
+
+	client_logs: {"0":{"numbers":[0],"whitelisted":false},"@scott":{"numbers":[2,4,37,58,67,141,142,389,390,481,488,529,667,773,888,999],"owner":"@scott"},"@eric":{"numbers":[2,23,47,48,65,66,72,73,82,91,93,96,222,365,438,528,552,777,794],"owner":"@eric"},"2":{"owner":"@scott \/ @eric","numbers":[2],"whitelisted":false},"4":{"owner":"@scott","numbers":[4],"whitelisted":false},"5":{"channels":"#dhtml","numbers":[5],"whitelisted":false},"23":{"owner":"@eric","numbers":[23],"whitelisted":false},"sounds":{"owner":"@scott","name":"sounds","numbers":[37]},"37":{"owner":"@scott","name":"sounds","numbers":[37],"whitelisted":true},"47":{"owner":"@eric","numbers":[47],"whitelisted":false},"48":{"owner":"@eric","numbers":[48],"whitelisted":false},"58":{"owner":"@scott","numbers":[58],"whitelisted":false},"65":{"owner":"@eric","numbers":[65],"whitelisted":false},"66":{"owner":"@eric","numbers":[66],"whitelisted":false},"67":{"owner":"@scott","numbers":[67],"whitelisted":false},"72":{"owner":"@eric","numbers":[72],"whitelisted":false},"73":{"owner":"@eric","numbers":[73],"whitelisted":false},"82":{"owner":"@eric","numbers":[82],"whitelisted":false},"@shinypb":{"owner":"@shinypb","numbers":[88,1000,1989,1996]},"88":{"owner":"@shinypb","numbers":[88],"whitelisted":false},"91":{"owner":"@eric","numbers":[91],"whitelisted":false},"93":{"owner":"@eric","numbers":[93],"whitelisted":false},"96":{"owner":"@eric","numbers":[96],"whitelisted":false},"@steveb":{"owner":"@steveb","numbers":[99]},"99":{"owner":"@steveb","numbers":[99],"whitelisted":false},"Channel Marking (MS)":{"owner":"@scott","name":"Channel Marking (MS)","numbers":[141]},"141":{"owner":"@scott","name":"Channel Marking (MS)","numbers":[141],"whitelisted":true},"Channel Marking (Client)":{"owner":"@scott","name":"Channel Marking (Client)","numbers":[142]},"142":{"owner":"@scott","name":"Channel Marking (Client)","numbers":[142],"whitelisted":true},"222":{"owner":"@eric","numbers":[222],"whitelisted":false},"365":{"owner":"@eric","numbers":[365],"whitelisted":false},"389":{"owner":"@scott","numbers":[389],"whitelisted":false},"390":{"owner":"@scott","numbers":[390],"whitelisted":false},"438":{"owner":"@eric","numbers":[438],"whitelisted":false},"@rowan":{"numbers":[444,666],"owner":"@rowan"},"444":{"owner":"@rowan","numbers":[444],"whitelisted":false},"481":{"owner":"@scott","numbers":[481],"whitelisted":false},"488":{"owner":"@scott","numbers":[488],"whitelisted":false},"528":{"owner":"@eric","numbers":[528],"whitelisted":false},"529":{"owner":"@scott","numbers":[529],"whitelisted":false},"552":{"owner":"@eric","numbers":[552],"whitelisted":false},"dashboard":{"owner":"@ac \/ @bruce \/ @kylestetz \/ @nic \/ @rowan","channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666]},"@ac":{"channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666],"owner":"@ac"},"@bruce":{"channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666],"owner":"@bruce"},"@kylestetz":{"channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666],"owner":"@kylestetz"},"@nic":{"channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666],"owner":"@nic"},"666":{"owner":"@ac \/ @bruce \/ @kylestetz \/ @nic \/ @rowan","channels":"#devel-enterprise-fe, #feat-enterprise-dash","name":"dashboard","numbers":[666],"whitelisted":false},"667":{"owner":"@scott","numbers":[667],"whitelisted":false},"773":{"owner":"@scott","numbers":[773],"whitelisted":false},"777":{"owner":"@eric","numbers":[777],"whitelisted":false},"794":{"owner":"@eric","numbers":[794],"whitelisted":false},"888":{"owner":"@scott","numbers":[888],"whitelisted":false},"999":{"owner":"@scott","numbers":[999],"whitelisted":false},"1000":{"owner":"@shinypb","numbers":[1000],"whitelisted":false},"flannel":{"owner":"@shinypb","features":["feature_flannel_fe"],"channels":"#devel-flannel","name":"flannel","numbers":[1989]},"1989":{"owner":"@shinypb","features":["feature_flannel_fe"],"channels":"#devel-flannel","name":"flannel","numbers":[1989],"whitelisted":true},"ms":{"owner":"@shinypb","name":"ms","numbers":[1996]},"1996":{"owner":"@shinypb","name":"ms","numbers":[1996],"whitelisted":true},"@patrick":{"owner":"@patrick","channels":"#dhtml","numbers":[2001,2002,2003,2004]},"2001":{"owner":"@patrick","channels":"#dhtml","numbers":[2001],"whitelisted":false},"dnd":{"owner":"@patrick","channels":"dhtml","name":"dnd","numbers":[2002]},"2002":{"owner":"@patrick","channels":"dhtml","name":"dnd","numbers":[2002],"whitelisted":true},"2003":{"owner":"@patrick","channels":"dhtml","numbers":[2003],"whitelisted":false},"2004":{"owner":"@patrick","channels":"#feature_message_replies, #feat-threads","numbers":[2004],"whitelisted":false},"mc_sibs":{"name":"mc_sibs","numbers":[9999]},"9999":{"name":"mc_sibs","numbers":[9999],"whitelisted":false},"@fearon":{"owner":"@fearon","numbers":[98765]},"98765":{"owner":"@fearon","numbers":[98765],"whitelisted":false}},
+
+
+		img: {
+			app_icon: 'https://a.slack-edge.com/272a/img/slack_growl_icon.png'
+		},
+		page_needs_custom_emoji: false,
+		page_needs_team_profile_fields: false,
+		page_needs_enterprise: false,
+				slackbot_help_enabled: true
+	};
+
+	
+	
+	
+	
+	
+	// client boot data
+	
+		
+	
+//-->
+</script>	
+	
+	
+
+
+	<!-- output_js "core" -->
+<script type="text/javascript" src="https://a.slack-edge.com/67e0/js/rollup-core_required_libs.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/72fe0/js/rollup-core_required_ts.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/d363/js/TS.web.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+
+	<!-- output_js "core_web" -->
+<script type="text/javascript" src="https://a.slack-edge.com/9982f/js/rollup-core_web.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+
+	<!-- output_js "secondary" -->
+<script type="text/javascript" src="https://a.slack-edge.com/d6df1/js/rollup-secondary_a_required.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/60973/js/rollup-secondary_b_required.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+
+			
+	<!-- output_js "regular" -->
+<script type="text/javascript" src="https://a.slack-edge.com/a414f/js/TS.web.comments.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/02248/js/TS.web.file.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/cb0fd/js/libs/codemirror.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+<script type="text/javascript" src="https://a.slack-edge.com/8df80/js/codemirror_load.js" crossorigin="anonymous" onload="window._cdn && _cdn.ok(this, arguments)" onerror="window._cdn && _cdn.failed(this, arguments)"></script>
+
+
+		<script type="text/javascript">
+				TS.clog.setTeam('T0KQ61K6G');
+				TS.clog.setUser('U0KRPMS1L');
+			</script>
+
+			<script type="text/javascript">
+	<!--
+		boot_data.page_needs_custom_emoji = true;
+
+		boot_data.file = {"id":"F3U016MDX","created":1485004916,"timestamp":1485004916,"name":"boatbase.obj","title":"boatbase.obj","mimetype":"text\/plain","filetype":"text","pretty_type":"Plain Text","user":"U3UJ57QTE","editable":true,"size":84678,"mode":"snippet","is_external":false,"external_type":"","is_public":false,"public_url_shared":false,"display_as_bot":false,"username":"","url_private":"https:\/\/files.slack.com\/files-pri\/T0KQ61K6G-F3U016MDX\/boatbase.obj","url_private_download":"https:\/\/files.slack.com\/files-pri\/T0KQ61K6G-F3U016MDX\/download\/boatbase.obj","permalink":"https:\/\/brightonggj.slack.com\/files\/bdeakin\/F3U016MDX\/boatbase.obj","permalink_public":"https:\/\/slack-files.com\/T0KQ61K6G-F3U016MDX-d074fa871d","edit_link":"https:\/\/brightonggj.slack.com\/files\/bdeakin\/F3U016MDX\/boatbase.obj\/edit","preview":"# This file uses centimeters as units for non-parametric coordinates.\n\nv -6.266029 10.567745 -14.704584\nv -6.266030 9.462886 -14.883319\nv -0.080790 10.798768 19.971077","preview_highlight":"\u003Cdiv class=\"CodeMirror cm-s-default CodeMirrorServer\" oncopy=\"if(event.clipboardData){event.clipboardData.setData('text\/plain',window.getSelection().toString().replace(\/\\u200b\/g,''));event.preventDefault();event.stopPropagation();}\"\u003E\n\u003Cdiv class=\"CodeMirror-code\"\u003E\n\u003Cdiv\u003E\u003Cpre\u003E# This file uses centimeters as units for non-parametric coordinates.\u003C\/pre\u003E\u003C\/div\u003E\n\u003Cdiv\u003E\u003Cpre\u003E\u003C\/pre\u003E\u003C\/div\u003E\n\u003Cdiv\u003E\u003Cpre\u003Ev -6.266029 10.567745 -14.704584\u003C\/pre\u003E\u003C\/div\u003E\n\u003Cdiv\u003E\u003Cpre\u003Ev -6.266030 9.462886 -14.883319\u003C\/pre\u003E\u003C\/div\u003E\n\u003Cdiv\u003E\u003Cpre\u003Ev -0.080790 10.798768 19.971077\u003C\/pre\u003E\u003C\/div\u003E\n\u003C\/div\u003E\n\u003C\/div\u003E\n","lines":2712,"lines_more":2707,"preview_is_truncated":true,"channels":[],"groups":["G3V9NU0EA"],"ims":[],"comments_count":1,"initial_comment":{"id":"Fc3VAKQY6A","created":1485004916,"timestamp":1485004916,"user":"U3UJ57QTE","is_intro":true,"comment":"hopefully this is ok?","channel":""}};
+		boot_data.file.comments = [{"id":"Fc3VAKQY6A","created":1485004916,"timestamp":1485004916,"user":"U3UJ57QTE","is_intro":true,"comment":"hopefully this is ok?","channel":""}];
+
+		
+
+		var g_editor;
+
+		$(function(){
+
+			var wrap_long_lines = !!TS.model.code_wrap_long_lines;
+
+			g_editor = CodeMirror(function(elt){
+				var content = document.getElementById("file_contents");
+				content.parentNode.replaceChild(elt, content);
+			}, {
+				value: $('#file_contents').text(),
+				lineNumbers: true,
+				matchBrackets: true,
+				indentUnit: 4,
+				indentWithTabs: true,
+				enterMode: "keep",
+				tabMode: "shift",
+				viewportMargin: 10,
+				readOnly: true,
+				lineWrapping: wrap_long_lines
+			});
+
+			// past a certain point, CodeMirror rendering may simply stop working.
+			// start having CodeMirror use its Long List View-style scolling at >= max_lines.
+			var max_lines = 8192;
+
+			var snippet_lines;
+
+			// determine # of lines, limit height accordingly
+			if (g_editor.doc && g_editor.doc.lineCount) {
+				snippet_lines = parseInt(g_editor.doc.lineCount());
+				var new_height;
+				if (snippet_lines) {
+					// we want the CodeMirror container to collapse around short snippets.
+					// however, we want to let it auto-expand only up to a limit, at which point
+					// we specify a fixed height so CM can display huge snippets without dying.
+					// this is because CodeMirror works nicely with no height set, but doesn't
+					// scale (big file performance issue), and doesn't work with min/max-height -
+					// so at some point, we have to set an absolute height to kick it into its
+					// smart / partial "Long List View"-style rendering mode.
+					if (snippet_lines < max_lines) {
+						new_height = 'auto';
+					} else {
+						new_height = (max_lines * 0.875) + 'rem'; // line-to-rem ratio
+					}
+					var line_count = Math.min(snippet_lines, max_lines);
+					TS.info('Applying height of ' + new_height + ' to container for this snippet of ' + snippet_lines + (snippet_lines === 1 ? ' line' : ' lines'));
+					$('#page .CodeMirror').height(new_height);
+				}
+			}
+
+			$('#file_preview_wrap_cb').bind('change', function(e) {
+				TS.model.code_wrap_long_lines = $(this).prop('checked');
+				g_editor.setOption('lineWrapping', TS.model.code_wrap_long_lines);
+			})
+
+			$('#file_preview_wrap_cb').prop('checked', wrap_long_lines);
+
+			CodeMirror.switchSlackMode(g_editor, "text");
+		});
+
+		
+		$('#file_comment').css('overflow', 'hidden').autogrow();
+	//-->
+	</script>
+
+
+			<script type="text/javascript">TS.boot(boot_data);</script>
+	
+<style>.color_9f69e7:not(.nuc) {color:#9F69E7;}.color_4bbe2e:not(.nuc) {color:#4BBE2E;}.color_e7392d:not(.nuc) {color:#E7392D;}.color_3c989f:not(.nuc) {color:#3C989F;}.color_674b1b:not(.nuc) {color:#674B1B;}.color_e96699:not(.nuc) {color:#E96699;}.color_e0a729:not(.nuc) {color:#E0A729;}.color_684b6c:not(.nuc) {color:#684B6C;}.color_5b89d5:not(.nuc) {color:#5B89D5;}.color_2b6836:not(.nuc) {color:#2B6836;}.color_99a949:not(.nuc) {color:#99A949;}.color_df3dc0:not(.nuc) {color:#DF3DC0;}.color_4cc091:not(.nuc) {color:#4CC091;}.color_9b3b45:not(.nuc) {color:#9B3B45;}.color_d58247:not(.nuc) {color:#D58247;}.color_bb86b7:not(.nuc) {color:#BB86B7;}.color_5a4592:not(.nuc) {color:#5A4592;}.color_db3150:not(.nuc) {color:#DB3150;}.color_235e5b:not(.nuc) {color:#235E5B;}.color_9e3997:not(.nuc) {color:#9E3997;}.color_53b759:not(.nuc) {color:#53B759;}.color_c386df:not(.nuc) {color:#C386DF;}.color_385a86:not(.nuc) {color:#385A86;}.color_a63024:not(.nuc) {color:#A63024;}.color_5870dd:not(.nuc) {color:#5870DD;}.color_ea2977:not(.nuc) {color:#EA2977;}.color_50a0cf:not(.nuc) {color:#50A0CF;}.color_d55aef:not(.nuc) {color:#D55AEF;}.color_d1707d:not(.nuc) {color:#D1707D;}.color_43761b:not(.nuc) {color:#43761B;}.color_e06b56:not(.nuc) {color:#E06B56;}.color_8f4a2b:not(.nuc) {color:#8F4A2B;}.color_902d59:not(.nuc) {color:#902D59;}.color_de5f24:not(.nuc) {color:#DE5F24;}.color_a2a5dc:not(.nuc) {color:#A2A5DC;}.color_827327:not(.nuc) {color:#827327;}.color_3c8c69:not(.nuc) {color:#3C8C69;}.color_8d4b84:not(.nuc) {color:#8D4B84;}.color_84b22f:not(.nuc) {color:#84B22F;}.color_4ec0d6:not(.nuc) {color:#4EC0D6;}.color_e23f99:not(.nuc) {color:#E23F99;}.color_e475df:not(.nuc) {color:#E475DF;}.color_619a4f:not(.nuc) {color:#619A4F;}.color_a72f79:not(.nuc) {color:#A72F79;}.color_7d414c:not(.nuc) {color:#7D414C;}.color_aba727:not(.nuc) {color:#ABA727;}.color_965d1b:not(.nuc) {color:#965D1B;}.color_4d5e26:not(.nuc) {color:#4D5E26;}.color_dd8527:not(.nuc) {color:#DD8527;}.color_bd9336:not(.nuc) {color:#BD9336;}.color_e85d72:not(.nuc) {color:#E85D72;}.color_dc7dbb:not(.nuc) {color:#DC7DBB;}.color_bc3663:not(.nuc) {color:#BC3663;}.color_9d8eee:not(.nuc) {color:#9D8EEE;}.color_8469bc:not(.nuc) {color:#8469BC;}.color_73769d:not(.nuc) {color:#73769D;}.color_b14cbc:not(.nuc) {color:#B14CBC;}</style>
+
+<!-- slack-www-hhvm-03ece7b9ce2842b59 / 2017-01-21 06:02:28 / v6e342b56386c35d72b84d2d20089908d0d781fd5 / B:H -->
+
+</body>
+</html>
