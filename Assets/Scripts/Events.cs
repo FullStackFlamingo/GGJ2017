@@ -120,13 +120,17 @@ public struct WaveStatusData
 {
 	//	WaveStatusEvent waveStatusEvent;
 	public GameObject wave;
+	public GameObject waveSpawnPoint;
+	public GameObject waveTarget;
 	public Vector3 wavePosition;
 	public float waveProgressPercentage;
 
-	public WaveStatusData(/*WaveStatusEvent waveStatusEvent,*/ GameObject wave, Vector3 wavePosition, float waveProgressPercentage)
+	public WaveStatusData(/*WaveStatusEvent waveStatusEvent,*/ GameObject wave, Vector3 wavePosition, GameObject waveSpawnPoint, GameObject waveTarget, float waveProgressPercentage = 0f)
 	{
 		//		this.waveStatusEvent = waveStatusEvent;
 		this.wave = wave;
+		this.waveSpawnPoint = waveSpawnPoint;
+		this.waveTarget = waveTarget;
 		this.wavePosition = wavePosition;
 		this.waveProgressPercentage = waveProgressPercentage;
 	}
