@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-	public GameObject waveForegroundSpawnpoint, waveBackgroundSpawnpoint;
-	public GameObject waveForegroundTarget, waveBackgroundTarget;
+	public GameObject waveFrontSpawnpoint, waveBackSpawnpoint;
+	public GameObject waveFrontTarget, waveBackTarget;
 	public GameObject wavePrefab;
 	public float waveSpawnRate;
-	public List<GameObject> activeForegroundWaves, activeBackgroundWaves;
+	public float waveSpeed;
+	public List<GameObject> activeFrontWaves, activeBackWaves;
+	private Queue<GameObject> inactiveWaves;
 	private float waveSpawnCountdown;
-	private List<GameObject> activeWaves;
+	private Vector3 waveFrontSpawnpointPosition; 
+	private Vector3 waveBackSpawnpointPosition;
+	private Vector3 waveFrontTargetPosition;
+	private Vector3 waveBackTargetPosition;
+	private float totalFrontDistance;
+	private float totalBackDistance;
+
 
 	private static WaveManager waveManager;
 	public static WaveManager Instance
@@ -27,68 +35,95 @@ public class WaveManager : MonoBehaviour
 		}
 	}
 
-	void OnEnable ()
+	void Awake()
 	{
-		EventManager.StartListening<GameStatusData>(Events.GameStartEvent, OnGameStart);
-		EventManager.StartListening<GameStatusData>(Events.GameStartEvent, OnGameEnd);
+		activeFrontWaves = new List<GameObject>();
+		activeBackWaves = new List<GameObject>();
+		inactiveWaves = new Queue<GameObject>();
+	}
+
+	void OnEnable()
+	{
+
+		waveFrontSpawnpointPosition = waveFrontSpawnpoint.transform.position;
+		waveBackSpawnpointPosition = waveBackSpawnpoint.transform.position;
+		waveFrontTargetPosition = waveFrontTarget.transform.position;
+		waveBackTargetPosition = waveBackTarget.transform.position;
+		totalFrontDistance = (waveFrontTargetPosition - waveFrontSpawnpointPosition).magnitude;
+		totalBackDistance = (waveBackTargetPosition - waveBackSpawnpointPosition).magnitude;
+		InvokeRepeating("InvokeWaveSpawn", 0f, waveSpawnRate);
 	}
 
 	void OnDisable()
 	{
-		EventManager.StopListening<GameStatusData>(Events.GameStartEvent, OnGameStart);
-		EventManager.StopListening<GameStatusData>(Events.GameStartEvent, OnGameEnd);
-	}
-
-	void OnGameStart(GameStatusData waveData)
-	{
-		InvokeRepeating("SpawnWave", 0f, waveSpawnRate);
-	}
-
-	void OnGameEnd(GameStatusData waveData)
-	{
-		CancelInvoke("SpawnWave");
-	}
-
-	void InvokeWaveSpawn()
-	{
-		switch ((int)(Mathf.PingPong(Time.deltaTime, 2)))
-		{
-			case 0:
-				SpawnWave(waveForegroundSpawnpoint, waveForegroundTarget, activeForegroundWaves, Quaternion.identity);
-				break;
-			case 1:
-				SpawnWave(waveForegroundSpawnpoint, waveForegroundTarget, activeForegroundWaves, Quaternion.identity);
-				SpawnWave(waveBackgroundSpawnpoint, waveBackgroundTarget, activeBackgroundWaves, Quaternion.identity);
-				break;
-			case 2:
-				SpawnWave(waveBackgroundSpawnpoint, waveBackgroundTarget, activeBackgroundWaves, Quaternion.identity);
-				break;
-		}
-	}
-
-	void SpawnWave(GameObject waveSpawnPoint, GameObject waveTarget, List<GameObject> activeWaveList, Quaternion waveOrientation)
-	{
-		GameObject newWave;
-		newWave = Instantiate(wavePrefab as GameObject, waveSpawnPoint.transform.position, waveOrientation);
-		activeWaveList.Add(newWave);
-		EventManager.InvokeEvent<WaveStatusData>(Events.WaveStartEvent, new WaveStatusData(newWave, waveSpawnPoint.transform.position, waveSpawnPoint, waveTarget, 0f));
+		CancelInvoke("InvokeWaveSpawn");
 	}
 
 	void Update()
 	{
-		float waveProgress;
-		float totalForegroundDistance = (waveForegroundSpawnpoint.transform.position - waveForegroundTarget.transform.position).magnitude;
-		float totalBackgroundDistance = (waveBackgroundSpawnpoint.transform.position - waveBackgroundTarget.transform.position).magnitude;
-
-		foreach (GameObject wave in activeForegroundWaves)
+		Vector3 wavePosition;
+		for (int i = 0; i < activeFrontWaves.Count; ++i)
 		{
-			waveProgress = (wave.transform.position - waveForegroundSpawnpoint.transform.position).magnitude;
-			EventManager.InvokeEvent<WaveStatusData>(Events.WaveActiveEvent, new WaveStatusData(wave, wave.transform.position, waveForegroundSpawnpoint, waveForegroundTarget, waveProgress / totalForegroundDistance));
+			wavePosition = activeFrontWaves[i].transform.position;
+			wavePosition = Vector3.MoveTowards(wavePosition, waveFrontTargetPosition, waveSpeed * Time.deltaTime);
+			activeFrontWaves[i].transform.position = wavePosition;
+			if (wavePosition == waveFrontTargetPosition)
+			{
+				activeFrontWaves[i].SetActive(false);
+				inactiveWaves.Enqueue(activeFrontWaves[i]);
+				activeFrontWaves.Remove(activeFrontWaves[i]);
+			}
 		}
-		foreach (GameObject wave in activeBackgroundWaves)
+
+		for (int i = 0; i < activeBackWaves.Count; ++i)
 		{
-			waveProgress = (wave.transform.position - waveBackgroundSpawnpoint.transform.position).magnitude;
-			EventManager.InvokeEvent<WaveStatusData>(Events.WaveActiveEvent, new WaveStatusData(wave, wave.transform.position, waveBackgroundSpawnpoint, waveBackgroundTarget, waveProgress / totalBackgroundDistance));
+			wavePosition = activeBackWaves[i].transform.position;
+			wavePosition = Vector3.MoveTowards(wavePosition, waveBackTargetPosition, waveSpeed * Time.deltaTime);
+			activeBackWaves[i].transform.position = wavePosition;
+			if (wavePosition == waveBackTargetPosition)
+			{
+				activeBackWaves[i].SetActive(false);
+				inactiveWaves.Enqueue(activeBackWaves[i]);
+				activeBackWaves.Remove(activeBackWaves[i]);
+			}
 		}
 	}
+
+	void InvokeWaveSpawn()
+	{
+		switch ((int)(Time.time % 2))
+		{
+			case 0:
+				activeFrontWaves.Add(SpawnWave(waveFrontSpawnpoint, waveFrontTarget, activeFrontWaves, Quaternion.identity));
+				break;
+			case 1:
+				activeBackWaves.Add(SpawnWave(waveBackSpawnpoint, waveBackTarget, activeBackWaves,Quaternion.Euler(0f,180f,0f)));
+				break;
+			default:
+				Debug.Log("oops");
+				break;
+		}
+	}
+
+	GameObject SpawnWave(GameObject waveSpawnPoint, GameObject waveTarget, List<GameObject> activeWaveList, Quaternion waveOrientation)
+	{
+		GameObject newWave;
+		if (inactiveWaves.Count == 0)
+		{
+			newWave = Instantiate(wavePrefab as GameObject, waveSpawnPoint.transform.position, waveOrientation) as GameObject;
+			newWave.SetActive(true);
+		}
+		else
+		{
+			newWave = inactiveWaves.Dequeue();
+			newWave.transform.position = waveSpawnPoint.transform.position;
+			newWave.transform.rotation = waveOrientation;
+			newWave.SetActive(true);
+		}
+		newWave.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		activeWaveList.Add(newWave);
+		return newWave;
+	}
+
+
 }
