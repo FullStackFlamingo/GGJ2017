@@ -6,7 +6,6 @@
 		_Intensity("Intensity", Range(0, 0.1)) = 0
 		_Tint("Tint", Color) = (0.5,0.5,1,0.3)
 		_DistortionTexture ("Distortion Texture", 2D) = "white" {}
-
 	}
 
 
@@ -61,8 +60,8 @@
 			}
 
 			float4 fragFunction(v2f o) : COLOR{				
-				v_diffuseUV = o.uv +(_Time) * _Intensity;
-		 		v_diffuseUVS = o.uv - (_Time*2.1)  * _Intensity;
+				v_diffuseUV = o.uv*5 +(_Time) * _Intensity;
+		 		v_diffuseUVS = o.uv*5 - (_Time*2.1)  * _Intensity;
 
 				float4 diffuse = tex2D(_DistortionTexture, v_diffuseUV);
 				float4 diffuseS = tex2D(_DistortionTexture, v_diffuseUVS);
