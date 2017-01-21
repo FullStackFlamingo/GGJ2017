@@ -69,7 +69,7 @@
 	    		diffuse = lerp(diffuse, diffuseS, 0.5);
 
 
-				o.grabPos +=diffuse;
+				//o.grabPos +=diffuse;
 
 				float4 projCoord = UNITY_PROJ_COORD(o.grabPos);
 				float4 color = tex2Dproj(_GrabTexture, projCoord);
