@@ -61,8 +61,8 @@
 			}
 
 			float4 fragFunction(v2f o) : COLOR{				
-				v_diffuseUV = o.uv*50 +(_Time) * _Intensity;
-		 		v_diffuseUVS = o.uv*50 - (_Time*2.1)  * _Intensity;
+				v_diffuseUV = o.uv +(_Time) * _Intensity;
+		 		v_diffuseUVS = o.uv - (_Time*2.1)  * _Intensity;
 
 				float4 diffuse = tex2D(_DistortionTexture, v_diffuseUV);
 				float4 diffuseS = tex2D(_DistortionTexture, v_diffuseUVS);
@@ -74,14 +74,14 @@
 				float4 projCoord = UNITY_PROJ_COORD(o.grabPos);
 				float4 color = tex2Dproj(_GrabTexture, projCoord);
 
-				if((diffuse.r >= 0.4 && diffuse.r <= 1)){
+				if((diffuse.r >= 0.3 && diffuse.r <= 1)){
 		            diffuse.rgb = 1;
 		        }else{
 		            //_Tint
 		            diffuse.rgb =  _Tint.rgb;
 		        }
-				color = lerp(color, diffuse,0.3);
-				return color * _Tint;
+				color = lerp(_Tint, diffuse,0.8);
+				return color;
 			}
 
 			ENDCG
