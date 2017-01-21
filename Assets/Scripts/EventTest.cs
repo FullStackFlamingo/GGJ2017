@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EventTest : MonoBehaviour
 {
-
 	public GameObject player;
 	public Vector3 playerMovementVelocity;
 	public void OnEnable()
