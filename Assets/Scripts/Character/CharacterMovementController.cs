@@ -34,8 +34,12 @@
          movement = movement.normalized * speed * Time.deltaTime;
         
 
-         
-         playerRigidBody.MovePosition (transform.position + movement);
+        if (lh == 0f && lv == 0f){
+            playerRigidBody.velocity = Vector3.zero;
+            playerRigidBody.angularVelocity = Vector3.zero;
+        }else{
+            playerRigidBody.MovePosition (transform.position + movement);
+        }
          
          
          if (lh != 0f || lv != 0f) 
