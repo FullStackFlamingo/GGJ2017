@@ -20,27 +20,31 @@ public class CharacterColliderController : MonoBehaviour {
 		if (collidingWithObject == true && Input.GetKeyDown(KeyCode.Space)) {
 			collectedObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
 			collectedObjectBool = true; 
-	
+			//Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
+ 
 		}
 		if (collectedObjectBool == true && Input.GetKeyDown (KeyCode.Q)) {
 			collectedObject.transform.SetParent (null);
+
 			Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
-			rb.isKinematic = false;  
-			rb.velocity = new Vector3(20, 10, 0);
+			rb.isKinematic = false; 
+		
+			rb.velocity = new Vector3(0, 10, transform.forward.z) * 5;
+
 			collectedObjectBool = false; 
 		}
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag != "boat") {
-		 	//if (collectedObjectBool = false) { 
-				Debug.Log ("CLKSHFKJSBNVDKSEJVBKJ");
+  
 				collidingWithObject = true; 
 				collectedObject = other.gameObject; 
-				Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
-	 
-				rb.mass = 1;
-		 //}
+			Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
+			rb.mass = 1;
+			SphereCollider col = collectedObject.GetComponent<SphereCollider> (); 
+		 col.enabled = false; 
+ 
 		}
 	}
 }
