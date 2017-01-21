@@ -1,12 +1,10 @@
 ﻿ using UnityEngine;
  using System.Collections;
  
- public class CharacterController : MonoBehaviour 
+ public class CharacterMovementController : MonoBehaviour 
  {
      public float speed = 2f;
-     public float runSpeed = 5f;
      public float turnSmoothing = 15f;
-     
      private Vector3 movement;
      private Rigidbody playerRigidBody;
      
@@ -21,7 +19,7 @@
      {
          float lh = Input.GetAxisRaw ("Horizontal");
          float lv = Input.GetAxisRaw ("Vertical");
-         
+    
          Move (lh, lv);
      }
      
@@ -29,17 +27,13 @@
      void Move (float lh, float lv)
      {
          movement.Set (lh, 0f, lv);
+         //direction by camera
          movement = Camera.main.transform.TransformDirection(movement);
          
          
-         if (Input.GetKey (KeyCode.LeftShift))
-         {
-             movement = movement.normalized * runSpeed * Time.deltaTime;
-         } 
-         else 
-         {
-             movement = movement.normalized * speed * Time.deltaTime;
-         }
+         movement = movement.normalized * speed * Time.deltaTime;
+        
+
          
          playerRigidBody.MovePosition (transform.position + movement);
          
