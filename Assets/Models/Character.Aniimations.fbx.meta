@@ -1,0 +1,1068 @@
+fileFormatVersion: 2
+guid: d1775063260026e44b10074514beb885
+timeCreated: 1485033056
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature.001
+    100002: C.Chest
+    100004: C.Clavical.L
+    100006: C.Clavical.R
+    100008: C.Fingers.B.L
+    100010: C.Fingers.B.R
+    100012: C.Fingers.E.L
+    100014: C.Fingers.E.L_end
+    100016: C.Fingers.E.R
+    100018: C.Fingers.E.R_end
+    100020: C.Hand.L
+    100022: C.Hand.R
+    100024: C.Head
+    100026: C.Head_end
+    100028: C.Hip
+    100030: C.LowerArm.L
+    100032: C.LowerArm.R
+    100034: C.LowerLeg.L
+    100036: C.LowerLeg.L_end
+    100038: C.LowerLeg.R
+    100040: C.LowerLeg.R_end
+    100042: C.Thumb.B.L
+    100044: C.Thumb.B.R
+    100046: C.Thumb.E.L
+    100048: C.Thumb.E.L_end
+    100050: C.Thumb.E.R
+    100052: C.Thumb.E.R_end
+    100054: C.UpperArm.L
+    100056: C.UpperArm.R
+    100058: C.UpperLeg.L
+    100060: C.UpperLeg.R
+    100062: //RootNode
+    100064: Character.Mesh
+    100066: Character.Rig
+    100068: IK.Knee.L
+    100070: IK.Knee.L_end
+    100072: IK.Knee.R
+    100074: IK.Knee.R_end
+    100076: IK.Leg.L
+    100078: IK.Leg.L_end
+    100080: IK.Leg.R
+    100082: IK.Leg.R_end
+    400000: Armature.001
+    400002: C.Chest
+    400004: C.Clavical.L
+    400006: C.Clavical.R
+    400008: C.Fingers.B.L
+    400010: C.Fingers.B.R
+    400012: C.Fingers.E.L
+    400014: C.Fingers.E.L_end
+    400016: C.Fingers.E.R
+    400018: C.Fingers.E.R_end
+    400020: C.Hand.L
+    400022: C.Hand.R
+    400024: C.Head
+    400026: C.Head_end
+    400028: C.Hip
+    400030: C.LowerArm.L
+    400032: C.LowerArm.R
+    400034: C.LowerLeg.L
+    400036: C.LowerLeg.L_end
+    400038: C.LowerLeg.R
+    400040: C.LowerLeg.R_end
+    400042: C.Thumb.B.L
+    400044: C.Thumb.B.R
+    400046: C.Thumb.E.L
+    400048: C.Thumb.E.L_end
+    400050: C.Thumb.E.R
+    400052: C.Thumb.E.R_end
+    400054: C.UpperArm.L
+    400056: C.UpperArm.R
+    400058: C.UpperLeg.L
+    400060: C.UpperLeg.R
+    400062: //RootNode
+    400064: Character.Mesh
+    400066: Character.Rig
+    400068: IK.Knee.L
+    400070: IK.Knee.L_end
+    400072: IK.Knee.R
+    400074: IK.Knee.R_end
+    400076: IK.Leg.L
+    400078: IK.Leg.L_end
+    400080: IK.Leg.R
+    400082: IK.Leg.R_end
+    4300000: Character.Mesh
+    7400000: T-Pose
+    7400002: Character.Rig|Character.RigAction
+    7400004: Character.Rig|PoseLib
+    7400006: Run
+    7400008: Pickup
+    7400010: CarryRun
+    7400012: Throw
+    7400014: Victory
+    7400016: Loss
+    7400018: LossLoop
+    9500000: //RootNode
+    13700000: Character.Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: T-Pose
+      takeName: Character.Rig|Character Animations
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Character.Rig|Character Animations
+      firstFrame: 1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Pickup
+      takeName: Character.Rig|Character Animations
+      firstFrame: 20
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: CarryRun
+      takeName: Character.Rig|Character Animations
+      firstFrame: 32
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Throw
+      takeName: Character.Rig|Character Animations
+      firstFrame: 52
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Victory
+      takeName: Character.Rig|Character Animations
+      firstFrame: 60
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Loss
+      takeName: Character.Rig|Character Animations
+      firstFrame: 76
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LossLoop
+      takeName: Character.Rig|Character Animations
+      firstFrame: 84
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Character.Mesh
+        weight: 1
+      - path: Character.Rig
+        weight: 1
+      - path: Character.Rig/C.Hip
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Fingers.B.L/C.Fingers.E.L/C.Fingers.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.L/C.UpperArm.L/C.LowerArm.L/C.Hand.L/C.Thumb.B.L/C.Thumb.E.L/C.Thumb.E.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Fingers.B.R/C.Fingers.E.R/C.Fingers.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Clavical.R/C.UpperArm.R/C.LowerArm.R/C.Hand.R/C.Thumb.B.R/C.Thumb.E.R/C.Thumb.E.R_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head
+        weight: 1
+      - path: Character.Rig/C.Hip/C.Chest/C.Head/C.Head_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.L/C.LowerLeg.L/C.LowerLeg.L_end
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R
+        weight: 1
+      - path: Character.Rig/C.Hip/C.UpperLeg.R/C.LowerLeg.R/C.LowerLeg.R_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.L
+        weight: 1
+      - path: Character.Rig/IK.Knee.L/IK.Knee.L_end
+        weight: 1
+      - path: Character.Rig/IK.Knee.R
+        weight: 1
+      - path: Character.Rig/IK.Knee.R/IK.Knee.R_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.L
+        weight: 1
+      - path: Character.Rig/IK.Leg.L/IK.Leg.L_end
+        weight: 1
+      - path: Character.Rig/IK.Leg.R
+        weight: 1
+      - path: Character.Rig/IK.Leg.R/IK.Leg.R_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
