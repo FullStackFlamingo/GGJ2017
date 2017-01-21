@@ -15,7 +15,7 @@ public class GameSceneController : MonoBehaviour {
  
 		itemPositions = GameObject.FindGameObjectsWithTag("itemPosition");
 		items = GameObject.FindGameObjectsWithTag("item");
-		InvokeRepeating("InvokeWave", 1.0f, 5f);
+		InvokeRepeating("InvokeWave", 1.0f, 10f);
 	}
 	
  
@@ -26,12 +26,13 @@ public class GameSceneController : MonoBehaviour {
 	public void InvokeWave() {
 
 		//randomly istanciate an item in a 
-		int numberOfObjectsToInstanciate = 10; 
+		int numberOfObjectsToInstanciate = 2; 
 
 		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {
 
-		//GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], itemPositions [Random.Range (0, itemPositions.Length)].transform.position,  Quaternion.identity);
-		//	newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
+			GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], itemPositions [Random.Range (0, itemPositions.Length)].transform.position,  Quaternion.identity);
+			newObj.transform.LookAt(Camera.main.transform.position);
+			newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
 		}
 		 
 	 

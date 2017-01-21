@@ -29,7 +29,7 @@ public class CharacterColliderController : MonoBehaviour
 
 		if (collidingWithObject == true && Input.GetKeyDown (KeyCode.Space)) {
 			collectedObject.transform.SetParent (GameObject.FindGameObjectWithTag ("Player").transform);
-			collectedObject.transform.localPosition = new Vector3 (0, 0.5f, 1);
+			collectedObject.transform.localPosition = new Vector3 (0, 1f, 1);
 			collectedObjectBool = true;  
 			SphereCollider col = collectedObject.GetComponent<SphereCollider> (); 
 			col.enabled = false;
@@ -60,8 +60,6 @@ public class CharacterColliderController : MonoBehaviour
 			collectedObject = other.gameObject; 
 			Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
 			rb.mass = 1;
-
-			 
  
 		}
 	}
