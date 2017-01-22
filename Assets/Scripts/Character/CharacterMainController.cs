@@ -26,7 +26,7 @@ using System.Collections.Generic;
 		itemIsAttachedToCharacter = false; 
 		playerRigidBody = this.gameObject.GetComponent<Rigidbody>();
 		anim = this.GetComponent<Animator>();
-		shootSpeed = 25f; 
+		shootSpeed = 10f; 
 		 
      }
 	public void Update() {
@@ -52,19 +52,19 @@ using System.Collections.Generic;
 				collectedItem.GetComponent<Rigidbody> ().isKinematic = false; 
 				collectedItem.transform.SetParent (null);
 			 
-				collectedItem.GetComponent<Rigidbody> ().velocity = new Vector3 (transform.forward.x * shootSpeed, 10, transform.forward.z * shootSpeed * Time.deltaTime);
-	
+
 			itemIsAttachedToCharacter = false;
 			isCarrying = false; 
 			anim.SetBool ("isCarrying", false); 
 
 			isThrowing = false;
-			// anim.SetBool ("isWalking",false); 
+			StartCoroutine (AddForceToObject(collectedItem));
+
  
 
  
      }
-
+				
 		if (itemIsAttachedToCharacter == false && Input.GetKeyUp (KeyCode.Q) ) {
 
 			isThrowing = false; 
@@ -122,7 +122,9 @@ using System.Collections.Generic;
      }
 
 	public void	OnCollisionStay(Collision col) {
-		if (col.gameObject.tag == "item") {
+
+	 
+		if (col.gameObject.tag == "item" && isCarrying == false) {
 
 			if (Input.GetKeyDown(KeyCode.Space)) {
 				 
@@ -151,14 +153,24 @@ using System.Collections.Generic;
 	}
 
 		public IEnumerator AnimateObjectPickUp(GameObject item){
-
-		collectedItem.transform.SetParent (this.transform);
+			item.transform.SetParent (this.transform);
 			Vector3 startLocation = item.transform.position; 
 			Vector3 targetLocation = new Vector3 (-0.05f, 1.08f, 0.61f); 
-		yield return new WaitForSeconds(0.3f); 
-		collectedItem.transform.localPosition = new Vector3 (-0.05f, 1.08f, 0.61f);
+			yield return new WaitForSeconds(0.3f); 
+			collectedItem.transform.localPosition = new Vector3 (-0.05f, 1.08f, 0.61f);
 			yield return null; 
 		}
+
+	public IEnumerator AddForceToObject(GameObject item){
+ 
+		yield return new WaitForSeconds(0.2f); 
+		item.GetComponent<Rigidbody> ().velocity = new Vector3 (transform.forward.x * shootSpeed, 10, transform.forward.z * shootSpeed * Time.deltaTime);
+		yield return new WaitForSeconds(0.1f); 
+		isWalking = true; 
+		anim.SetBool ("isWalking",true); 
+
+	}
+
 
 	 
 }
