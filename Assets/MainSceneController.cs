@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MainSceneController : MonoBehaviour {
-
+	public GameUIController uiController;
 	public GameObject player; 
 	public GameObject boat; 
 	public GameObject[] items; 
@@ -71,8 +71,10 @@ public class MainSceneController : MonoBehaviour {
 			}
 		}
 
-		if (_items.Count < 2)
+		if (_items.Count < 2){
 			Debug.Log("The deck is full");
+			uiController.showLoseScreen();
+		}
 		return _items;
 	}
 

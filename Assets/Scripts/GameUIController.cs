@@ -18,7 +18,7 @@ public class GameUIController : MonoBehaviour {
 	}
 
 	public void showLoseScreen(){
-		loseScreen.SetActive(false);
+		loseScreen.SetActive(true);
 	}
 	public void showWinScreen(){
 		winScreen.SetActive(true);
