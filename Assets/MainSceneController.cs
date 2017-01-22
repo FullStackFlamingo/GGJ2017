@@ -48,10 +48,10 @@ public class MainSceneController : MonoBehaviour {
 	}
 
 	public IEnumerator startSinking () {
-		Vector3 direction = new Vector3 (0,0,0); 
+		//Vector3 direction = new Vector3 (0,0,0); 
 		Debug.Log ("StartRise "); 
 		float speed = 0.1f;
-		water.transform.position = direction;
+	//	water.transform.position = direction;
 
 		waterRisen = true;
 		yield return null; 
