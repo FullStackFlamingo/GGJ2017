@@ -1,4 +1,5 @@
 ﻿ using UnityEngine;
+using System.Collections.Generic;
  using System.Collections;
  
  public class CharacterMovementController : MonoBehaviour 
@@ -16,6 +17,9 @@
 
 	public float shootSpeed;
 
+	 
+	 
+
 
      void Awake()
      {
@@ -23,6 +27,9 @@
 		playerRigidBody = this.gameObject.GetComponent<Rigidbody>();
 		anim = this.GetComponent<Animator>();
 		shootSpeed = 25f; 
+		 
+
+
      }
      
      void FixedUpdate()
@@ -38,7 +45,8 @@
 				collectedItem.transform.SetParent (null);
 			 
 				collectedItem.GetComponent<Rigidbody> ().velocity = new Vector3 (transform.forward.x * shootSpeed, 10, transform.forward.z * shootSpeed * Time.deltaTime);
-				itemIsAttachedToCharacter = false;
+	
+			itemIsAttachedToCharacter = false;
 
 	 
 		}
@@ -94,6 +102,7 @@
 				collectedItem.GetComponent<SphereCollider> ().enabled = false; 
 
 				itemIsAttachedToCharacter = true;
+ 
 			}
 
 

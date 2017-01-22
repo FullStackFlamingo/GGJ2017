@@ -10,18 +10,20 @@ public class GameSceneController : MonoBehaviour {
 	public GameObject boat; 
 	public GameObject[] itemPositions;
 	public GameObject[] items;  
+	 
 
-
+	public 	List<GameObject> itemsOnDeck ; 
 	void Start () {
  
 		itemPositions = GameObject.FindGameObjectsWithTag("itemPosition");
 		items = GameObject.FindGameObjectsWithTag("item");
 		InvokeRepeating("InvokeWave", 1.0f, 10f);
+ 
 	}
 	
  
 	void Update () {
- 
+		Debug.Log(itemsOnDeck.Count + "c ount "); 
 	}
 
 	public void InvokeWave() {
@@ -32,7 +34,9 @@ public class GameSceneController : MonoBehaviour {
 		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {
 
 			GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], itemPositions [Random.Range (0, itemPositions.Length)].transform.position,  Quaternion.identity);
+			itemsOnDeck.Add (newObj); 
 			newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
+ 
 		}
 	
 						
