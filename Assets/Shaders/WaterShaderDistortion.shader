@@ -37,6 +37,7 @@
 				float4 pos : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float4 grabPos : TEXCOORD1;
+				UNITY_FOG_COORDS(1)
 			};
 
 
@@ -56,12 +57,13 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.grabPos = ComputeGrabScreenPos(o.pos);
             	o.uv = v.uv; 
+				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
 
 			float4 fragFunction(v2f o) : COLOR{				
-				v_diffuseUV = o.uv*5 +(_Time) * _Intensity;
-		 		v_diffuseUVS = o.uv*5 - (_Time*2.1)  * _Intensity;
+				v_diffuseUV = o.uv +(_Time) * _Intensity;
+		 		v_diffuseUVS = o.uv - (_Time*2.1)  * _Intensity;
 
 				float4 diffuse = tex2D(_DistortionTexture, v_diffuseUV);
 				float4 diffuseS = tex2D(_DistortionTexture, v_diffuseUVS);
@@ -80,6 +82,8 @@
 		            diffuse.rgb =  _Tint.rgb;
 		        }
 				color = lerp(_Tint, diffuse,0.8);
+				                 UNITY_APPLY_FOG(o.fogCoord, color);
+
 				return color;
 			}
 
