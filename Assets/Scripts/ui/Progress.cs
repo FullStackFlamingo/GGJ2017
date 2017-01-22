@@ -9,14 +9,22 @@ public class Progress : MonoBehaviour {
 
 	public float percentageComplete=0;
 
+	public Sprite[] boatImageList;
+
+	public MainSceneController sceneController;
+
 	private GameObject boatImageObject;
 
 	private Vector3 tmpV1 = new Vector3();
 
 	private float boatImageWidth = 0;
 	private float progressBarWidth = 0;
+
+	private int currentSinkLevel = 0;
+
+	public AudioSource sinkingSound;
 	void Start () {
-		 
+
 		boatImageObject = boatImage.gameObject;
 		setupUIBoatRotation();
 
@@ -44,5 +52,10 @@ public class Progress : MonoBehaviour {
 		tmpV1.x += boatImageWidth/2;
 		boatImageObject.transform.position = tmpV1;
 
+		if(Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16)!=currentSinkLevel){
+			sinkingSound.Play();
+			currentSinkLevel = Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16);
+		}
+		boatImage.sprite = boatImageList[currentSinkLevel];
 	}
 }
