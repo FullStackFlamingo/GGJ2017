@@ -77,7 +77,9 @@
 				float4 color = tex2Dproj(_GrabTexture, projCoord);
 
 				if((diffuse.r >= 0.3 && diffuse.r <= 1)){
-		            diffuse.rgb = 1;
+		            diffuse.r = 1;
+		            diffuse.g = 1;
+		            diffuse.b = 1;
 		        }else{
 		            //_Tint
 		            diffuse.rgb =  _Tint.rgb;
