@@ -37,6 +37,7 @@
 				float4 pos : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float4 grabPos : TEXCOORD1;
+				UNITY_FOG_COORDS(1)
 			};
 
 
@@ -56,6 +57,8 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.grabPos = ComputeGrabScreenPos(o.pos);
             	o.uv = v.uv; 
+				                 UNITY_TRANSFER_FOG(o,o.vertex);
+
 				return o;
 			}
 
@@ -80,6 +83,8 @@
 		            diffuse.rgb =  _Tint.rgb;
 		        }
 				color = lerp(_Tint, diffuse,0.8);
+				                 UNITY_APPLY_FOG(o.fogCoord, color);
+
 				return color;
 			}
 
