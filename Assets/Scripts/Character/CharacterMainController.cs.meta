@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Character/CharacterMainController.cs.meta
 guid: a6bb29fe5addb4241808c6425c69274e
 timeCreated: 1485073827
+=======
+guid: d58f3a50918d34458895729c793d361b
+timeCreated: 1485076488
+>>>>>>> c57e2cd6111aa227b46950d2ff4021c191a8e4c5:Assets/Scripts/Character/CharacterMainController.cs.meta
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
