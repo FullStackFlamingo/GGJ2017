@@ -7,7 +7,8 @@ public class WaveManager : MonoBehaviour
 	public GameObject frontWave, backWave;
 	public GameObject sceneController;
 	private MainSceneController mainSceneController;
-	private WaveMovementController frontWaveMovementController, backWaveMovementController;
+	private WaveMovementController frontWaveMovementController;
+	private WaveMovementController backWaveMovementController;
 	private static WaveManager waveManager;
 	public static WaveManager Instance
 	{
@@ -28,6 +29,7 @@ public class WaveManager : MonoBehaviour
 		frontWaveMovementController = frontWave.GetComponent<WaveMovementController>();
 		backWaveMovementController = backWave.GetComponent<WaveMovementController>();
 		frontWaveMovementController.waveActive = true;
+		
 		frontWave.SetActive(true);
 		backWaveMovementController.waveActive = false;
 		backWave.SetActive(false);
@@ -36,24 +38,22 @@ public class WaveManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Mathf.Approximately(frontWaveMovementController.waveProgress,1f))
+		if (Mathf.Approximately(frontWaveMovementController.waveProgress,1f) && frontWaveMovementController.waveActive)
 		{
 			Debug.Log("frontWavebooop");
 			backWaveMovementController.waveActive = true;
 			backWave.SetActive(true);
 			frontWaveMovementController.waveActive = false;
 			frontWave.SetActive(false);
+			mainSceneController.InvokeItemSpawn ();
 		}
-		if (Mathf.Approximately(backWaveMovementController.waveProgress, 1f))
+		if (Mathf.Approximately(backWaveMovementController.waveProgress, 1f) && backWaveMovementController.waveActive)
 		{
 			Debug.Log("backWavebooop");
 			frontWaveMovementController.waveActive = true;
 			frontWave.SetActive(true);
 			backWaveMovementController.waveActive = false;
 			backWave.SetActive(false);
-		}
-		if (Mathf.Approximately (frontWaveMovementController.waveProgress, 1f) || Mathf.Approximately (backWaveMovementController.waveProgress, 1f)) 
-		{
 			mainSceneController.InvokeItemSpawn ();
 		}
 	}

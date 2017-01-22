@@ -7,7 +7,8 @@ public class MainSceneController : MonoBehaviour {
 	public GameObject player; 
 	public GameObject boat; 
 	public GameObject[] items; 
-	public GameObject[] spawnablePositions; 
+	public SpawnableItem[] spawnablePositions; 
+
 	public GameObject water; 
 
 	public 	List<GameObject> itemsOnDeck ; 
@@ -35,19 +36,38 @@ public class MainSceneController : MonoBehaviour {
 
 		//randomly istanciate an item in a 
 
-
 		int numberOfObjectsToInstanciate = 2; 
+		List<SpawnableItem> _spawnableItems = getAvailibleSpawnablePosition(numberOfObjectsToInstanciate);
 
-		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {
+		for (int i = 0; i < _spawnableItems.Count; i++) {
 
-			GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], spawnablePositions [Random.Range (0, spawnablePositions.Length)].transform.position,  Quaternion.identity);
+			GameObject newObj = Instantiate (
+				items[Random.Range(0,items.Length)], 
+				_spawnableItems[i].transform.position,  
+				Quaternion.identity);
 			newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
 			itemsOnDeck.Add (newObj); 
 		}
 
+	}
 
+	 public List<SpawnableItem> getAvailibleSpawnablePosition(int _itemsCount){
+		List<SpawnableItem> _items = new List<SpawnableItem>();
 
+		//foreach(GameObject spawnablePosition in spawnablePositions) {
+			//foreach(GameObject )
+		//}
 
+		for(int index = 0; index<spawnablePositions.Length;index++){
+			if(!spawnablePositions[index].isNotAvailible){
+				spawnablePositions[index].isNotAvailible = true;
+				_items.Add(spawnablePositions[index]);
+			}
+			if(_items.Count>=_itemsCount){
+				break;
+			}
+		}
+		return _items;
 	}
 
 	public IEnumerator startSinking () {
