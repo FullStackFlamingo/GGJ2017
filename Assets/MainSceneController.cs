@@ -16,7 +16,6 @@ public class MainSceneController : MonoBehaviour {
 	private int maxNumberOfItemsOnDeck = 16; 
   
 	void Start () {
-//		InvokeRepeating("InvokeWave", 1.0f, 10f);
 		waterRisen = false; 
 	}
 
@@ -25,9 +24,7 @@ public class MainSceneController : MonoBehaviour {
 		if (waterRisen == false && itemsOnDeck.Count >= 2) {
 			Debug.Log ("OVER "); 
 			StartCoroutine(startSinking ()); 
-
 		} 
-
 	}
  
  
@@ -54,11 +51,17 @@ public class MainSceneController : MonoBehaviour {
 	 public List<SpawnableItem> getAvailibleSpawnablePosition(int _itemsCount){
 		List<SpawnableItem> _items = new List<SpawnableItem>();
 
-		//foreach(GameObject spawnablePosition in spawnablePositions) {
-			//foreach(GameObject )
-		//}
+		foreach(SpawnableItem spawnablePosition in spawnablePositions)
+		{
+			spawnablePosition.isNotAvailible = false;
+			foreach(GameObject itemOnDeck in itemsOnDeck)
+			{
+				if ( itemOnDeck.GetComponent<SphereCollider>().bounds.Contains(spawnablePosition.transform.position) )
+					spawnablePosition.isNotAvailible = true;
+			}
+		}
 
-		for(int index = 0; index<spawnablePositions.Length;index++){
+		for(int index = 0; index < spawnablePositions.Length; index++){
 			if(!spawnablePositions[index].isNotAvailible){
 				spawnablePositions[index].isNotAvailible = true;
 				_items.Add(spawnablePositions[index]);
@@ -67,6 +70,9 @@ public class MainSceneController : MonoBehaviour {
 				break;
 			}
 		}
+
+		if (_items.Count < 2)
+			Debug.Log("The deck is full");
 		return _items;
 	}
 
