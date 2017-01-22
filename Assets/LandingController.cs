@@ -15,8 +15,9 @@ public class LandingController : MonoBehaviour {
 
 		var config = new GoTweenConfig();
 		config.addTweenProperty( scaleIng );
-		config.setEaseType(GoEaseType.BounceIn);
-		var tween = new GoTween( logo.transform, 0.6f, config );
+		config.setEaseType(GoEaseType.ElasticOut);
+		config.delay = 0.5f;
+		var tween = new GoTween( logo.transform, 2f, config );
 		
 		Go.addTween( tween );
 	}
