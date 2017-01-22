@@ -2,7 +2,7 @@
 using System.Collections.Generic;
  using System.Collections;
  
- public class CharacterMovementController : MonoBehaviour 
+ public class CharacterMainController : MonoBehaviour 
  {
     public float speed = 2f;
     public float turnSmoothing = 15f;
