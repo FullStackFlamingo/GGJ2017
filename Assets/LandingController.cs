@@ -11,6 +11,7 @@ public class LandingController : MonoBehaviour {
 	public Image howToPlay;
 
 	public GameObject titleScreen;
+	public GameObject creditsScreen;
 
 	private bool keyPressReady = false;
 	// Use this for initialization
@@ -23,6 +24,10 @@ public class LandingController : MonoBehaviour {
     IEnumerator hideSplash() {
         yield return new WaitForSeconds(2);
         titleScreen.SetActive(false);
+
+		yield return new WaitForSeconds(2);
+		creditsScreen.SetActive(false);
+		
 		scaleInImage(logo);
     }
     
