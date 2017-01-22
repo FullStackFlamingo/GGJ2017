@@ -54,7 +54,7 @@ public class Progress : MonoBehaviour {
 
 		if(Mathf.Clamp(sceneController.itemsOnDeck.Count,0,15)!=currentSinkLevel){
 			sinkingSound.Play();
-			currentSinkLevel = Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16);
+			currentSinkLevel = Mathf.Clamp(sceneController.itemsOnDeck.Count,0,15);
 					boatImage.sprite = boatImageList[currentSinkLevel];
 
 		}

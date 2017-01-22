@@ -15,7 +15,7 @@ public class MainSceneController : MonoBehaviour {
 	private int maxNumberOfItemsOnDeck = 16; 
   
 	void Start () {
-		InvokeRepeating("InvokeWave", 1.0f, 10f);
+//		InvokeRepeating("InvokeWave", 1.0f, 10f);
 		waterRisen = false; 
 	}
 
@@ -31,9 +31,11 @@ public class MainSceneController : MonoBehaviour {
  
  
  
-	public void InvokeWave() {
+	public void InvokeItemSpawn() {
 
 		//randomly istanciate an item in a 
+
+
 		int numberOfObjectsToInstanciate = 2; 
 
 		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {

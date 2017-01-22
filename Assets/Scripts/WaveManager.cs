@@ -5,6 +5,8 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
 	public GameObject frontWave, backWave;
+	public GameObject sceneController;
+	private MainSceneController mainSceneController;
 	private WaveMovementController frontWaveMovementController, backWaveMovementController;
 	private static WaveManager waveManager;
 	public static WaveManager Instance
@@ -29,6 +31,7 @@ public class WaveManager : MonoBehaviour
 		frontWave.SetActive(true);
 		backWaveMovementController.waveActive = false;
 		backWave.SetActive(false);
+		mainSceneController = sceneController.GetComponent<MainSceneController> ();
 	}
 
 	void Update()
@@ -48,6 +51,10 @@ public class WaveManager : MonoBehaviour
 			frontWave.SetActive(true);
 			backWaveMovementController.waveActive = false;
 			backWave.SetActive(false);
+		}
+		if (Mathf.Approximately (frontWaveMovementController.waveProgress, 1f) || Mathf.Approximately (backWaveMovementController.waveProgress, 1f)) 
+		{
+			mainSceneController.InvokeItemSpawn ();
 		}
 	}
 }
