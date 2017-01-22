@@ -18,6 +18,7 @@ public class GameSceneController : MonoBehaviour {
 		itemPositions = GameObject.FindGameObjectsWithTag("itemPosition");
 		items = GameObject.FindGameObjectsWithTag("item");
 		InvokeRepeating("InvokeWave", 1.0f, 10f);
+
  
 	}
 	
@@ -34,6 +35,7 @@ public class GameSceneController : MonoBehaviour {
 		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {
 
 			GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], itemPositions [Random.Range (0, itemPositions.Length)].transform.position,  Quaternion.identity);
+			//need to check the new object is not in same position as last 
 			itemsOnDeck.Add (newObj); 
 			newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
  
