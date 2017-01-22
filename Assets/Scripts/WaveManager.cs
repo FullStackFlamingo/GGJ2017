@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
 	private WaveMovementController frontWaveMovementController;
 	private WaveMovementController backWaveMovementController;
 	private static WaveManager waveManager;
+	private bool itemSpawned;
 	public static WaveManager Instance
 	{
 		get
@@ -34,6 +35,7 @@ public class WaveManager : MonoBehaviour
 		backWaveMovementController.waveActive = false;
 		backWave.SetActive(false);
 		mainSceneController = sceneController.GetComponent<MainSceneController> ();
+		itemSpawned = false;
 	}
 
 	void Update()
@@ -45,7 +47,8 @@ public class WaveManager : MonoBehaviour
 			backWave.SetActive(true);
 			frontWaveMovementController.waveActive = false;
 			frontWave.SetActive(false);
-			mainSceneController.InvokeItemSpawn ();
+			itemSpawned = false;
+//			mainSceneController.InvokeItemSpawn ();
 		}
 		if (Mathf.Approximately(backWaveMovementController.waveProgress, 1f) && backWaveMovementController.waveActive)
 		{
@@ -54,7 +57,14 @@ public class WaveManager : MonoBehaviour
 			frontWave.SetActive(true);
 			backWaveMovementController.waveActive = false;
 			backWave.SetActive(false);
+			itemSpawned = false;
+		}
+		if (itemSpawned == false 
+			&& ((backWaveMovementController.waveProgress > 0.7f && backWaveMovementController.waveActive)
+			|| (frontWaveMovementController.waveProgress > 0.7f && frontWaveMovementController.waveActive))) 
+		{
 			mainSceneController.InvokeItemSpawn ();
+			itemSpawned = true;
 		}
 	}
 }
