@@ -8,18 +8,17 @@ public class CharacterColliderController : MonoBehaviour
 	public Collider triggerCollider;
 	public bool collidingWithObject = false;
 	public GameObject collectedObject;
-	private bool collectedObjectBool = false;
-
+	public bool collectedObjectBool = false;
 
 	public float shootSpeed = 100f;
-     
-	private float speed = 40f;
+
+	private float speed = 20f;
 	// Use this for initialization
 	void Start ()
 	{
 		collectedObjectBool = false; 
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -27,17 +26,21 @@ public class CharacterColliderController : MonoBehaviour
 		Debug.Log ("collidingWithObject =" + collidingWithObject);
 
 
-		if (collidingWithObject == true && Input.GetKeyDown (KeyCode.Space)) {
-			collectedObject.transform.SetParent (GameObject.FindGameObjectWithTag ("Player").transform);
-			collectedObject.transform.localPosition = new Vector3 (0, 1f, 1);
-			collectedObjectBool = true;  
-			SphereCollider col = collectedObject.GetComponent<SphereCollider> (); 
-			col.enabled = false;
-			collectedObject.GetComponent<Rigidbody> ().isKinematic = true;
-		}
+		if (collidingWithObject == true && Input.GetKeyDown (KeyCode.Space) && collectedObject == false) {
+
+		 
+				collectedObjectBool = true;
+				collectedObject.transform.SetParent (GameObject.FindGameObjectWithTag ("Player").transform);
+				collectedObject.transform.localPosition = new Vector3 (0, 1f, 1);
+				collectedObjectBool = true;  
+				SphereCollider col = collectedObject.GetComponent<SphereCollider> (); 
+				col.enabled = false;
+				collectedObject.GetComponent<Rigidbody> ().isKinematic = true;
+			}
 
 
-		if (collectedObjectBool == true && Input.GetKeyDown (KeyCode.Q)) {
+
+		if (collectedObjectBool == true && Input.GetKeyDown (KeyCode.Q) ) {
 			collectedObject.transform.SetParent (null);
 
 			Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
@@ -46,11 +49,14 @@ public class CharacterColliderController : MonoBehaviour
 
 			SphereCollider col = collectedObject.GetComponent<SphereCollider> (); 
 			col.enabled = true;
-		
-			rb.velocity = new Vector3 (20, 20, transform.forward.z) * shootSpeed;
+			rb.velocity = new Vector3 (5, 5, transform.forward.z) * shootSpeed;
 
-			collectedObjectBool = false; 
+			collectedObjectBool = false;  
+
 		}
+
+
+
 	}
 
 	void OnCollisionStay (Collision other)
@@ -60,7 +66,14 @@ public class CharacterColliderController : MonoBehaviour
 			collectedObject = other.gameObject; 
 			Rigidbody rb = collectedObject.GetComponent<Rigidbody> (); 
 			rb.mass = 1;
- 
+			 
 		}
 	}
+
+
+	void OnCollisionExit(Collision other) {
+		Debug.Log ("THROWN"); 
+		collectedObjectBool = false; 
+	}
+
 }

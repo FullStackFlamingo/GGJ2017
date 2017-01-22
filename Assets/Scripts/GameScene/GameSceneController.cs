@@ -11,6 +11,7 @@ public class GameSceneController : MonoBehaviour {
 	public GameObject[] itemPositions;
 	public GameObject[] items;  
 
+
 	void Start () {
  
 		itemPositions = GameObject.FindGameObjectsWithTag("itemPosition");
@@ -31,10 +32,10 @@ public class GameSceneController : MonoBehaviour {
 		for (int i = 0; i < numberOfObjectsToInstanciate; i++) {
 
 			GameObject newObj = Instantiate (items[Random.Range(0,items.Length)], itemPositions [Random.Range (0, itemPositions.Length)].transform.position,  Quaternion.identity);
-			newObj.transform.LookAt(Camera.main.transform.position);
 			newObj.transform.SetParent(GameObject.FindGameObjectWithTag("boat").transform);
 		}
-		 
+	
+						
 	 
 	} 
 
