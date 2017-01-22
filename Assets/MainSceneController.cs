@@ -12,6 +12,7 @@ public class MainSceneController : MonoBehaviour {
 
 	public 	List<GameObject> itemsOnDeck ; 
 	private bool waterRisen; 
+	private int maxNumberOfItemsOnDeck = 16; 
   
 	void Start () {
 		InvokeRepeating("InvokeWave", 1.0f, 10f);
@@ -51,11 +52,27 @@ public class MainSceneController : MonoBehaviour {
 		//Vector3 direction = new Vector3 (0,0,0); 
 		Debug.Log ("StartRise "); 
 		float speed = 0.1f;
-	//	water.transform.position = direction;
 
+		//raiseWater ();
 		waterRisen = true;
 		yield return null; 
 	} 
+	void raiseWater(){
+		Vector3 targetHeight = water.transform.position;
+		targetHeight.y = -0.46f;
+
+		var positionProperty = new PositionTweenProperty( targetHeight );
+
+		var config = new GoTweenConfig();
+		config.addTweenProperty( positionProperty );
+
+		config.onComplete ((AbstractGoTween abs) => {
+			
+		});
+		var tween = new GoTween( water.transform, 2f, config );
+
+		Go.addTween( tween );
+	}
 
  
 }
