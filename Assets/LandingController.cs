@@ -10,11 +10,23 @@ public class LandingController : MonoBehaviour {
 	public Image logo;
 	public Image howToPlay;
 
+	public GameObject titleScreen;
+
 	private bool keyPressReady = false;
 	// Use this for initialization
 	void Start () {
-		scaleInImage(logo);
+		StartCoroutine(hideSplash());
 	}
+
+
+    
+    IEnumerator hideSplash() {
+        yield return new WaitForSeconds(2);
+        titleScreen.SetActive(false);
+		scaleInImage(logo);
+    }
+    
+
 
 	void scaleInImage(Image _image){
 		var scaleIng = new ScaleTweenProperty( new Vector3( 1, 1, 1 ) );
