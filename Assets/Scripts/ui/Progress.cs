@@ -52,7 +52,7 @@ public class Progress : MonoBehaviour {
 		tmpV1.x += boatImageWidth/2;
 		boatImageObject.transform.position = tmpV1;
 
-		if(Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16)!=currentSinkLevel){
+		if(Mathf.Clamp(sceneController.itemsOnDeck.Count,0,15)!=currentSinkLevel){
 			sinkingSound.Play();
 			currentSinkLevel = Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16);
 					boatImage.sprite = boatImageList[currentSinkLevel];
