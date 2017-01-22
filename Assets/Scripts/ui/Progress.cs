@@ -20,7 +20,7 @@ public class Progress : MonoBehaviour {
 	private float boatImageWidth = 0;
 	private float progressBarWidth = 0;
 
-	private int currentSinkLevel = 0;
+	private int currentSinkLevel = -9999;
 
 	public AudioSource sinkingSound;
 	void Start () {
@@ -55,7 +55,8 @@ public class Progress : MonoBehaviour {
 		if(Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16)!=currentSinkLevel){
 			sinkingSound.Play();
 			currentSinkLevel = Mathf.Clamp(sceneController.itemsOnDeck.Count,0,16);
+					boatImage.sprite = boatImageList[currentSinkLevel];
+
 		}
-		boatImage.sprite = boatImageList[currentSinkLevel];
 	}
 }
