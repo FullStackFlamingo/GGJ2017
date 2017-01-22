@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class Progress : MonoBehaviour {
 
 	public Canvas canvas;
+
+	public GameUIController uiController;
 	public Image boatImage;
 
 	public float percentageComplete=0;
@@ -47,6 +49,7 @@ public class Progress : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		tmpV1 = boatImageObject.transform.position;
+		percentageComplete = uiController.currentTime / uiController.maxTimeSeconds *100;
 		percentageComplete = Mathf.Clamp(percentageComplete,0,100);
 		tmpV1.x = percentageComplete/100 * (progressBarWidth - boatImageWidth);
 		tmpV1.x += boatImageWidth/2;
